@@ -1,4 +1,8 @@
-import { Controller } from '@nestjs/common';
+import { Controller } from "@nestjs/common"
 
-@Controller('employer-reviews')
-export class EmployerReviewsController {}
+@Controller("employer-reviews")
+export class EmployerReviewsController {
+  create() {}
+
+  getAll() {}
+}

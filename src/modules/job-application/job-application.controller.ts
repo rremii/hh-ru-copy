@@ -1,4 +1,8 @@
-import { Controller } from '@nestjs/common';
+import { Controller } from "@nestjs/common"
 
-@Controller('job-application')
-export class JobApplicationController {}
+@Controller("job-application")
+export class JobApplicationController {
+  create() {}
+
+  getAll() {}
+}
