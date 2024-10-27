@@ -15,6 +15,14 @@ import { AccessTokenGuard } from "src/guards/access-token.guard"
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  // @Get("/test")
+  // @Roles(UserRole.EMPLOYER)
+  // @UseGuards(AccessTokenGuard, RoleGuard)
+  // test(@CurrentUser() user: IUser) {
+  //   console.log(user)
+  //   return "passed"
+  // }
+
   @Get("/me")
   @UseGuards(AccessTokenGuard)
   getMe(@Req() request: Request) {
