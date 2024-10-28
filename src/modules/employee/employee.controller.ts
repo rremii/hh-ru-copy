@@ -95,8 +95,8 @@ export class EmployeeController {
   }
 
   @Get("job-application")
-  async getJobApplication(@CurrentUser() user: IUser) {
-    return this.employeeService.getJobApplication(user.id)
+  async getJobApplications(@CurrentUser() user: IUser) {
+    return this.employeeService.getJobApplications(user.id)
   }
 
   @Post("employer-reviews")

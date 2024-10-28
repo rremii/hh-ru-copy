@@ -38,7 +38,7 @@ export class EmployerController {
   async updateMe(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("id", -1))
-    updateDto: Omit<UpdateEmployerDto, "id">,
+    updateDto: UpdateEmployerDto,
   ) {
     return this.employerService.update({ ...updateDto, id: user.id })
   }
@@ -70,16 +70,11 @@ export class EmployerController {
     return this.employerService.deleteJobPost(id)
   }
 
-  @Get("job-post/:id/job-application")
-  async getJobApplications(@CurrentUser() user: IUser, @Param() id: number) {
-    return this.employerService.getJobApplications(user.id, id)
-  }
-
   @Post("resume-application")
   async createResumeApplication(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("employerId", -1), ValidationPipe)
-    createDto: Omit<CreateResumeApplicationDto, "employerId">,
+    createDto: CreateResumeApplicationDto,
   ) {
     return this.employerService.createResumeApplication({
       ...createDto,

@@ -6,6 +6,7 @@ import { CreateUserDto } from "./dto/create-user.dto"
 import { HashData } from "src/common/helpers/hashData"
 import { IUserInfo } from "./user.interface"
 import { ApiError } from "src/common/constants/errors"
+import { UpdateUserDto } from "./dto/update-user.dto"
 
 @Injectable()
 export class UserService {
@@ -27,14 +28,14 @@ export class UserService {
     return this.uowService.userRepository.save(user)
   }
 
-  // async update({ id, name }: UpdateUserDto) {
-  //   const user = await this.uowService.userRepository.findOneBy({ id })
-  //   if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
+  async update({ id, name }: UpdateUserDto) {
+    const user = await this.uowService.userRepository.findOneBy({ id })
+    if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
-  //   if (name) user.name = name
+    if (name) user.name = name
 
-  //   return user.save()
-  // }
+    return user.save()
+  }
 
   async getByToken(authToken: string): Promise<IUserInfo> {
     const decodedUser = await this.tokenService.decodeToken(authToken)

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common"
+import { Injectable, NotFoundException } from "@nestjs/common"
 import { CreateEmployerDto } from "./dto/create-employer.dto"
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
 import { Employer } from "./entities/employer.entity"
@@ -6,12 +6,19 @@ import { UpdateEmployerDto } from "./dto/update-employer.dto"
 import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
 import { UpdateJobPostDto } from "../job-post/dto/update-jobPost"
 import { CreateResumeApplicationDto } from "../resume-application/dto/create-resumeApplication.dto"
+import { ApiError } from "src/common/constants/errors"
+import { JobPostService } from "../job-post/job-post.service"
+import { ResumeApplicationService } from "../resume-application/resume-application.service"
 
 @Injectable()
 export class EmployerService {
-  constructor(private readonly uowService: UnitOfWorkService) {}
+  constructor(
+    private readonly uowService: UnitOfWorkService,
+    private readonly jobPostService: JobPostService,
+    private readonly resumeApplicationService: ResumeApplicationService,
+  ) {}
 
-  create({ about, id }: CreateEmployerDto): Promise<Employer> {
+  async create({ about, id }: CreateEmployerDto): Promise<Employer> {
     const employer = new Employer()
     employer.id = id
     employer.about = about
@@ -19,21 +26,52 @@ export class EmployerService {
     return this.uowService.employerRepository.save(employer)
   }
 
-  update(updateDto: UpdateEmployerDto) {}
+  async update({ id, about, name }: UpdateEmployerDto) {
+    const employer = await this.uowService.employerRepository.findOneBy({ id })
+    const user = await this.uowService.userRepository.findOneBy({ id })
+    if (!employer || !user)
+      throw new NotFoundException(ApiError.EMPLOYER_NOT_FOUND)
 
-  getJobPosts(employerId: number) {}
+    if (about) employer.about = about
+    if (name) user.name = name
 
-  createJobPost(createDto: CreateJobPostDto) {}
+    this.uowService.makeTransactional(async () => {
+      await this.uowService.employerRepository.save(employer)
+      await this.uowService.userRepository.save(user)
+    })
+  }
 
-  updateJobPost(updateDto: UpdateJobPostDto) {}
+  async getJobPosts(employerId: number) {
+    return this.uowService.jobPostRepository.find({
+      where: { employerId },
+    })
+  }
 
-  deleteJobPost(id: number) {}
+  async createJobPost(createDto: CreateJobPostDto) {
+    return this.jobPostService.create(createDto)
+  }
 
-  getJobApplications(employerId: number, jobPostId: number) {}
+  async updateJobPost(updateDto: UpdateJobPostDto) {
+    return this.jobPostService.update(updateDto)
+  }
 
-  createResumeApplication(createDto: CreateResumeApplicationDto) {}
+  async deleteJobPost(id: number) {
+    return this.jobPostService.delete(id)
+  }
 
-  getResumeApplications(employerId: number) {}
+  async createResumeApplication(createDto: CreateResumeApplicationDto) {
+    return this.resumeApplicationService.create(createDto)
+  }
 
-  getEmployerReviews(employerId: number) {}
+  async getResumeApplications(employerId: number) {
+    return this.uowService.resumeApplicationRepository.find({
+      where: { employerId },
+    })
+  }
+
+  async getEmployerReviews(employerId: number) {
+    return this.uowService.employerReviewRepository.find({
+      where: { employerId },
+    })
+  }
 }

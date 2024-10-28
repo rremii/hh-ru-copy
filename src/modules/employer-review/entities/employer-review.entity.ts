@@ -17,7 +17,7 @@ export class EmployerReview extends BaseEntity implements IEmployerReview {
   id: number
 
   @Column()
-  comments: string
+  comment: string
 
   @ManyToOne(() => Employer, undefined, { onDelete: "CASCADE" })
   @JoinColumn({ name: "employerId", referencedColumnName: "id" })

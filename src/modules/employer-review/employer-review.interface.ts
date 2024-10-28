@@ -1,5 +1,5 @@
 export interface IEmployerReview {
-  comments: string
+  comment: string
   employerId: number
   employeeId: number
 }

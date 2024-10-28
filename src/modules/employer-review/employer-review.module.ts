@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common"
-import { EmployerReviewsService } from "./employer-review.service"
+import { EmployerReviewService } from "./employer-review.service"
 
 @Module({
   controllers: [],
-  providers: [EmployerReviewsService],
+  providers: [EmployerReviewService],
 })
 export class EmployerReviewsModule {}
