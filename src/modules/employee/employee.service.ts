@@ -77,9 +77,9 @@ export class EmployeeService {
     return this.employerReviewService.create(createDto)
   }
 
-  async getEmployerReviews(employerId: number) {
+  async getEmployerReviews(employeeId: number) {
     return this.uowService.employerReviewRepository.find({
-      where: { employerId },
+      where: { employeeId },
     })
   }
 }

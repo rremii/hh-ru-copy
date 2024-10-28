@@ -20,8 +20,4 @@ export class ResumeApplicationService {
 
     return this.uowService.resumeApplicationRepository.save(resumeApplication)
   }
-
-  async getAllByEmployerId() {}
-
-  async getAllByEmployeeId() {}
 }

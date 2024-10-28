@@ -15,6 +15,4 @@ export class EmployerReviewService {
 
     return this.uowService.employerReviewRepository.save(employerReview)
   }
-
-  async getAll() {}
 }

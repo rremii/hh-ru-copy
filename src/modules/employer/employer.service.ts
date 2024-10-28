@@ -55,6 +55,12 @@ export class EmployerService {
     return this.jobPostService.update(updateDto)
   }
 
+  async getJobApplications(jobPostId: number) {
+    return this.uowService.jobApplicationRepository.find({
+      where: { jobPostId },
+    })
+  }
+
   async deleteJobPost(id: number) {
     return this.jobPostService.delete(id)
   }

@@ -10,5 +10,4 @@ export const ApiError = {
   RESUME_NOT_FOUND: "Resume was not found",
   EMPLOYER_NOT_FOUND: "Employer was not found",
   JOB_POST_NOT_FOUND: "Job post was not found",
-  RESUME_NOT_FOUND,: "Resume was not found",
 }

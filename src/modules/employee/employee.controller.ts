@@ -29,6 +29,13 @@ import { CreateJobApplicationDto } from "../job-application/dto/create-jobApplic
 import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
 import { DefaultFieldPipe } from "src/pipes/DefaultField.pipe"
 
+//todo if endpoint can exist without domain entity better not to join it
+
+//если экнпоинт напрямую зависит от доменной сущ то связываем если нет то нет
+//например получение всех своих откликов на вокансии
+// и получение всех откликов на вакансии
+
+//типо если общий эндпоинт то не надо связывать
 @Roles(UserRole.EMPLOYEE)
 @UseGuards(AccessTokenGuard, RoleGuard)
 @Controller("employee/me/")
@@ -111,10 +118,8 @@ export class EmployeeController {
     })
   }
 
-  @Get("employer-reviews/employer/:employerId")
-  async getEmployerReviews(
-    @Param("employerId", ParseIntPipe) employerId: number,
-  ) {
-    return this.employeeService.getEmployerReviews(employerId)
+  @Get("employer-reviews")
+  async getEmployerReviews(@CurrentUser() user: IUser) {
+    return this.employeeService.getEmployerReviews(user.id)
   }
 }

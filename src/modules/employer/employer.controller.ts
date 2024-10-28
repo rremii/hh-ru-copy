@@ -65,6 +65,11 @@ export class EmployerController {
     return this.employerService.updateJobPost(updateDto)
   }
 
+  @Get("job-post/:jobPostId/job-application")
+  async getJobApplications(@Param("jobPostId") jobPostId: number) {
+    return this.employerService.getJobApplications(jobPostId)
+  }
+
   @Delete("job-post/:id")
   async deleteJobPost(@Param("id", ParseIntPipe) id: number) {
     return this.employerService.deleteJobPost(id)
