@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from "class-validator"
 
-export class CreateEmployerReview {
+export class CreateEmployerReviewDto {
   @IsString()
   comment: string
   @IsNumber()

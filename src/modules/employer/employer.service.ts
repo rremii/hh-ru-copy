@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common"
 import { CreateEmployerDto } from "./dto/create-employer.dto"
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
 import { Employer } from "./entities/employer.entity"
+import { UpdateEmployerDto } from "./dto/update-employer.dto"
 
 @Injectable()
 export class EmployerService {
@@ -14,4 +15,6 @@ export class EmployerService {
 
     return this.uowService.employerRepository.save(employer)
   }
+
+  update(updateDto: UpdateEmployerDto) {}
 }

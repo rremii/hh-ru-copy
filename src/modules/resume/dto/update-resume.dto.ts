@@ -1,6 +1,6 @@
 import { IsArray, IsNumber, IsString } from "class-validator"
 
-export class CreateResumeDto {
+export class UpdateResumeDto {
   @IsNumber()
   id: number
 

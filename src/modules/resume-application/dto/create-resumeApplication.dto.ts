@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from "class-validator"
 
-export class CreateResumeApplication {
+export class CreateResumeApplicationDto {
   @IsString()
   coverLetter: string
 

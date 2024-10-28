@@ -14,14 +14,34 @@ import { UnitOfWorkModule } from "./unit-of-work/unit-of-work.module"
 import { ResumeModule } from "./resume/resume.module"
 import { ResumeApplicationModule } from "./resume-application/resume-application.module"
 import { EmployerReviewsModule } from "./employer-review/employer-review.module"
-import { JobApplicationModule } from './job-application/job-application.module';
-import { JobPostModule } from './job-post/job-post.module';
+import { JobApplicationModule } from "./job-application/job-application.module"
+import { JobPostModule } from "./job-post/job-post.module"
+import { RouterModule } from "@nestjs/core"
 
 @Module({
   imports: [
     CodeModule,
     AuthModule,
     UserModule,
+    RouterModule.register([
+      {
+        path: "employee",
+        module: EmployeeModule,
+        children: [
+          {
+            path: "resume",
+            module: DashboardModule,
+          },
+          {
+            path: "resume-application",
+            module: MetricsModule,
+          },
+          {
+            path: "employer-review",
+          },
+        ],
+      },
+    ]),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configurations],
