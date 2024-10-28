@@ -4,7 +4,7 @@ import { EmployerReview } from "./entities/employer-review.entity"
 
 @Injectable()
 export class EmployerReviewsService {
-  create(createDto: CreateEmployerReviewDto): Promise<EmployerReview> {}
+  async create(createDto: CreateEmployerReviewDto) {}
 
-  getAll() {}
+  async getAll() {}
 }

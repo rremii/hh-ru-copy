@@ -1,32 +1,120 @@
-import { Body, Controller, Get, Put, UseGuards } from "@nestjs/common"
+import {
+  ArgumentMetadata,
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Delete,
+  Get,
+  Injectable,
+  Param,
+  ParseIntPipe,
+  PipeTransform,
+  Post,
+  Put,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common"
 import { CurrentUser } from "src/decorators/current-user"
-import { IUser } from "../user/user.interface"
 import { AccessTokenGuard } from "src/guards/access-token.guard"
 import { Roles } from "src/decorators/roles"
-import { UserRole } from "../user/entities/user.entity"
 import { RoleGuard } from "src/guards/role.guard"
-import { UpdateUserDto } from "../user/dto/update-user.dto"
-import { UpdateEmployeeDto } from "./dto/update-employee.dto"
+import { UserRole } from "src/modules/user/entities/user.entity"
+import { IUser } from "src/modules/user/user.interface"
 import { EmployeeService } from "./employee.service"
+import { UpdateEmployeeDto } from "./dto/update-employee.dto"
+import { CreateResumeDto } from "../resume/dto/create-resume.dto"
+import { UpdateResumeDto } from "../resume/dto/update-resume.dto"
+import { CreateJobApplicationDto } from "../job-application/dto/create-jobApplication.dto"
+import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
+import { DefaultFieldPipe } from "src/pipes/DefaultField.pipe"
 
-@Controller("employee")
+@Roles(UserRole.EMPLOYEE)
+@UseGuards(AccessTokenGuard, RoleGuard)
+@Controller("employee/me/")
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
-  @Get("/me")
-  @Roles(UserRole.EMPLOYEE)
-  @UseGuards(AccessTokenGuard, RoleGuard)
+  @Get("")
   getMe(@CurrentUser() user: IUser) {
     return user
   }
 
-  @Put("/me")
-  @Roles(UserRole.EMPLOYEE)
-  @UseGuards(AccessTokenGuard, RoleGuard)
+  @Put("")
   async updateMe(
     @CurrentUser() user: IUser,
-    @Body() updateDto: Omit<UpdateEmployeeDto, "id">,
+    @Body(new DefaultFieldPipe("id", -1), ValidationPipe)
+    updateDto: UpdateEmployeeDto,
   ) {
     return this.employeeService.update({ ...updateDto, id: user.id })
+  }
+
+  @Get("resume")
+  async getResume(@CurrentUser() user: IUser) {
+    return this.employeeService.getResume(user?.id)
+  }
+
+  @Post("resume")
+  @UsePipes()
+  async createResume(
+    @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
+    createDto: CreateResumeDto,
+    @CurrentUser() user: IUser,
+  ) {
+    return this.employeeService.createResume({
+      ...createDto,
+      employeeId: user.id,
+    })
+  }
+
+  @Put("resume")
+  async updateResume(@Body() updateDto: UpdateResumeDto) {
+    return this.employeeService.updateResume(updateDto)
+  }
+
+  @Delete("resume/:id")
+  async deleteResume(@Param("id", ParseIntPipe) id: number) {
+    return this.employeeService.deleteResume(id)
+  }
+
+  @Get("resume/resume-application")
+  async getResumeApplications(@CurrentUser() user: IUser) {
+    return this.employeeService.getResumeApplications(user.id)
+  }
+
+  @Post("job-application")
+  async createJobApplication(
+    @CurrentUser() user: IUser,
+    @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
+    createDto: Omit<CreateJobApplicationDto, "employeeId">,
+  ) {
+    return this.employeeService.createJobApplication({
+      ...createDto,
+      employeeId: user.id,
+    })
+  }
+
+  @Get("job-application")
+  async getJobApplication(@CurrentUser() user: IUser) {
+    return this.employeeService.getJobApplication(user.id)
+  }
+
+  @Post("employer-reviews")
+  async createEmployerReview(
+    @CurrentUser() user: IUser,
+    @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
+    createDto: Omit<CreateEmployerReviewDto, "employeeId">,
+  ) {
+    return this.employeeService.createEmployerReview({
+      ...createDto,
+      employeeId: user.id,
+    })
+  }
+
+  @Get("employer-reviews/employer/:employerId")
+  async getEmployerReviews(
+    @Param("employerId", ParseIntPipe) employerId: number,
+  ) {
+    return this.employeeService.getEmployerReviews(employerId)
   }
 }

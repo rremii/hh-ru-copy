@@ -1,9 +1,8 @@
-import { Module } from '@nestjs/common';
-import { ResumeApplicationService } from './resume-application.service';
-import { ResumeApplicationController } from './resume-application.controller';
+import { Module } from "@nestjs/common"
+import { ResumeApplicationService } from "./resume-application.service"
 
 @Module({
   providers: [ResumeApplicationService],
-  controllers: [ResumeApplicationController]
+  controllers: [],
 })
 export class ResumeApplicationModule {}

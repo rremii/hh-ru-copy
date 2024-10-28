@@ -1,6 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common"
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from "@nestjs/common"
 import { Reflector } from "@nestjs/core"
 import { Observable } from "rxjs"
+import { ApiError } from "src/common/constants/errors"
 import { ROLE_KEY } from "src/decorators/roles"
 import { TokenService } from "src/modules/token/token.service"
 import { UserRole } from "src/modules/user/entities/user.entity"
@@ -23,8 +29,11 @@ export class RoleGuard implements CanActivate {
 
     const decodedToken = this.tokenService.decodeToken(token)
 
-    if (requiredRoles && requiredRoles.length > 0)
-      return requiredRoles.includes(decodedToken?.role)
+    if (requiredRoles && requiredRoles.length > 0) {
+      if (requiredRoles.includes(decodedToken?.role)) return true
+      throw new ForbiddenException(ApiError.WRONG_ROLE)
+    }
+
     return true
   }
 }

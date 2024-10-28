@@ -4,13 +4,13 @@ import { UpdateResumeDto } from "./dto/update-resume.dto"
 
 @Injectable()
 export class ResumeService {
-  getById(id: number) {}
+  async getById(id: number) {}
 
-  getAll() {}
+  async getAll() {}
 
-  create(createDto: CreateResumeDto) {}
+  async create(createDto: CreateResumeDto) {}
 
-  update(updateDto: UpdateResumeDto) {}
+  async update(updateDto: UpdateResumeDto) {}
 
-  delete(id: number) {}
+  async delete(id: number) {}
 }

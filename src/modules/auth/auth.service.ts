@@ -68,13 +68,13 @@ export class AuthService {
     })
   }
 
-  async loginUser(LoginUserDto: LoginUserDto): Promise<TokenResponse> {
-    const existUser = await this.userService.getByEmail(LoginUserDto.email)
+  async loginUser(loginUserDto: LoginUserDto): Promise<TokenResponse> {
+    const existUser = await this.userService.getByEmail(loginUserDto.email)
     if (!existUser || !existUser.password)
       throw new BadRequestException(ApiError.WRONG_DATA)
 
     const isPasswordValid = await bcrypt.compare(
-      LoginUserDto.password,
+      loginUserDto.password,
       existUser.password,
     )
     if (!isPasswordValid) throw new BadRequestException(ApiError.WRONG_DATA)

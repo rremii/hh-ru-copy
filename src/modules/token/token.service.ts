@@ -51,7 +51,7 @@ export class TokenService {
   }
 
   async getTokens(user: IUser) {
-    const payload = user
+    const payload = { ...user }
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
         secret: this.configService.get<string>("access_secret_jwt"),

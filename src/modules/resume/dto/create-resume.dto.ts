@@ -1,13 +1,15 @@
-import { IsArray, IsNumber, IsString } from "class-validator"
+import { Type } from "class-transformer"
+import { IsArray, IsNumber, IsString, ValidateNested } from "class-validator"
 
 export class CreateResumeDto {
-  @IsNumber()
+  @IsString()
   title: string
 
   @IsString()
   experience: string
 
   @IsArray()
+  @IsString({ each: true })
   skills: string[]
 
   @IsString()

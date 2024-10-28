@@ -5,4 +5,5 @@ export const ApiError = {
   USER_NOT_FOUND: "User was not found",
   WRONG_DATA: "Email or password is not correct",
   INVALID_CODE: "The code is invalid or expired",
+  WRONG_ROLE: "You have not the right role",
 }

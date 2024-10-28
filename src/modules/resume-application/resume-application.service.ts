@@ -4,9 +4,9 @@ import { CreateResumeApplicationDto } from "./dto/create-resumeApplication.dto"
 
 @Injectable()
 export class ResumeApplicationService {
-  create(createDto: CreateResumeApplicationDto): Promise<ResumeApplication> {}
+  async create(createDto: CreateResumeApplicationDto) {}
 
-  getAllByEmployerId(): Promise<ResumeApplication[]> {}
+  async getAllByEmployerId() {}
 
-  getAllByEmployeeId(): Promise<ResumeApplication[]> {}
+  async getAllByEmployeeId() {}
 }

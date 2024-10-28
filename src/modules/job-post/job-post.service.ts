@@ -4,13 +4,13 @@ import { CreateJobPostDto } from "./dto/create-jobPost"
 
 @Injectable()
 export class JobPostService {
-  getById(id: number) {}
+  async getById(id: number) {}
 
-  getAll() {}
+  async getAll() {}
 
-  create(createDto: CreateJobPostDto) {}
+  async create(createDto: CreateJobPostDto) {}
 
-  update(updateDto: UpdateJobPostDto) {}
+  async update(updateDto: UpdateJobPostDto) {}
 
-  delete(id: number) {}
+  async delete(id: number) {}
 }
