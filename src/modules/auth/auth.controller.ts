@@ -1,3 +1,4 @@
+import { DefaultResponse } from "./../../common/types/types"
 import {
   BadRequestException,
   Body,
@@ -17,6 +18,8 @@ import { Request, Response } from "express"
 import { GetCookieExpTime } from "../../common/helpers/getCookieExpTime"
 import { RegisterEmployerDto } from "./dto/register-employer.dto"
 import { RegisterEmployeeDto } from "./dto/register-employee.dto"
+import { ApiBody, ApiOperation, ApiResponse } from "@nestjs/swagger"
+import { TokenResponse } from "./response/token.response"
 
 @Controller("auth")
 export class AuthController {
@@ -25,6 +28,13 @@ export class AuthController {
     private readonly tokenService: TokenService,
   ) {}
 
+  @ApiOperation({ summary: "Register Employer" })
+  @ApiBody({ type: RegisterEmployerDto })
+  @ApiResponse({
+    status: 200,
+    description: "Successfully registered",
+    type: TokenResponse,
+  })
   @Post("register/employer")
   @UsePipes(new ValidationPipe())
   async registerEmployer(
@@ -42,6 +52,13 @@ export class AuthController {
     response.json({ accessToken })
   }
 
+  @ApiOperation({ summary: "Register Employee" })
+  @ApiBody({ type: RegisterEmployeeDto })
+  @ApiResponse({
+    status: 200,
+    description: "Successfully registered",
+    type: TokenResponse,
+  })
   @Post("register/employee")
   @UsePipes(new ValidationPipe())
   async registerEmployee(
@@ -59,6 +76,12 @@ export class AuthController {
     response.json({ accessToken })
   }
 
+  @ApiOperation({ summary: "Refresh tokens" })
+  @ApiResponse({
+    status: 200,
+    description: "Successfully refreshed",
+    type: TokenResponse,
+  })
   @Get("refresh")
   async refreshTokens(
     @Req() request: Request,
@@ -77,6 +100,13 @@ export class AuthController {
     return { accessToken }
   }
 
+  @ApiOperation({ summary: "Login user" })
+  @ApiBody({ type: LoginUserDto })
+  @ApiResponse({
+    status: 200,
+    description: "Successfully registered",
+    type: TokenResponse,
+  })
   @UsePipes(ValidationPipe)
   @Post("login")
   async login(
@@ -94,6 +124,11 @@ export class AuthController {
     return { accessToken }
   }
 
+  @ApiOperation({ summary: "Log out user" })
+  @ApiResponse({
+    status: 200,
+    description: "Successfully logout",
+  })
   @Delete("logout")
   async logout(@Req() request: Request, @Res() response: Response) {
     const { refreshToken } = request.cookies

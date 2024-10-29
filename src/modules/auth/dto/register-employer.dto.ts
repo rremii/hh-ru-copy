@@ -1,11 +1,9 @@
+import { ApiProperty } from "@nestjs/swagger"
 import { RegisterUserDto } from "./register-user.dto"
-import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsNotEmpty, IsString } from "class-validator"
 
 export class RegisterEmployerDto extends RegisterUserDto {
-  // @IsNotEmpty()
-  // @IsNumber()
-  // id: number
-
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   about: string
