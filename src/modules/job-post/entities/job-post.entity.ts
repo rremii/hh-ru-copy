@@ -28,8 +28,10 @@ export class JobPost extends BaseEntity implements IJobPost {
   @Column({ array: true, type: "text", default: [] })
   requirements: string[]
 
-  @ManyToOne(() => Employer, undefined, { onDelete: "CASCADE" })
-  @JoinColumn({ name: "employerId", referencedColumnName: "id" })
   @Column()
   employerId: number
+
+  @ManyToOne(() => Employer, undefined, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "employerId", referencedColumnName: "id" })
+  employer: Employer
 }

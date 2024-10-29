@@ -22,13 +22,17 @@ export class ResumeApplication
   @Column()
   coverLetter: string
 
-  @ManyToOne(() => Resume, undefined, { onDelete: "CASCADE" })
-  @JoinColumn({ name: "resumeId", referencedColumnName: "id" })
+  @Column()
+  employerId: number
+
   @Column()
   resumeId: number
 
+  @ManyToOne(() => Resume, undefined, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "resumeId", referencedColumnName: "id" })
+  resume: Resume
+
   @ManyToOne(() => Employer, undefined, { onDelete: "CASCADE" })
   @JoinColumn({ name: "employerId", referencedColumnName: "id" })
-  @Column()
-  employerId: number
+  employer: Employer
 }

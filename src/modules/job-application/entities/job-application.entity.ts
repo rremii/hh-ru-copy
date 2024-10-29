@@ -18,13 +18,17 @@ export class JobApplication extends BaseEntity implements IJobApplication {
   @Column()
   coverLetter: string
 
-  @ManyToOne(() => JobPost, undefined, { onDelete: "CASCADE" })
-  @JoinColumn({ name: "jobPostId", referencedColumnName: "id" })
+  @Column()
+  employeeId: number
+
   @Column()
   jobPostId: number
 
+  @ManyToOne(() => JobPost, undefined, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "jobPostId", referencedColumnName: "id" })
+  jobPost: JobPost
+
   @ManyToOne(() => Employee, undefined, { onDelete: "CASCADE" })
   @JoinColumn({ name: "employeeId", referencedColumnName: "id" })
-  @Column()
-  employeeId: number
+  employee: Employee
 }

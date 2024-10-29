@@ -1,6 +1,6 @@
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
 import { BadRequestException, Injectable } from "@nestjs/common"
-import { User, UserRole } from "./entities/user.entity"
+import { User } from "./entities/user.entity"
 import { TokenService } from "../token/token.service"
 import { CreateUserDto } from "./dto/create-user.dto"
 import { HashData } from "src/common/helpers/hashData"
@@ -34,7 +34,7 @@ export class UserService {
 
     if (name) user.name = name
 
-    return user.save()
+    return this.uowService.userRepository.save(user)
   }
 
   async getByToken(authToken: string): Promise<IUserInfo> {

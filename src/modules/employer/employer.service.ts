@@ -27,17 +27,20 @@ export class EmployerService {
   }
 
   async update({ id, about, name }: UpdateEmployerDto) {
-    const employer = await this.uowService.employerRepository.findOneBy({ id })
-    const user = await this.uowService.userRepository.findOneBy({ id })
+    const employer = await this.uowService.employerRepository.findOne({
+      where: { id },
+      relations: { user: true },
+    })
+    const user = employer.user
     if (!employer || !user)
       throw new NotFoundException(ApiError.EMPLOYER_NOT_FOUND)
 
     if (about) employer.about = about
     if (name) user.name = name
 
-    this.uowService.makeTransactional(async () => {
-      await this.uowService.employerRepository.save(employer)
+    return this.uowService.makeTransactional(async () => {
       await this.uowService.userRepository.save(user)
+      return await this.uowService.employerRepository.save(employer)
     })
   }
 

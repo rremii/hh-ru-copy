@@ -5,7 +5,9 @@ import { IEmployee } from "../employee.interface"
 @Entity({ name: "employees" })
 export class Employee implements IEmployee {
   @PrimaryColumn()
+  id: number
+
   @OneToOne(() => User, undefined, { onDelete: "CASCADE" })
   @JoinColumn({ name: "id", referencedColumnName: "id" })
-  id: number
+  user: User
 }

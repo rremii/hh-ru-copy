@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm"
 import { IResume } from "../resume.interface"
-import { User } from "src/modules/user/entities/user.entity"
 import { Employee } from "src/modules/employee/entities/employee.entity"
 
 @Entity({ name: "resumes" })
@@ -27,8 +26,10 @@ export class Resume extends BaseEntity implements IResume {
   @Column()
   education: string
 
-  @OneToOne(() => Employee, undefined, { onDelete: "CASCADE" })
-  @JoinColumn({ name: "employeeId", referencedColumnName: "id" })
   @Column()
   employeeId: number
+
+  @OneToOne(() => Employee, undefined, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "employeeId", referencedColumnName: "id" })
+  employee: Employee
 }

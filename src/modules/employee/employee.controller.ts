@@ -1,14 +1,10 @@
 import {
-  ArgumentMetadata,
   Body,
   Controller,
-  DefaultValuePipe,
   Delete,
   Get,
-  Injectable,
   Param,
   ParseIntPipe,
-  PipeTransform,
   Post,
   Put,
   UseGuards,
@@ -36,18 +32,39 @@ import { DefaultFieldPipe } from "src/pipes/DefaultField.pipe"
 // и получение всех откликов на вакансии
 
 //типо если общий эндпоинт то не надо связывать
+
+// по сути наши эндпоинты отражают как мы ходим между сущностями в бд
+
+// таблицы многие ко многим являються границами областей доступа каждой из сущностей, а вся цепь которая идет к ним как один ко дному или один ко многим входит в ее зону доступа
+
+// алгоритм
+// определяем доменные сущности,(главные, они будут концами наших зависимостей и все будет к ним сводиться)
+// делим весь грав на зоны доступа
+// расписываем логику для каждого домена
+// а если доспута домену не хватает до делаем общий эндпоинт
+
+//вопросы
+//  будучи работником получить все отзыва о компании
+//  будучи работником получить всех работодателей
+//  будучи работником получить все вакансии конкретной компании
+// к домену компании нету доступа у работника!!!
+// сделать открытый доступ к домену employers
+// но закрытый к employers/me
+
+// все завязанно на доменные сущности,начиная от нее можем найти любую ей доступнуюю и наоборот
+
 @Roles(UserRole.EMPLOYEE)
 @UseGuards(AccessTokenGuard, RoleGuard)
-@Controller("employee/me/")
+@Controller("employee/")
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
-  @Get("")
+  @Get("me")
   getMe(@CurrentUser() user: IUser) {
     return user
   }
 
-  @Put("")
+  @Put("me")
   async updateMe(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("id", -1), ValidationPipe)
@@ -56,12 +73,12 @@ export class EmployeeController {
     return this.employeeService.update({ ...updateDto, id: user.id })
   }
 
-  @Get("resume")
+  @Get("me/resume")
   async getResume(@CurrentUser() user: IUser) {
     return this.employeeService.getResume(user?.id)
   }
 
-  @Post("resume")
+  @Post("me/resume")
   @UsePipes()
   async createResume(
     @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
@@ -74,26 +91,26 @@ export class EmployeeController {
     })
   }
 
-  @Put("resume")
+  @Put("me/resume")
   async updateResume(@Body() updateDto: UpdateResumeDto) {
     return this.employeeService.updateResume(updateDto)
   }
 
-  @Delete("resume/:id")
+  @Delete("me/resume/:id")
   async deleteResume(@Param("id", ParseIntPipe) id: number) {
     return this.employeeService.deleteResume(id)
   }
 
-  @Get("resume/resume-application")
+  @Get("me/resume/resume-application")
   async getResumeApplications(@CurrentUser() user: IUser) {
     return this.employeeService.getResumeApplications(user.id)
   }
 
-  @Post("job-application")
+  @Post("me/job-application")
   async createJobApplication(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
-    createDto: Omit<CreateJobApplicationDto, "employeeId">,
+    createDto: CreateJobApplicationDto,
   ) {
     return this.employeeService.createJobApplication({
       ...createDto,
@@ -101,16 +118,16 @@ export class EmployeeController {
     })
   }
 
-  @Get("job-application")
+  @Get("me/job-application")
   async getJobApplications(@CurrentUser() user: IUser) {
     return this.employeeService.getJobApplications(user.id)
   }
 
-  @Post("employer-reviews")
+  @Post("me/employer-reviews")
   async createEmployerReview(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
-    createDto: Omit<CreateEmployerReviewDto, "employeeId">,
+    createDto: CreateEmployerReviewDto,
   ) {
     return this.employeeService.createEmployerReview({
       ...createDto,
@@ -118,8 +135,15 @@ export class EmployeeController {
     })
   }
 
-  @Get("employer-reviews")
-  async getEmployerReviews(@CurrentUser() user: IUser) {
-    return this.employeeService.getEmployerReviews(user.id)
+  @Get("me/employer-reviews")
+  async getEmployerReviewsByEmployee(@CurrentUser() user: IUser) {
+    return this.employeeService.getEmployerReviewsByEmployee(user.id)
+  }
+
+  @Get("employer-reviews/employer/:employerId")
+  async getEmployerReviewsByEmployer(
+    @Param("employerId", ParseIntPipe) employerId: number,
+  ) {
+    return this.employeeService.getEmployerReviewsByEmployer(employerId)
   }
 }

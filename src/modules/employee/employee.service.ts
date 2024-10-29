@@ -31,9 +31,7 @@ export class EmployeeService {
   }
 
   async update({ id, name }: UpdateEmployeeDto) {
-    const user = await this.userService.update({ id, name })
-
-    return this.uowService.employeeRepository.save(user)
+    return await this.userService.update({ id, name })
   }
 
   async getResume(employeeId: number) {
@@ -77,9 +75,14 @@ export class EmployeeService {
     return this.employerReviewService.create(createDto)
   }
 
-  async getEmployerReviews(employeeId: number) {
+  async getEmployerReviewsByEmployee(employeeId: number) {
     return this.uowService.employerReviewRepository.find({
       where: { employeeId },
+    })
+  }
+  async getEmployerReviewsByEmployer(employerId: number) {
+    return this.uowService.employerReviewRepository.find({
+      where: { employerId },
     })
   }
 }

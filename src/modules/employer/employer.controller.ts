@@ -92,7 +92,7 @@ export class EmployerController {
     return this.employerService.getResumeApplications(user.id)
   }
 
-  @Get("reviews")
+  @Get("employer-reviews")
   async getEmployerReviews(@CurrentUser() user: IUser) {
     return this.employerService.getEmployerReviews(user.id)
   }
