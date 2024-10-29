@@ -1,15 +1,9 @@
-import { RegisterUserDto } from "./dto/register-user.dto"
-import { CreateEmployerDto } from "./../employer/dto/create-employer.dto"
-import { CreateEmployeeDto } from "./../employee/dto/create-employee.dto"
 import {
   BadRequestException,
   ForbiddenException,
   Injectable,
 } from "@nestjs/common"
-import { InjectRepository } from "@nestjs/typeorm"
-import { User, UserRole } from "../user/entities/user.entity"
-import { Auth, Repository } from "typeorm"
-import { CreateUserDto } from "../user/dto/create-user.dto"
+import { User } from "../user/entities/user.entity"
 import { ApiError } from "../../common/constants/errors"
 import { LoginUserDto } from "./dto/login-user.dto"
 import * as bcrypt from "bcrypt"

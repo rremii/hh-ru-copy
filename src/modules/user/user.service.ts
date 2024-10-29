@@ -3,9 +3,9 @@ import { BadRequestException, Injectable } from "@nestjs/common"
 import { User } from "./entities/user.entity"
 import { TokenService } from "../token/token.service"
 import { CreateUserDto } from "./dto/create-user.dto"
-import { HashData } from "src/common/helpers/hashData"
+import { HashData } from "./../../common/helpers/hashData"
 import { IUserInfo } from "./user.interface"
-import { ApiError } from "src/common/constants/errors"
+import { ApiError } from "./../../common/constants/errors"
 import { UpdateUserDto } from "./dto/update-user.dto"
 
 @Injectable()

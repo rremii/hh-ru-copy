@@ -6,7 +6,7 @@ import { UpdateEmployerDto } from "./dto/update-employer.dto"
 import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
 import { UpdateJobPostDto } from "../job-post/dto/update-jobPost"
 import { CreateResumeApplicationDto } from "../resume-application/dto/create-resumeApplication.dto"
-import { ApiError } from "src/common/constants/errors"
+import { ApiError } from "./../../common/constants/errors"
 import { JobPostService } from "../job-post/job-post.service"
 import { ResumeApplicationService } from "../resume-application/resume-application.service"
 

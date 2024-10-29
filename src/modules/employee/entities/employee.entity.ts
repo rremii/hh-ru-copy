@@ -1,5 +1,5 @@
 import { Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm"
-import { User } from "src/modules/user/entities/user.entity"
+import { User } from "./../../user/entities/user.entity"
 import { IEmployee } from "../employee.interface"
 
 @Entity({ name: "employees" })

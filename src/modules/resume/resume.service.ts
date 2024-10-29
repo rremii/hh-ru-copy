@@ -3,7 +3,7 @@ import { CreateResumeDto } from "./dto/create-resume.dto"
 import { UpdateResumeDto } from "./dto/update-resume.dto"
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
 import { Resume } from "./entities/resume.entity"
-import { ApiError } from "src/common/constants/errors"
+import { ApiError } from "./../../common/constants/errors"
 
 @Injectable()
 export class ResumeService {

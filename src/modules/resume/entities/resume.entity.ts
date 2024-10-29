@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm"
 import { IResume } from "../resume.interface"
-import { Employee } from "src/modules/employee/entities/employee.entity"
+import { Employee } from "./../../employee/entities/employee.entity"
 
 @Entity({ name: "resumes" })
 export class Resume extends BaseEntity implements IResume {

@@ -1,5 +1,5 @@
 import { CreateResumeApplicationDto } from "./../resume-application/dto/create-resumeApplication.dto"
-import { AccessTokenGuard } from "src/guards/access-token.guard"
+import { AccessTokenGuard } from "./../../guards/access-token.guard"
 import { Roles } from "./../../decorators/roles"
 import {
   Body,
@@ -13,15 +13,15 @@ import {
   UseGuards,
   ValidationPipe,
 } from "@nestjs/common"
-import { RoleGuard } from "src/guards/role.guard"
+import { RoleGuard } from "./../../guards/role.guard"
 import { UserRole } from "../user/entities/user.entity"
-import { CurrentUser } from "src/decorators/current-user"
+import { CurrentUser } from "./../../decorators/current-user"
 import { IUser } from "../user/user.interface"
 import { UpdateEmployerDto } from "./dto/update-employer.dto"
 import { EmployerService } from "./employer.service"
 import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
 import { UpdateJobPostDto } from "../job-post/dto/update-jobPost"
-import { DefaultFieldPipe } from "src/pipes/DefaultField.pipe"
+import { DefaultFieldPipe } from "./../../pipes/DefaultField.pipe"
 
 @UseGuards(AccessTokenGuard)
 @Controller("employer/")

@@ -4,12 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm"
 import { IResumeApplication } from "../resume-application.interface"
-import { Resume } from "src/modules/resume/entities/resume.entity"
-import { Employer } from "src/modules/employer/entities/employer.entity"
+import { Resume } from "./../../resume/entities/resume.entity"
+import { Employer } from "./../../employer/entities/employer.entity"
 
 @Entity({ name: "resume_applications" })
 export class ResumeApplication

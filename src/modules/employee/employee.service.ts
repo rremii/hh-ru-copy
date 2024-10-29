@@ -11,7 +11,7 @@ import { CreateResumeDto } from "../resume/dto/create-resume.dto"
 import { UserService } from "../user/user.service"
 import { JobApplicationService } from "../job-application/job-application.service"
 import { EmployerReviewService } from "../employer-review/employer-review.service"
-import { ApiError } from "src/common/constants/errors"
+import { ApiError } from "./../../common/constants/errors"
 
 @Injectable()
 export class EmployeeService {

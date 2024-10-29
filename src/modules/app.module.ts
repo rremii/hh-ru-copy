@@ -16,7 +16,7 @@ import { ResumeApplicationModule } from "./resume-application/resume-application
 import { EmployerReviewsModule } from "./employer-review/employer-review.module"
 import { JobApplicationModule } from "./job-application/job-application.module"
 import { JobPostModule } from "./job-post/job-post.module"
-import { LoggerMiddleware } from "src/middlewares/logger.middleware"
+import { LoggerMiddleware } from "./../middlewares/logger.middleware"
 
 @Module({
   imports: [

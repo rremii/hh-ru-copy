@@ -4,12 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm"
-import { Employee } from "src/modules/employee/entities/employee.entity"
+import { Employee } from "./../../employee/entities/employee.entity"
 import { IEmployerReview } from "../employer-review.interface"
-import { Employer } from "src/modules/employer/entities/employer.entity"
+import { Employer } from "./../../employer/entities/employer.entity"
 
 @Entity({ name: "employer_reviews" })
 export class EmployerReview extends BaseEntity implements IEmployerReview {

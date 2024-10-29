@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common"
 import { UpdateJobPostDto } from "./dto/update-jobPost"
 import { CreateJobPostDto } from "./dto/create-jobPost"
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
-import { ApiError } from "src/common/constants/errors"
+import { ApiError } from "./../../common/constants/errors"
 import { JobPost } from "./entities/job-post.entity"
 
 @Injectable()

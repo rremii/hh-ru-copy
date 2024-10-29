@@ -10,19 +10,19 @@ import {
   UseGuards,
   ValidationPipe,
 } from "@nestjs/common"
-import { CurrentUser } from "src/decorators/current-user"
-import { AccessTokenGuard } from "src/guards/access-token.guard"
-import { Roles } from "src/decorators/roles"
-import { RoleGuard } from "src/guards/role.guard"
-import { UserRole } from "src/modules/user/entities/user.entity"
-import { IUser } from "src/modules/user/user.interface"
+import { CurrentUser } from "./../../decorators/current-user"
+import { AccessTokenGuard } from "./../../guards/access-token.guard"
+import { Roles } from "./../../decorators/roles"
+import { RoleGuard } from "./../../guards/role.guard"
+import { UserRole } from "./../../modules/user/entities/user.entity"
+import { IUser } from "./../../modules/user/user.interface"
 import { EmployeeService } from "./employee.service"
 import { UpdateEmployeeDto } from "./dto/update-employee.dto"
 import { CreateResumeDto } from "../resume/dto/create-resume.dto"
 import { UpdateResumeDto } from "../resume/dto/update-resume.dto"
 import { CreateJobApplicationDto } from "../job-application/dto/create-jobApplication.dto"
 import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
-import { DefaultFieldPipe } from "src/pipes/DefaultField.pipe"
+import { DefaultFieldPipe } from "./../../pipes/DefaultField.pipe"
 
 @UseGuards(AccessTokenGuard)
 @Controller("employee/")

@@ -1,13 +1,13 @@
 import { Injectable, Scope } from "@nestjs/common"
-import { Employee } from "src/modules/employee/entities/employee.entity"
-import { Employer } from "src/modules/employer/entities/employer.entity"
-import { User } from "src/modules/user/entities/user.entity"
 import { DataSource, EntityManager } from "typeorm"
 import { Resume } from "../resume/entities/resume.entity"
 import { ResumeApplication } from "../resume-application/entities/resume-application.entity"
 import { EmployerReview } from "../employer-review/entities/employer-review.entity"
 import { JobPost } from "../job-post/entities/job-post.entity"
 import { JobApplication } from "../job-application/entities/job-application.entity"
+import { User } from "../user/entities/user.entity"
+import { Employee } from "../employee/entities/employee.entity"
+import { Employer } from "../employer/entities/employer.entity"
 
 @Injectable({
   scope: Scope.REQUEST,

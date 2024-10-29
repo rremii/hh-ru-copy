@@ -1,6 +1,4 @@
-import { DefaultResponse } from "./../../common/types/types"
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
