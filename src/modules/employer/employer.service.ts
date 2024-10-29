@@ -44,7 +44,7 @@ export class EmployerService {
     })
   }
 
-  async getJobPosts(employerId: number) {
+  async getJobPostsByEmployerId(employerId: number) {
     return this.uowService.jobPostRepository.find({
       where: { employerId },
     })
@@ -82,5 +82,17 @@ export class EmployerService {
     return this.uowService.employerReviewRepository.find({
       where: { employerId },
     })
+  }
+
+  async getById(id: number) {
+    return this.uowService.employerRepository.findOneBy({ id })
+  }
+
+  async getPostJobById(id: number) {
+    return this.jobPostService.getById(id)
+  }
+
+  async getPostJobs() {
+    return this.jobPostService.getAll()
   }
 }

@@ -23,18 +23,36 @@ import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
 import { UpdateJobPostDto } from "../job-post/dto/update-jobPost"
 import { DefaultFieldPipe } from "src/pipes/DefaultField.pipe"
 
-@Roles(UserRole.EMPLOYER)
-@UseGuards(AccessTokenGuard, RoleGuard)
-@Controller("employer/me/")
+@UseGuards(AccessTokenGuard)
+@Controller("employer/")
 export class EmployerController {
   constructor(private readonly employerService: EmployerService) {}
 
-  @Get("")
+  @Get(":id")
+  async getById(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.getById(id)
+  }
+
+  @Get("job-post")
+  async getJobPosts() {
+    return this.employerService.getPostJobs()
+  }
+
+  @Get("job-post/:id")
+  async getPostJobById(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.getPostJobById(id)
+  }
+
+  @Get("me")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   getMe(@CurrentUser() user: IUser) {
     return user
   }
 
-  @Put("")
+  @Put("me")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async updateMe(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("id", -1))
@@ -43,12 +61,16 @@ export class EmployerController {
     return this.employerService.update({ ...updateDto, id: user.id })
   }
 
-  @Get("job-post")
-  async getJobPosts(@CurrentUser() user: IUser) {
-    return this.employerService.getJobPosts(user?.id)
+  @Get("me/job-post")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
+  async getJobPostsByEmployer(@CurrentUser() user: IUser) {
+    return this.employerService.getJobPostsByEmployerId(user?.id)
   }
 
-  @Post("job-post")
+  @Post("me/job-post")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async createJobPost(
     @Body(new DefaultFieldPipe("employerId", -1), ValidationPipe)
     createDto: CreateJobPostDto,
@@ -60,22 +82,30 @@ export class EmployerController {
     })
   }
 
-  @Put("job-post")
+  @Put("me/job-post")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async updateJobPost(@Body(ValidationPipe) updateDto: UpdateJobPostDto) {
     return this.employerService.updateJobPost(updateDto)
   }
 
-  @Get("job-post/:jobPostId/job-application")
+  @Get("me/job-post/:jobPostId/job-application")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async getJobApplications(@Param("jobPostId") jobPostId: number) {
     return this.employerService.getJobApplications(jobPostId)
   }
 
-  @Delete("job-post/:id")
+  @Delete("me/job-post/:id")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async deleteJobPost(@Param("id", ParseIntPipe) id: number) {
     return this.employerService.deleteJobPost(id)
   }
 
-  @Post("resume-application")
+  @Post("me/resume-application")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async createResumeApplication(
     @CurrentUser() user: IUser,
     @Body(new DefaultFieldPipe("employerId", -1), ValidationPipe)
@@ -87,12 +117,16 @@ export class EmployerController {
     })
   }
 
-  @Get("resume-application")
+  @Get("me/resume-application")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async getResumeApplication(@CurrentUser() user: IUser) {
     return this.employerService.getResumeApplications(user.id)
   }
 
-  @Get("employer-reviews")
+  @Get("me/employer-reviews")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
   async getEmployerReviews(@CurrentUser() user: IUser) {
     return this.employerService.getEmployerReviews(user.id)
   }

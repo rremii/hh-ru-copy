@@ -80,9 +80,18 @@ export class EmployeeService {
       where: { employeeId },
     })
   }
+
   async getEmployerReviewsByEmployer(employerId: number) {
     return this.uowService.employerReviewRepository.find({
       where: { employerId },
     })
+  }
+
+  async getResumeById(id: number) {
+    return this.resumeService.getById(id)
+  }
+
+  async getResumes() {
+    return this.resumeService.getAll()
   }
 }
