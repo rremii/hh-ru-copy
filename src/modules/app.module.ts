@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common"
+import { MiddlewareConsumer, Module } from "@nestjs/common"
 import { ConfigModule, ConfigService } from "@nestjs/config"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import configurations from "../configurations"
@@ -16,6 +16,7 @@ import { ResumeApplicationModule } from "./resume-application/resume-application
 import { EmployerReviewsModule } from "./employer-review/employer-review.module"
 import { JobApplicationModule } from "./job-application/job-application.module"
 import { JobPostModule } from "./job-post/job-post.module"
+import { LoggerMiddleware } from "src/middlewares/logger.middleware"
 
 @Module({
   imports: [
@@ -50,4 +51,8 @@ import { JobPostModule } from "./job-post/job-post.module"
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes("*")
+  }
+}

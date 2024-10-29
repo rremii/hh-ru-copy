@@ -8,8 +8,11 @@ import { ResumeApplication } from "src/modules/resume-application/entities/resum
 import { EmployerReview } from "src/modules/employer-review/entities/employer-review.entity"
 import { JobPost } from "src/modules/job-post/entities/job-post.entity"
 import { JobApplication } from "src/modules/job-application/entities/job-application.entity"
+import { TypeOrmModuleOptions } from "@nestjs/typeorm"
 
-export const getOrmConfig = async (config: ConfigService): Promise<any> => {
+export const getOrmConfig = async (
+  config: ConfigService,
+): Promise<TypeOrmModuleOptions> => {
   return {
     type: "postgres",
 
@@ -19,7 +22,7 @@ export const getOrmConfig = async (config: ConfigService): Promise<any> => {
     password: config.get("db_password"),
     database: config.get("db_name"),
     synchronize: true,
-
+    logging: true,
     entities: [
       User,
       Code,
