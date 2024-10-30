@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -23,9 +24,10 @@ import { UpdateResumeDto } from "../resume/dto/update-resume.dto"
 import { CreateJobApplicationDto } from "../job-application/dto/create-jobApplication.dto"
 import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
 import { DefaultFieldPipe } from "./../../pipes/DefaultField.pipe"
+import { ClientProxy } from "@nestjs/microservices"
 
-@UseGuards(AccessTokenGuard)
 @Controller("employee/")
+@UseGuards(AccessTokenGuard)
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 

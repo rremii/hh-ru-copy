@@ -23,4 +23,8 @@ export default () => ({
   smtp_password: process.env.SMTP_PASSWORD,
 
   auth_code_expire: +process.env.AUTH_CODE_EXPIRE || 60, //seconds
+
+  broker_url: process.env.BROKER_URL,
+  email_service_queue: process.env.EMAIL_SERVICE_QUEUE,
+  hh_ru_service_queue: process.env.HH_RU_SERVICE_QUEUE,
 })

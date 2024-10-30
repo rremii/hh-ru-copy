@@ -1,3 +1,4 @@
+import { ConfigModule, ConfigService } from "@nestjs/config"
 import { JobApplicationModule } from "./../job-application/job-application.module"
 import { Module } from "@nestjs/common"
 import { EmployeeService } from "./employee.service"

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common"
+import { BadRequestException, Inject, Injectable } from "@nestjs/common"
 import { ConfirmEmailDto } from "./dto/confirm-email.dto"
 import { DefaultResponse } from "../../common/types/types"
 import { ApiError } from "../../common/constants/errors"
@@ -10,6 +10,8 @@ import { LessThan, Repository } from "typeorm"
 import { GetAuthCodeExpTime } from "../../common/helpers/getAuthCodeExpTime"
 import { UserService } from "../user/user.service"
 import { v4 as uuid } from "uuid"
+import { ClientProxy } from "@nestjs/microservices"
+import { IoCTypes } from "IoC"
 
 @Injectable()
 export class CodeService {
@@ -18,22 +20,23 @@ export class CodeService {
     private readonly codeRepository: Repository<Code>,
     private readonly mailerService: MailerService,
     private readonly userService: UserService,
-  ) {}
+    @Inject(IoCTypes.EMAIL_SERVICE) private readonly emailClient: ClientProxy,
+  ) {
+    this.emailClient.connect()
+  }
 
   async sendConfirmCode({ email }: ConfirmEmailDto): Promise<DefaultResponse> {
     const existUser = await this.userService.getByEmail(email)
     if (existUser) throw new BadRequestException(ApiError.USER_EXIST)
 
-    // const code = uuid().slice(0, 6)
-    const code = "111111"
+    const code = uuid().slice(0, 6)
+    // const code = "111111"
 
-    await this.mailerService.sendMail({
-      to: email,
-      from: "remi mail sender",
-      subject: "confirm email",
-      text: "please confirm your email",
-      html: `<div>${code}</div>`,
+    const observer = this.emailClient.send("send_email", {
+      email,
+      payload: code,
     })
+    observer.subscribe((res) => console.log("EMAIL_SERVICE_RESPONSE:", res))
 
     const newCode = this.codeRepository.create({
       code,
@@ -41,7 +44,6 @@ export class CodeService {
     })
 
     await newCode.save()
-
     return { message: "code was sent" }
   }
 

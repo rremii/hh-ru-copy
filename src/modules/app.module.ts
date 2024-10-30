@@ -23,7 +23,6 @@ import { LoggerMiddleware } from "./../middlewares/logger.middleware"
     CodeModule,
     AuthModule,
     UserModule,
-    // RouterModule.register(routes),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configurations],
