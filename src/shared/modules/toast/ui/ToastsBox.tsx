@@ -10,7 +10,6 @@ export const ToastBox = ({ children }: PropsWithChildren) => {
 const ToastBoxLayout = styled.div`
   pointer-events: none;
   position: fixed;
-  background-color: red;
   z-index: 110;
   bottom: 0;
   width: 100%;

@@ -11,7 +11,7 @@ export const Spinner = styled.div<{
   width: ${({ $width }) => $width || "50px"};
   height: ${({ $height }) => $height || "50px"};
 
-  border-top: ${({ $size }) => $size || "3px"} solid
+  border-top: ${({ $size }) => ($size || 2) + "px"} solid
     ${({ $color }) => $color || "black"};
 
   animation: spin 0.7s infinite linear;
