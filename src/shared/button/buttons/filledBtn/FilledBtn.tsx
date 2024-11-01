@@ -10,6 +10,7 @@ export const FilledBtn: FC<FilledBtnProps> = ({
   color,
   rounded,
   onClick,
+  ...btnProps
 }) => {
   let brRadius = 0
   if (rounded === true) brRadius = 10
@@ -22,6 +23,7 @@ export const FilledBtn: FC<FilledBtnProps> = ({
       $padding={padding}
       $brRadius={brRadius}
       disabled={pending}
+      {...btnProps}
     >
       {children}
 

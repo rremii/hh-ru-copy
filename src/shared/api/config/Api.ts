@@ -1,7 +1,7 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react"
 import { ApiError } from "@shared/api/config/types"
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
-import { $api, $apiDefault, API_URL } from "./index"
+import { $api, API_URL } from "./index"
 
 const axiosBaseQuery =
   (): BaseQueryFn<
@@ -10,22 +10,13 @@ const axiosBaseQuery =
       method: AxiosRequestConfig["method"]
       data?: unknown
       params?: unknown
-      withInterceptors?: boolean //use default axios, instead of custom with interceptors
       baseUrl?: string
       withCredentials?: boolean
     },
     unknown,
     ApiError
   > =>
-  async ({
-    url,
-    method,
-    data,
-    params,
-    withCredentials,
-    withInterceptors = true,
-    baseUrl = API_URL,
-  }) => {
+  async ({ url, method, data, params, withCredentials, baseUrl = API_URL }) => {
     try {
       const requestConfig: AxiosRequestConfig = {
         url: baseUrl + url,
@@ -34,10 +25,8 @@ const axiosBaseQuery =
         params,
         withCredentials,
       }
-      let result: AxiosResponse
 
-      if (withInterceptors) result = await $api(requestConfig)
-      else result = await $apiDefault(requestConfig)
+      const result = await $api.request(requestConfig)
 
       return { data: result.data }
     } catch (error: unknown) {
@@ -56,5 +45,5 @@ export const Api = createApi({
   reducerPath: "ApiRtk",
   baseQuery: axiosBaseQuery(),
   endpoints: () => ({}),
-  tagTypes: ["Palette", "User"],
+  tagTypes: ["", "User"],
 })

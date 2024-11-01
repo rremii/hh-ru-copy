@@ -1,4 +1,4 @@
-export interface IResumeApplication {
+export interface ResumeApplication {
   id: number
   resumeId: number
   employerId: number

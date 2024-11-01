@@ -9,6 +9,7 @@ export const SimpleBtn: FC<SimpleBtnProps> = ({
   padding,
   children,
   onClick,
+  ...btnProps
 }) => {
   return (
     <SimpleBtnLayout
@@ -17,6 +18,7 @@ export const SimpleBtn: FC<SimpleBtnProps> = ({
       $pending={pending}
       $color={color}
       $padding={padding}
+      {...btnProps}
     >
       {children}
       <div className="spinner">

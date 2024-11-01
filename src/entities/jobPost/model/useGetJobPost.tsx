@@ -1,6 +1,6 @@
-import { IJobPost } from "../types"
+import { JobPost } from "../types"
 
-const jobPosts: IJobPost[] = [
+const jobPosts: JobPost[] = [
   {
     id: 1,
     title: "Frontend developer",

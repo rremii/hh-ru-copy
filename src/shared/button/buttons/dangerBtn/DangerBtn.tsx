@@ -8,6 +8,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
   padding,
   children,
   onClick,
+  ...btnProps
 }) => {
   return (
     <DangerBtnLayout
@@ -15,6 +16,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
       disabled={pending}
       $pending={pending}
       $padding={padding}
+      {...btnProps}
     >
       {children}
       <div className="spinner">

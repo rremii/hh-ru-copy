@@ -1,6 +1,6 @@
-import { IResumeApplication } from "../types"
+import { ResumeApplication } from "../types"
 
-const resumeApplications: IResumeApplication[] = [
+const resumeApplications: ResumeApplication[] = [
   {
     id: 1,
     resumeId: 1,

@@ -1,10 +1,12 @@
-import { PropsWithChildren } from "react"
+import { ButtonHTMLAttributes, HTMLAttributes, PropsWithChildren } from "react"
 
 type CombineTypes<T, U> = T & U
 
 type BtnType = "simple" | "danger" | "filled"
 
-interface BaseBtnProps extends PropsWithChildren {
+interface BaseBtnProps
+  extends PropsWithChildren,
+    HTMLAttributes<HTMLButtonElement> {
   pending?: boolean
   padding?: string
   onClick?: () => void

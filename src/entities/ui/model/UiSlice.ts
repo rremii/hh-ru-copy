@@ -1,17 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-type Menus = "sidebar"
+type Menus = "resumeModal"
 
 interface initialState {
-  sidebar: {
-    isOpen: boolean
-  }
+  resumeModal: boolean
 }
 
 const initialState = {
-  sidebar: {
-    isOpen: false,
-  },
+  resumeModal: false,
 } as initialState
 
 export const UiSlice = createSlice({
@@ -19,10 +15,10 @@ export const UiSlice = createSlice({
   initialState,
   reducers: {
     openMenu(state, action: PayloadAction<Menus>) {
-      state[action.payload].isOpen = true
+      state[action.payload] = true
     },
     closeMenu(state, action: PayloadAction<Menus>) {
-      state[action.payload].isOpen = false
+      state[action.payload] = false
     },
   },
 })

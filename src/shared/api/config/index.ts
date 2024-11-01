@@ -8,15 +8,10 @@ export const $api = axios.create({
   baseURL: API_URL,
 })
 
-export const $apiDefault = axios.create({
-  withCredentials: true,
-  baseURL: API_URL,
-})
-
 $api.interceptors.request.use((config) => {
   if (config.headers !== null) {
     config.headers.Authorization = `Bearer ${localStorage.getItem(
-      "accessToken",
+      "accessToken"
     )}`
   }
   return config
@@ -36,7 +31,7 @@ $api.interceptors.response.use(
       try {
         const response = await axios.get<{ accessToken: string }>(
           API_URL + "auth/refresh",
-          { withCredentials: true },
+          { withCredentials: true }
         )
         localStorage.setItem("accessToken", response.data.accessToken)
         return await $api.request(originalRequest)
@@ -46,5 +41,5 @@ $api.interceptors.response.use(
       }
     }
     throw error
-  },
+  }
 )

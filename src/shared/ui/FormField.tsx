@@ -4,8 +4,8 @@ import styled from "styled-components"
 interface Props {
   isError?: boolean
   label?: string
-  input: {
-    type: string
+  input?: {
+    type?: string
     beforeInput?: ReactNode
     placeholder?: string
     register?: object //TODO check how to fix
@@ -13,8 +13,8 @@ interface Props {
   }
 }
 
-export const FormField: FC<Props> = ({ input, isError, label }) => {
-  const { placeholder, type, register, onChange, beforeInput } = input
+export const FormField: FC<Props> = ({ input = {}, isError, label }) => {
+  const { placeholder, type = "text", register, onChange, beforeInput } = input
 
   const labelId = useId()
 

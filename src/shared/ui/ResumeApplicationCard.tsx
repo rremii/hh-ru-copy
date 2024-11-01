@@ -1,10 +1,10 @@
 import { IJobApplication } from "@entities/jobApplication/types"
-import { IResumeApplication } from "@entities/resumeApplication/types"
+import { ResumeApplication } from "@entities/resumeApplication/types"
 import { Button } from "@shared/button"
 import { Fragment } from "react/jsx-runtime"
 import styled from "styled-components"
 
-interface Props extends IResumeApplication {
+interface Props extends ResumeApplication {
   btns?: React.ReactNode[]
 }
 

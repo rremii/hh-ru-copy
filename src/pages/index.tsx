@@ -5,12 +5,13 @@ import { JobListPage } from "./employee/JobListPage.tsx"
 import { MainLayout } from "../app/layout/MainLayout.tsx"
 import { JobPostPage } from "./employee/JobPostPage.tsx"
 import { ApplicationsPage } from "./employee/ApplicationsPage.tsx"
+import { ResumePage } from "./employee/ResumePage.tsx"
 
 export const Routing = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // navigate("/job-list")
+    navigate("/job-list")
   }, [])
 
   const employeeRoutes = [
@@ -34,7 +35,7 @@ export const Routing = () => {
       path: "/resume",
       element: (
         <MainLayout>
-          <div>resume</div>
+          <ResumePage />
         </MainLayout>
       ),
     },
