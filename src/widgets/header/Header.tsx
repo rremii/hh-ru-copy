@@ -4,6 +4,7 @@ import Logo from "@icons/logo.svg?react"
 import SearchIcon from "@icons/search.svg?react"
 import ProfileIcon from "@icons/profile.svg?react"
 import { Link } from "@shared/ui/Link"
+import { Logout } from "@features/logout/Logout"
 
 export const Header = () => {
   const leftContainerLinks = [
@@ -38,10 +39,10 @@ export const Header = () => {
               <SearchIcon />
               Поиск
             </Link>
-
             <Link to="/profile">
               <ProfileIcon />
             </Link>
+            <Logout />
           </SectionContainer>
         }
       />

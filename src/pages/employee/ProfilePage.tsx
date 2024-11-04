@@ -1,10 +1,10 @@
-import { JobPostList } from "@widgets/jobPostList/JobPostList"
+import { Profile } from "@widgets/employee/profile/Profile"
 import styled from "styled-components"
 
-export const JobListPage = () => {
+export const ProfilePage = () => {
   return (
     <PageLayout>
-      <JobPostList />
+      <Profile />
     </PageLayout>
   )
 }
@@ -12,5 +12,5 @@ export const JobListPage = () => {
 const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 0 100px;
+  padding: 10% 0 100px;
 `

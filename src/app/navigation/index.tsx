@@ -1,11 +1,12 @@
 import { Route, Routes, useNavigate } from "react-router-dom"
-import AppLayout from "../app/layout/AppLayout.tsx"
+import AppLayout from "../layout/AppLayout.tsx"
 import { useEffect } from "react"
-import { JobListPage } from "./employee/JobListPage.tsx"
-import { MainLayout } from "../app/layout/MainLayout.tsx"
-import { JobPostPage } from "./employee/JobPostPage.tsx"
-import { ApplicationsPage } from "./employee/ApplicationsPage.tsx"
-import { ResumePage } from "./employee/ResumePage.tsx"
+import { JobListPage } from "../../pages/employee/JobListPage.tsx"
+import { MainLayout } from "../layout/MainLayout.tsx"
+import { JobPostPage } from "../../pages/employee/JobPostPage.tsx"
+import { ApplicationsPage } from "../../pages/employee/ApplicationsPage.tsx"
+import { ResumePage } from "../../pages/employee/ResumePage.tsx"
+import { ProfilePage } from "../../pages/employee/ProfilePage.tsx"
 
 export const Routing = () => {
   const navigate = useNavigate()
@@ -43,7 +44,7 @@ export const Routing = () => {
       path: "/profile",
       element: (
         <MainLayout>
-          <div>resume</div>
+          <ProfilePage />
         </MainLayout>
       ),
     },

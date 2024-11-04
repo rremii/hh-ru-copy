@@ -7,6 +7,7 @@ import {
 } from "react"
 import styled from "styled-components"
 import { Skill } from "./Skill"
+import CrossIcon from "@icons/cross.svg?react"
 
 interface Props {
   initSkills: string[]
@@ -15,12 +16,7 @@ interface Props {
 
 export const SkillsPicker = ({ initSkills, onChange }: Props) => {
   const [skills, setSkills] = useState<string[]>(initSkills)
-  const [isAdding, setIsAdding] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
-
-  useEffect(() => {
-    if (isAdding) inputRef.current?.focus()
-  }, [isAdding])
 
   const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -32,41 +28,55 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
       const newSkills = [...skills, newSkill]
       onChange(newSkills)
       setSkills(newSkills)
-    }
 
-    setIsAdding(false)
+      inputRef.current.value = ""
+    }
   }
   const onRemove = (removeSkill: string) => {
-    onChange(skills.filter((skill) => skill !== removeSkill))
+    if (!inputRef.current) return
+    const newSkills = skills.filter((skill) => skill !== removeSkill)
+    onChange(newSkills)
+    setSkills(newSkills)
+    inputRef.current.value = ""
   }
 
-  const startAdding = () => {
-    setIsAdding(true)
-  }
   return (
     <PickerContainer>
-      {skills.map((skill) => (
-        <Skill onClick={() => onRemove(skill)} key={skill}>
-          {skill}
-        </Skill>
-      ))}
-
-      {isAdding ? (
-        <SkillInput
-          type="text"
-          ref={inputRef}
-          onKeyDown={(e) => e.key === "Enter" && onSubmit(e)}
-        />
-      ) : (
-        <AddNewSkill onClick={startAdding}>+</AddNewSkill>
-      )}
+      <SkillInput
+        placeholder="Enter your skills"
+        type="text"
+        ref={inputRef}
+        onKeyDown={(e) => e.key === "Enter" && onSubmit(e)}
+      />
+      <SkillsContainer>
+        {skills.map((skill) => (
+          <Skill onClick={() => onRemove(skill)} key={skill}>
+            {skill}
+            <CrossIcon color="black" width="10" height="10" />
+          </Skill>
+        ))}
+      </SkillsContainer>
     </PickerContainer>
   )
 }
-const PickerContainer = styled.div`
+
+const PickerContainer = styled.div``
+
+const SkillInput = styled.input`
+  display: block;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 17px;
+  line-height: 17px;
+  margin-bottom: 10px;
+  transition: border 0.3s;
+  &:focus-within {
+    border: 1px solid #2e6ebb;
+  }
+`
+const SkillsContainer = styled.div`
   display: flex;
   align-items: center;
 `
-const AddNewSkill = styled.button``
-
-const SkillInput = styled.input``

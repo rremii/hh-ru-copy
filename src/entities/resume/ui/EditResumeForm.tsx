@@ -57,32 +57,42 @@ export const EditResumeForm = ({
   return (
     <FormLayout onSubmit={handleSubmit(onSubmit)}>
       <FormField
+        label="Title"
         isError={Boolean(errors.root) || Boolean(errors.title)}
         input={{
-          placeholder: "title",
           register: { ...register("title") },
         }}
       />
       <FormField
+        label="Experience"
         isError={Boolean(errors.root) || Boolean(errors.experience)}
         input={{
-          placeholder: "experience",
           register: { ...register("experience") },
         }}
       />
       <FormField
+        label="Education"
         isError={Boolean(errors.root) || Boolean(errors.education)}
         input={{
-          placeholder: "education",
           register: { ...register("education") },
         }}
       />
       <SkillsPicker initSkills={skills} onChange={setSkills} />
-      <Button type="filled" rounded>
-        Submit
-      </Button>
+      <div className="btn-section">
+        <Button type="filled" rounded>
+          Submit
+        </Button>
+      </div>
     </FormLayout>
   )
 }
 
-const FormLayout = styled.form``
+const FormLayout = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .btn-section {
+    display: flex;
+    justify-content: flex-end;
+  }
+`

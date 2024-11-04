@@ -1,4 +1,5 @@
 import { openMenu } from "@entities/ui/model/UiSlice"
+import { Button } from "@shared/button"
 import { useAppDispatch } from "@shared/hooks/storeHooks"
 import { PropsWithChildren } from "react"
 import styled from "styled-components"
@@ -12,6 +13,16 @@ export const OpenResumeModal = ({ children }: Props) => {
     dispatch(openMenu("resumeModal"))
   }
 
-  return <ButtonLayout onClick={openModal}>{children}</ButtonLayout>
+  return (
+    <Button
+      style={{
+        width: "100px",
+      }}
+      type="filled"
+      rounded
+      onClick={openModal}
+    >
+      {children}
+    </Button>
+  )
 }
-const ButtonLayout = styled.button``
