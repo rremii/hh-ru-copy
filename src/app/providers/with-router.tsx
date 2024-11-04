@@ -1,10 +1,11 @@
 import { FC, Suspense } from "react"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, RouterProvider, Routes } from "react-router-dom"
+import { router } from "../navigation"
 
-export const withRouter = (Component: FC) => () => (
-  <BrowserRouter>
-    <Suspense fallback={"loading"}>
+export const withRouter = (Component: FC) => () =>
+  (
+    <BrowserRouter>
       <Component />
-    </Suspense>
-  </BrowserRouter>
-)
+    </BrowserRouter>
+  )
+// <RouterProvider router={router} />

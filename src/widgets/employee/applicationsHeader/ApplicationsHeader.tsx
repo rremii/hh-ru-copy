@@ -4,11 +4,11 @@ import styled from "styled-components"
 export const ApplicationsHeader = () => {
   const links = [
     {
-      path: "/applications/me",
+      path: "/employee/applications/me",
       label: "Мои",
     },
     {
-      path: "/applications/employers",
+      path: "/employee/applications/employers",
       label: "Компаний",
     },
   ]

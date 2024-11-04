@@ -1,5 +1,5 @@
 import { useGetJobPost } from "@entities/jobPost/model/useGetJobPost"
-import { JobPost } from "@entities/jobPost/types"
+import { JobPost as JobPostType } from "@entities/jobPost/types"
 import { Button } from "@shared/button"
 import { useNavigation, useParams } from "react-router-dom"
 import styled from "styled-components"
@@ -10,7 +10,7 @@ export const JobPost = () => {
   const { jobPost } = useGetJobPost(Number(id))
 
   const { description, employerId, requirements, salary, title } =
-    jobPost as JobPost
+    jobPost as JobPostType
 
   return (
     <JobPostLayout>

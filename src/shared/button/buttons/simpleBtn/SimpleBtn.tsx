@@ -43,8 +43,8 @@ const SimpleBtnLayout = styled.button<{
 
   &:hover {
     border: ${({ $color, $pending }) =>
-      $pending ? "none" : `1px solid ${$color}`};
-    color: ${({ $color }) => $color || "black"};
+      $pending ? "none" : `1px solid ${$color || "#0070ff"}`};
+    color: ${({ $color }) => $color || "#0070ff"};
   }
 
   .spinner {

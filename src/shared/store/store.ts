@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { Api } from "@shared/api/config/Api.ts"
 import { UiReducer } from "@entities/ui/model/UiSlice.ts"
+import { AuthReducer, AuthSlice } from "@entities/auth-employee/model/AuthSlice"
 
 const rootReducer = combineReducers({
   Ui: UiReducer,
+  Auth: AuthReducer,
   [Api.reducerPath]: Api.reducer,
 })
 
@@ -18,4 +20,5 @@ export const setupStore = () => {
 
 export const store = setupStore()
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

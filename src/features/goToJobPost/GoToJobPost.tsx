@@ -9,7 +9,7 @@ export const GoToJobPost = ({ jobPostId }: Props) => {
   const navigate = useNavigate()
 
   const goToJobPost = (id: number) => {
-    navigate(`/job-list/${id}`)
+    navigate(`/employee/job-list/${id}`)
   }
   return (
     <Button

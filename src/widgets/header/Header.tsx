@@ -8,14 +8,14 @@ import { Logout } from "@features/logout/Logout"
 
 export const Header = () => {
   const leftContainerLinks = [
-    {
-      path: "/resume",
-      label: "Резюме",
-    },
-    {
-      path: "/applications/me",
-      label: "Отклики",
-    },
+    // {
+    //   path: "employee/resume",
+    //   label: "Резюме",
+    // },
+    // {
+    //   path: "employee/applications/me",
+    //   label: "Отклики",
+    // },
   ]
 
   return (
@@ -23,23 +23,20 @@ export const Header = () => {
       <HeaderTemplate
         left={
           <SectionContainer>
-            <Link to="/job-list">
+            <Link to="/employee/job-list">
               <Logo />
             </Link>
-            {leftContainerLinks.map(({ label, path }, index) => (
-              <Link key={index} to={path}>
-                {label}
-              </Link>
-            ))}
+            <Link to="/employee/resume">Резюме</Link>
+            <Link to="/employee/applications/me">Отклики</Link>
           </SectionContainer>
         }
         right={
           <SectionContainer>
-            <Link to="/job-list">
+            <Link to="/employee/job-list">
               <SearchIcon />
               Поиск
             </Link>
-            <Link to="/profile">
+            <Link to="/employee/profile">
               <ProfileIcon />
             </Link>
             <Logout />

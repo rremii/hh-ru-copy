@@ -1,88 +1,14 @@
-import { Route, Routes, useNavigate } from "react-router-dom"
-import AppLayout from "../layout/AppLayout.tsx"
-import { useEffect } from "react"
-import { JobListPage } from "../../pages/employee/JobListPage.tsx"
-import { MainLayout } from "../layout/MainLayout.tsx"
-import { JobPostPage } from "../../pages/employee/JobPostPage.tsx"
-import { ApplicationsPage } from "../../pages/employee/ApplicationsPage.tsx"
-import { ResumePage } from "../../pages/employee/ResumePage.tsx"
-import { ProfilePage } from "../../pages/employee/ProfilePage.tsx"
+import { Routes } from "react-router-dom"
+import { employeeNavigation } from "./employee/index.tsx"
+import { welcomeNavigation } from "./welcome/welcome.tsx"
+import { employerNavigation } from "./employer/index.tsx"
 
-export const Routing = () => {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    navigate("/job-list")
-  }, [])
-
-  const employeeRoutes = [
-    {
-      path: "/job-list",
-      element: (
-        <MainLayout>
-          <JobListPage />
-        </MainLayout>
-      ),
-    },
-    {
-      path: "/job-list/:id",
-      element: (
-        <MainLayout>
-          <JobPostPage />
-        </MainLayout>
-      ),
-    },
-    {
-      path: "/resume",
-      element: (
-        <MainLayout>
-          <ResumePage />
-        </MainLayout>
-      ),
-    },
-    {
-      path: "/profile",
-      element: (
-        <MainLayout>
-          <ProfilePage />
-        </MainLayout>
-      ),
-    },
-    {
-      path: "/applications/:type",
-      element: (
-        <MainLayout>
-          <ApplicationsPage />
-        </MainLayout>
-      ),
-    },
-    {
-      path: "/applications/me/:id",
-      element: (
-        <MainLayout>
-          <JobPostPage />
-        </MainLayout>
-      ),
-    },
-    {
-      path: "/applications/employers/:id",
-      element: (
-        <MainLayout>
-          <JobListPage />
-        </MainLayout>
-      ),
-    },
-  ]
-
+export const Navigation = () => {
   return (
-    <>
-      <AppLayout>
-        <Routes>
-          {employeeRoutes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
-          ))}
-        </Routes>
-      </AppLayout>
-    </>
+    <Routes>
+      {welcomeNavigation}
+      {employeeNavigation}
+      {employerNavigation}
+    </Routes>
   )
 }

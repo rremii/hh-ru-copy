@@ -1,9 +1,14 @@
 import { withProviders } from "./providers"
-import { Routing } from "./navigation"
 import "./styles/style.scss"
+import AppLayout from "./layout/AppLayout"
+import { Navigation } from "./navigation"
 
 function App() {
-  return <Routing />
+  return (
+    <AppLayout>
+      <Navigation />
+    </AppLayout>
+  )
 }
 
 export default withProviders(App)
