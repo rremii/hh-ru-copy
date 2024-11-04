@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "paths": {
+      "@root/*": ["./src/root/*"],
       "@shared/*": ["./src/shared/*"],
-      "@entities/*": ["./src/entities/*"],
-      "@features/*": ["./src/features/*"],
-      "@widgets/*": ["./src/widgets/*"],
+      "@employee/*": ["./src/employee/*"],
+      "@employer/*": ["./src/employer/*"],
       "@icons/*": ["./public/icons/*"]
     },
     "esModuleInterop": true,

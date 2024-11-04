@@ -6,10 +6,10 @@ import * as path from "path"
 export default defineConfig({
   resolve: {
     alias: {
+      "@root": path.resolve(__dirname, "./src/root"),
       "@shared": path.resolve(__dirname, "./src/shared"),
-      "@entities": path.resolve(__dirname, "./src/entities"),
-      "@features": path.resolve(__dirname, "./src/features"),
-      "@widgets": path.resolve(__dirname, "./src/widgets"),
+      "@employee": path.resolve(__dirname, "./src/employee"),
+      "@employer": path.resolve(__dirname, "./src/employer"),
       "@icons": path.resolve(__dirname, "./public/icons"),
     },
   },
