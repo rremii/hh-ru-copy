@@ -1,24 +1,27 @@
 import { Route, RouteObject } from "react-router-dom"
+import { LoginPage } from "../../../pages/employer/LoginPage"
+import { SignUpEmailPage } from "../../../pages/employer/SignUpEmailPage"
+import { SignUpCodePage } from "../../../pages/employer/SignUpCodePage"
+import { SignUpInfoPage } from "../../../pages/employer/SignUpInfoPage"
 
 const routes = [
   {
     path: "login",
-    element: <div>Login</div>,
+    element: <LoginPage />,
   },
   {
     path: "register/email",
-    element: <div>email</div>,
+    element: <SignUpEmailPage />,
   },
   {
     path: "register/code",
-    element: <div>code</div>,
+    element: <SignUpCodePage />,
   },
   {
     path: "register/info",
-    element: <div>info</div>,
+    element: <SignUpInfoPage />,
   },
 ]
-
 export const authNavigation = (
   <Route path="auth">
     {routes.map((route, index) => (

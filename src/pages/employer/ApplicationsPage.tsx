@@ -1,6 +1,6 @@
-import { ApplicationsHeader } from "@widgets/employers/applicationsHeader/ApplicationsHeader"
-import { EmployeeApplicationList } from "@widgets/employers/employeeApplicationsList/EmployeeApplicationList"
-import { MyApplicationList } from "@widgets/employers/myApplicationsList/MyApplicationList"
+import { ApplicationsHeader } from "@widgets/employer/applicationsHeader/ApplicationsHeader"
+import { EmployeeApplicationList } from "@widgets/employer/employeeApplicationsList/EmployeeApplicationList"
+import { MyApplicationList } from "@widgets/employer/myApplicationsList/MyApplicationList"
 import { useParams } from "react-router-dom"
 import styled from "styled-components"
 

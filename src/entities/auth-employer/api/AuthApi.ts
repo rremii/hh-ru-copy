@@ -3,14 +3,14 @@ import { AuthResponse, DefaultResponse, LoginDto, RegisterDto } from "../types"
 
 export const AuthApi = Api.injectEndpoints({
   endpoints: (build) => ({
-    register: build.mutation<AuthResponse, RegisterDto>({
+    registerEmployer: build.mutation<AuthResponse, RegisterDto>({
       query: (registerData: RegisterDto) => ({
-        url: "auth/register/employee",
+        url: "auth/register/employer",
         method: "POST",
         data: registerData,
       }),
     }),
-    login: build.mutation<AuthResponse, LoginDto>({
+    loginEmployer: build.mutation<AuthResponse, LoginDto>({
       query: (loginData) => ({
         url: "auth/login",
         method: "POST",
@@ -18,7 +18,7 @@ export const AuthApi = Api.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    confirmEmail: build.mutation<DefaultResponse, string>({
+    confirmEmailEmployer: build.mutation<DefaultResponse, string>({
       query: (email) => ({
         url: "code/send-code",
         method: "POST",
@@ -26,7 +26,7 @@ export const AuthApi = Api.injectEndpoints({
       }),
     }),
 
-    verifyCode: build.mutation<DefaultResponse, string>({
+    verifyCodeEmployer: build.mutation<DefaultResponse, string>({
       query: (code) => ({
         url: "code/verify-code",
         method: "POST",
@@ -34,28 +34,27 @@ export const AuthApi = Api.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    logout: build.mutation<DefaultResponse, void>({
+    logoutEmployer: build.mutation<DefaultResponse, void>({
       query: () => ({
         url: "auth/logout",
         method: "DELETE",
       }),
     }),
 
-    refresh: build.query<AuthResponse, void>({
+    refreshEmployer: build.query<AuthResponse, void>({
       query: () => ({
-        url: "auth/refresh/employee",
+        url: "auth/refresh/employer",
         method: "GET",
       }),
     }),
   }),
-  overrideExisting: true,
+  // overrideExisting: true,
 })
-export const { refresh } = AuthApi.endpoints
 export const {
-  useRefreshQuery,
-  useRegisterMutation,
-  useLoginMutation,
-  useConfirmEmailMutation,
-  useVerifyCodeMutation,
-  useLogoutMutation,
+  useConfirmEmailEmployerMutation,
+  useLogoutEmployerMutation,
+  useLoginEmployerMutation,
+  useRegisterEmployerMutation,
+  useRefreshEmployerQuery,
+  useVerifyCodeEmployerMutation,
 } = AuthApi

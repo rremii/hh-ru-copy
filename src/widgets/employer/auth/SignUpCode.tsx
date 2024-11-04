@@ -11,12 +11,12 @@ import {
   LinkWithText,
   SubHeader,
 } from "./ui/ContentLayout"
-import { SignUpCodeForm } from "@entities/auth-employee/ui/SignUpCodeForm"
 import { useToast } from "@shared/modules/toast"
 import { error } from "console"
+import { SignUpCodeForm } from "@entities/auth-employer/ui/SignUpCodeForm"
 
 export const SignUpCode: FC = () => {
-  const email = useTypedSelector((state) => state.EmployeeAuth.email)
+  const email = useTypedSelector((state) => state.EmployerAuth.email)
 
   const { confirmEmail, isSuccess, isError } = useConfirmEmail()
   const { openToast } = useToast()

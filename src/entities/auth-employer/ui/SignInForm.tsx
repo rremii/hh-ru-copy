@@ -49,7 +49,7 @@ export const SignInForm = () => {
         type: "info",
         content: "you were logged in",
       })
-      navigate("/employee")
+      navigate("/employer")
     }
     if (isError) {
       reset()
@@ -64,7 +64,7 @@ export const SignInForm = () => {
 
   const onSubmit = async (authData: FormFields) => {
     if (isLoading) return
-    await login({ ...authData, role: UserRole.EMPLOYEE })
+    await login({ ...authData, role: UserRole.EMPLOYER })
   }
 
   return (

@@ -21,12 +21,13 @@ import { setAuthState } from "../model/AuthSlice"
 interface FormFields {
   name: string
   password: string
+  about: string
 }
 
 export const SignUpInfoForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const email = useTypedSelector((state) => state.EmployeeAuth.email)
+  const email = useTypedSelector((state) => state.EmployerAuth.email)
 
   const {
     isError,
@@ -73,12 +74,18 @@ export const SignUpInfoForm = () => {
       content: "Аккаунт был создан",
       type: "info",
     })
-    navigate("/employee")
+    navigate("/employer")
   }, [isLoading])
 
-  const onSubmit = async ({ name, password }: FormFields) => {
+  const onSubmit = async ({ name, password, about }: FormFields) => {
     if (isLoading) return
-    await registerEmployee({ name, password, role: UserRole.EMPLOYEE, email })
+    await registerEmployee({
+      name,
+      password,
+      email,
+      about,
+      role: UserRole.EMPLOYER,
+    })
   }
 
   return (
@@ -98,6 +105,14 @@ export const SignUpInfoForm = () => {
             type: "password",
             placeholder: "123",
             register: { ...register("password") },
+          }}
+        />
+        <FormField
+          isError={Boolean(errors.root) || Boolean(errors.about)}
+          input={{
+            type: "text",
+            placeholder: "About",
+            register: { ...register("about") },
           }}
         />
 

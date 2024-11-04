@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { Api } from "@shared/api/config/Api.ts"
 import { UiReducer } from "@entities/ui/model/UiSlice.ts"
-import { AuthReducer, AuthSlice } from "@entities/auth-employee/model/AuthSlice"
+import { EmployeeAuthReducer } from "@entities/auth-employee/model/AuthSlice"
+import { EmployerAuthReducer } from "@entities/auth-employer/model/AuthSlice"
 
 const rootReducer = combineReducers({
   Ui: UiReducer,
-  Auth: AuthReducer,
+  EmployeeAuth: EmployeeAuthReducer,
+  EmployerAuth: EmployerAuthReducer,
   [Api.reducerPath]: Api.reducer,
 })
 

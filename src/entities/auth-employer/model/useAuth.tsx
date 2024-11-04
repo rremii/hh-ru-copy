@@ -1,18 +1,18 @@
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useEffect, useState } from "react"
-import { useRefreshQuery } from "../api/AuthApi"
 import { setAuthState } from "./AuthSlice"
 import { useNavigate } from "react-router-dom"
+import { useRefreshEmployerQuery } from "@entities/auth-employer/api/AuthApi"
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { data, isError } = useRefreshQuery()
+  const authState = useTypedSelector((state) => state.EmployerAuth.authState)
 
-  const authState = useTypedSelector((state) => state.EmployeeAuth.authState)
+  const { data, isError } = useRefreshEmployerQuery()
 
   useEffect(() => {
-    if (authState === "rejected") navigate("/employee/auth/login")
+    if (authState === "rejected") navigate("/employer/auth/login")
   }, [authState])
 
   useEffect(() => {

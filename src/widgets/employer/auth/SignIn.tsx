@@ -8,19 +8,19 @@ import {
   LinkWithText,
   SubHeader,
 } from "./ui/ContentLayout"
-import { SignInForm } from "@entities/auth-employee/ui/SignInForm"
 import { useNavigate } from "react-router-dom"
+import { SignInForm } from "@entities/auth-employer/ui/SignInForm"
 
 export const SignIn: FC = () => {
   const navigate = useNavigate()
 
   const goToSignUp = () => {
-    navigate("/employee/auth/register/email")
+    navigate("/employer/auth/register/email")
   }
 
   return (
     <AuthContainer>
-      <Header>Войти как сотрудник</Header>
+      <Header>Войти как роботодатель</Header>
       <SubHeader>Войти с помощью почты.</SubHeader>
 
       <SignInForm />

@@ -13,7 +13,7 @@ const initialState = {
 } as initialState
 
 export const AuthSlice = createSlice({
-  name: "EmployeeAuthSlice",
+  name: "EmployerAuthSlice",
   initialState,
   reducers: {
     setAuthState(state, action: PayloadAction<AuthState>) {
@@ -27,4 +27,4 @@ export const AuthSlice = createSlice({
 
 export const { setEmail, setAuthState } = AuthSlice.actions
 
-export const EmployeeAuthReducer = AuthSlice.reducer
+export const EmployerAuthReducer = AuthSlice.reducer

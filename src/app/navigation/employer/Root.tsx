@@ -1,20 +1,16 @@
 import { Route, RouteObject } from "react-router-dom"
-import { ApplicationsPage } from "../../../pages/employee/ApplicationsPage"
-import { JobListPage } from "../../../pages/employee/JobListPage"
-import { JobPostPage } from "../../../pages/employee/JobPostPage"
-import { ProfilePage } from "../../../pages/employee/ProfilePage"
-import { ResumePage } from "../../../pages/employee/ResumePage"
 import { MainLayout } from "../../layout/MainLayout"
+import { EmployerAuthLayout } from "../../layout/employer/AuthLayout"
 
 const routes: RouteObject[] = [
-  // {
-  //   path: "job-list",
-  //   element: (
-  //     <MainLayout>
-  //       <JobListPage />
-  //     </MainLayout>
-  //   ),
-  // },
+  {
+    path: "",
+    element: (
+      <div>
+        <h1>Hello</h1>
+      </div>
+    ),
+  },
   // {
   //   path: "job-list/:id",
   //   element: (
@@ -67,8 +63,16 @@ const routes: RouteObject[] = [
 
 export const rootNavigation = (
   <Route path="">
-    {routes.map((route, index) => (
-      <Route key={index} {...route} />
+    {routes.map(({ element, path }, index) => (
+      <Route
+        key={index}
+        path={path}
+        element={
+          <EmployerAuthLayout>
+            <MainLayout>{element}</MainLayout>
+          </EmployerAuthLayout>
+        }
+      />
     ))}
   </Route>
 )
