@@ -9,7 +9,7 @@ import { Observable } from "rxjs"
 import { ApiError } from "src/common/constants/errors"
 import { ROLE_KEY } from "src/decorators/roles"
 import { TokenService } from "src/modules/token/token.service"
-import { UserRole } from "src/modules/user/entities/user.entity"
+import { UserRole } from "src/modules/user/user.interface"
 
 @Injectable()
 export class RoleGuard implements CanActivate {

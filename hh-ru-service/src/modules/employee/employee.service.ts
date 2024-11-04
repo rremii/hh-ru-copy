@@ -25,8 +25,6 @@ export class EmployeeService {
   ) {}
 
   async getMe(userId: number): Promise<EmployeeDto> {
-
-    
     const employee = await this.uowService.employeeRepository.findOne({
       where: { user: { id: userId } },
       relations: { user: true },
@@ -39,10 +37,16 @@ export class EmployeeService {
         },
       },
     })
+    const user = employee.user
+    if (!employee || !user)
+      throw new NotFoundException(ApiError.EMPLOYEE_NOT_FOUND)
 
-
-    const user = 
-
+    return {
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      id: employee.id,
+    }
   }
 
   async create({ id }: CreateEmployeeDto): Promise<Employee> {

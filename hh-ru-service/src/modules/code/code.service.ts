@@ -29,8 +29,8 @@ export class CodeService {
     const existUser = await this.userService.getByEmail(email)
     if (existUser) throw new BadRequestException(ApiError.USER_EXIST)
 
-    const code = uuid().slice(0, 6)
-    // const code = "111111"
+    // const code = uuid().slice(0, 6)
+    const code = "111111"
 
     const observer = this.emailClient.send("send_email", {
       email,

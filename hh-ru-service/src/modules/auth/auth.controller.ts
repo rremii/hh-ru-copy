@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Req,
   Res,
@@ -18,6 +19,7 @@ import { RegisterEmployerDto } from "./dto/register-employer.dto"
 import { RegisterEmployeeDto } from "./dto/register-employee.dto"
 import { ApiBody, ApiOperation, ApiResponse } from "@nestjs/swagger"
 import { TokenResponse } from "./response/token.response"
+import { UserRole } from "../user/user.interface"
 
 @Controller("auth")
 export class AuthController {
@@ -80,14 +82,15 @@ export class AuthController {
     description: "Successfully refreshed",
     type: TokenResponse,
   })
-  @Get("refresh")
+  @Get("refresh/:role")
   async refreshTokens(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
+    @Param("role") role: UserRole,
   ) {
     const { refreshToken } = request.cookies
     const { accessToken, refreshToken: newRefreshToken } =
-      await this.tokenService.refreshTokens(refreshToken)
+      await this.tokenService.refreshTokens(refreshToken, role)
     response.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
       sameSite: "none",

@@ -7,6 +7,7 @@ import { Repository } from "typeorm"
 import { HashData } from "../../common/helpers/hashData"
 import { TokenPayload } from "./types"
 import { UserInfoDto } from "../user/dto/user-info.dto"
+import { UserRole } from "../user/user.interface"
 
 @Injectable()
 export class TokenService {
@@ -31,9 +32,11 @@ export class TokenService {
     return this.jwtService.decode<TokenPayload>(authToken)
   }
 
-  async refreshTokens(refreshToken: string) {
+  async refreshTokens(refreshToken: string, role: UserRole) {
     const decodedUser = this.jwtService.decode(refreshToken) as TokenPayload
     if (!decodedUser) throw new ForbiddenException("Access Denied")
+
+    if (decodedUser.role !== role) throw new ForbiddenException("Access Denied")
 
     const user = await this.usersRepository.findOneBy({ id: decodedUser.id })
     if (!user || !user.refreshToken)

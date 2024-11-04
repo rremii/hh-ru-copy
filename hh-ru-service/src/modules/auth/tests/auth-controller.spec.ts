@@ -1,3 +1,4 @@
+import { UserRole } from "./../../user/user.interface"
 import { Test, TestingModule } from "@nestjs/testing"
 import * as request from "supertest"
 import { INestApplication, ValidationPipe } from "@nestjs/common"
@@ -7,7 +8,6 @@ import { RegisterEmployerDto } from "../dto/register-employer.dto"
 import { LoginUserDto } from "../dto/login-user.dto"
 import { RegisterEmployeeDto } from "../dto/register-employee.dto"
 import { TokenService } from "./../../token/token.service"
-import { UserRole } from "./../..//user/entities/user.entity"
 
 describe("AuthController", () => {
   let app: INestApplication

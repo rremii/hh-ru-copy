@@ -20,10 +20,22 @@ export class EmployerService {
   ) {}
 
   async getMe(userId: number): Promise<EmployerDto> {
-    return this.uowService.employerRepository.findOne({
+    const employer = await this.uowService.employerRepository.findOne({
       where: { user: { id: userId } },
       relations: { user: true },
     })
+
+    const user = employer.user
+    if (!employer || !user)
+      throw new NotFoundException(ApiError.EMPLOYER_NOT_FOUND)
+
+    return {
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      id: employer.id,
+      about: employer.about,
+    }
   }
 
   async create({ about, id }: CreateEmployerDto): Promise<Employer> {

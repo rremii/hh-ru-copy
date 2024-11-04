@@ -67,6 +67,9 @@ export class AuthService {
     if (!existUser || !existUser.password)
       throw new BadRequestException(ApiError.WRONG_DATA)
 
+    if (existUser.role !== loginUserDto.role)
+      throw new BadRequestException(ApiError.WRONG_ROLE)
+
     const isPasswordValid = await bcrypt.compare(
       loginUserDto.password,
       existUser.password,
