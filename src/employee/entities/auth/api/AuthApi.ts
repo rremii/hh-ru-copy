@@ -20,22 +20,7 @@ export const AuthApi = Api.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    confirmEmailEmployee: build.mutation<DefaultResponse, string>({
-      query: (email) => ({
-        url: "code/send-code",
-        method: "POST",
-        data: { email },
-      }),
-    }),
 
-    verifyCodeEmployee: build.mutation<DefaultResponse, string>({
-      query: (code) => ({
-        url: "code/verify-code",
-        method: "POST",
-        data: { code },
-      }),
-      invalidatesTags: ["User"],
-    }),
     logoutEmployee: build.mutation<DefaultResponse, void>({
       query: () => ({
         url: "auth/logout",
@@ -56,7 +41,5 @@ export const {
   useRefreshEmployeeQuery,
   useRegisterEmployeeMutation,
   useLoginEmployeeMutation,
-  useConfirmEmailEmployeeMutation,
-  useVerifyCodeEmployeeMutation,
   useLogoutEmployeeMutation,
 } = AuthApi

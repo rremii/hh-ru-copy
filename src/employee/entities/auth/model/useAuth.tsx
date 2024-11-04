@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { useRefreshEmployeeQuery, useRefreshQuery } from "../api/AuthApi"
+import { useEffect } from "react"
+import { useRefreshEmployeeQuery } from "../api/AuthApi"
 import { setAuthState } from "./AuthSlice"
 import { useNavigate } from "react-router-dom"
 import {
@@ -10,15 +10,20 @@ import {
 export const useAuth = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { data, isError } = useRefreshEmployeeQuery()
 
   const authState = useTypedSelector((state) => state.EmployeeAuth.authState)
+
+  const { data, isError } = useRefreshEmployeeQuery(undefined, {
+    skip: authState === "success",
+  })
 
   useEffect(() => {
     if (authState === "rejected") navigate("/employee/auth/login")
   }, [authState])
 
   useEffect(() => {
+    if (authState === "success") return
+
     if (!localStorage.getItem("accessToken") || isError)
       dispatch(setAuthState("rejected"))
 

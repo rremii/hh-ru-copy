@@ -10,15 +10,20 @@ import { useRefreshEmployerQuery } from "../api/AuthApi"
 export const useAuth = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const authState = useTypedSelector((state) => state.EmployerAuth.authState)
 
-  const { data, isError } = useRefreshEmployerQuery()
+  const { data, isError } = useRefreshEmployerQuery(undefined, {
+    skip: authState === "success",
+  })
 
   useEffect(() => {
     if (authState === "rejected") navigate("/employer/auth/login")
   }, [authState])
 
   useEffect(() => {
+    if (authState === "success") return
+
     if (!localStorage.getItem("accessToken") || isError)
       dispatch(setAuthState("rejected"))
 
