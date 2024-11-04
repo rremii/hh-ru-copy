@@ -5,7 +5,7 @@ import { ProfilePage } from "@employee/pages/ProfilePage"
 import { ResumePage } from "@employee/pages/ResumePage"
 import { Route, RouteObject } from "react-router-dom"
 import { EmployeeAuthLayout } from "../layout/AuthLayout"
-import { MainLayout } from "@root/app/layout/MainLayout"
+import { MainLayout } from "@employee/app/layout/MainLayout"
 
 const routes = [
   {

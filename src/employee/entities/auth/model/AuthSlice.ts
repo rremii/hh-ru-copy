@@ -25,6 +25,6 @@ export const AuthSlice = createSlice({
   },
 })
 
-export const { setEmail, setAuthState, setPending } = AuthSlice.actions
+export const { setEmail, setAuthState } = AuthSlice.actions
 
 export const EmployeeAuthReducer = AuthSlice.reducer

@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { setAuthState, setPending } from "./AuthSlice"
+import { setAuthState } from "./AuthSlice"
 import { LoginDto } from "../types"
 import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
 import { useLoginEmployeeMutation } from "../api/AuthApi"

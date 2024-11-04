@@ -1,10 +1,13 @@
 import { useEffect } from "react"
-import { useLogoutEmployeeMutation, useLogoutMutation } from "../api/AuthApi"
+import { useLogoutEmployeeMutation } from "../api/AuthApi"
 import { setAuthState } from "./AuthSlice"
 import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
+import { useToast } from "@shared/shared/modules/toast"
 
 export const useLogout = () => {
   const dispatch = useAppDispatch()
+
+  const { openToast } = useToast()
 
   const [logout, { isLoading, isError, error, isSuccess }] =
     useLogoutEmployeeMutation()
@@ -12,8 +15,9 @@ export const useLogout = () => {
   useEffect(() => {
     if (!isSuccess && !isError) return
 
+    openToast({ content: "Вы вышли из системы", type: "info" })
     localStorage.removeItem("accessToken")
-    dispatch(setAuthState(null))
+    dispatch(setAuthState("rejected"))
   }, [isLoading])
 
   const handleLogout = async () => {

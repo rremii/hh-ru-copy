@@ -1,64 +1,41 @@
 import { Route, RouteObject } from "react-router-dom"
 import { EmployerAuthLayout } from "../layout/AuthLayout"
-import { MainLayout } from "@root/app/layout/MainLayout"
+import { MainLayout } from "@employer/app/layout/MainLayout"
+import { ApplicationsPage } from "@employer/pages/ApplicationsPage"
 
 const routes: RouteObject[] = [
   {
     path: "",
-    element: (
-      <div>
-        <h1>Hello</h1>
-      </div>
-    ),
+    element: <div>not implemented</div>,
   },
-  // {
-  //   path: "job-list/:id",
-  //   element: (
-  //     <MainLayout>
-  //       <JobPostPage />
-  //     </MainLayout>
-  //   ),
-  // },
-  // {
-  //   path: "resume",
-  //   element: (
-  //     <MainLayout>
-  //       <ResumePage />
-  //     </MainLayout>
-  //   ),
-  // },
-  // {
-  //   path: "profile",
-  //   element: (
-  //     <MainLayout>
-  //       <ProfilePage />
-  //     </MainLayout>
-  //   ),
-  // },
-  // {
-  //   path: "applications/:type",
-  //   element: (
-  //     <MainLayout>
-  //       <ApplicationsPage />
-  //     </MainLayout>
-  //   ),
-  // },
-  // {
-  //   path: "applications/me/:id",
-  //   element: (
-  //     <MainLayout>
-  //       <JobPostPage />
-  //     </MainLayout>
-  //   ),
-  // },
-  // {
-  //   path: "applications/employers/:id",
-  //   element: (
-  //     <MainLayout>
-  //       <JobListPage />
-  //     </MainLayout>
-  //   ),
-  // },
+  {
+    path: "job-posts",
+    element: <div>not implemented</div>,
+  },
+  {
+    path: "resumes",
+    element: <div>not implemented</div>,
+  },
+  {
+    path: "resumes/:id",
+    element: <div>not implemented</div>,
+  },
+  {
+    path: "applications/:type",
+    element: <ApplicationsPage />,
+  },
+  {
+    path: "applications/me/:id",
+    element: <div>not implemented</div>,
+  },
+  {
+    path: "applications/employees/:id",
+    element: <div>not implemented</div>,
+  },
+  {
+    path: "profile",
+    element: <div>not implemented</div>,
+  },
 ]
 
 export const rootNavigation = (
