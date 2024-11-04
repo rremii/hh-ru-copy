@@ -14,9 +14,8 @@ import {
   ValidationPipe,
 } from "@nestjs/common"
 import { RoleGuard } from "./../../guards/role.guard"
-import { UserRole } from "../user/entities/user.entity"
 import { CurrentUser } from "./../../decorators/current-user"
-import { IUser } from "../user/user.interface"
+import { IUser, UserRole } from "../user/user.interface"
 import { UpdateEmployerDto } from "./dto/update-employer.dto"
 import { EmployerService } from "./employer.service"
 import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
@@ -47,7 +46,7 @@ export class EmployerController {
   @Roles(UserRole.EMPLOYER)
   @UseGuards(RoleGuard)
   getMe(@CurrentUser() user: IUser) {
-    return user
+    return this.employerService.getMe(user.id)
   }
 
   @Put("me")

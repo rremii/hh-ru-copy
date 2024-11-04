@@ -29,9 +29,9 @@ export class AuthService {
     private readonly employerService: EmployerService,
   ) {}
 
-  private async updateTokens(user: User) {
-    const tokens = await this.tokenService.getTokens(user)
-    await this.tokenService.updateRefreshToken(user.id, tokens.refreshToken)
+  private async updateTokens({ id, name, email, role }: User) {
+    const tokens = await this.tokenService.getTokens({ email, name, role, id })
+    await this.tokenService.updateRefreshToken(id, tokens.refreshToken)
     return tokens
   }
 

@@ -1,4 +1,7 @@
-import { UserRole } from "./entities/user.entity"
+export enum UserRole {
+  EMPLOYEE = "employee",
+  EMPLOYER = "employer",
+}
 
 export interface IUser {
   id: number
@@ -7,11 +10,4 @@ export interface IUser {
   password: string
   role: UserRole
   refreshToken?: string
-}
-
-export interface IUserInfo {
-  id: number
-  name: string
-  email: string
-  role: UserRole
 }

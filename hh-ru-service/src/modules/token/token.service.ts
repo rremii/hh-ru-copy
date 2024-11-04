@@ -6,7 +6,7 @@ import { User } from "../user/entities/user.entity"
 import { Repository } from "typeorm"
 import { HashData } from "../../common/helpers/hashData"
 import { TokenPayload } from "./types"
-import { IUser } from "../user/user.interface"
+import { UserInfoDto } from "../user/dto/user-info.dto"
 
 @Injectable()
 export class TokenService {
@@ -50,7 +50,7 @@ export class TokenService {
     return tokens
   }
 
-  async getTokens(user: IUser) {
+  async getTokens(user: UserInfoDto) {
     const payload = { ...user }
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {

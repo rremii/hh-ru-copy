@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from "@nestjs/common"
+import { Controller } from "@nestjs/common"
 import { EmailService } from "./email.service"
 import { MessagePattern, Payload } from "@nestjs/microservices"
 import { SendMailDto } from "./dto/send-mail.dto"

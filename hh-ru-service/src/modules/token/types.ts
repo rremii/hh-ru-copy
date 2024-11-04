@@ -1,7 +1,3 @@
-import { UserRole } from "../user/entities/user.entity"
+import { UserInfoDto } from "../user/dto/user-info.dto"
 
-export type TokenPayload = {
-  id: number
-  email: string
-  role: UserRole
-}
+export class TokenPayload extends UserInfoDto {}

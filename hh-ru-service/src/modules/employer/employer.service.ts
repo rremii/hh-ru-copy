@@ -9,6 +9,7 @@ import { CreateResumeApplicationDto } from "../resume-application/dto/create-res
 import { ApiError } from "./../../common/constants/errors"
 import { JobPostService } from "../job-post/job-post.service"
 import { ResumeApplicationService } from "../resume-application/resume-application.service"
+import { EmployerDto } from "./dto/employer.dto"
 
 @Injectable()
 export class EmployerService {
@@ -17,6 +18,13 @@ export class EmployerService {
     private readonly jobPostService: JobPostService,
     private readonly resumeApplicationService: ResumeApplicationService,
   ) {}
+
+  async getMe(userId: number): Promise<EmployerDto> {
+    return this.uowService.employerRepository.findOne({
+      where: { user: { id: userId } },
+      relations: { user: true },
+    })
+  }
 
   async create({ about, id }: CreateEmployerDto): Promise<Employer> {
     const employer = new Employer()

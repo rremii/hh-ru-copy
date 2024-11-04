@@ -1,12 +1,12 @@
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
 import { BadRequestException, Injectable } from "@nestjs/common"
-import { User } from "./entities/user.entity"
 import { TokenService } from "../token/token.service"
 import { CreateUserDto } from "./dto/create-user.dto"
 import { HashData } from "./../../common/helpers/hashData"
-import { IUserInfo } from "./user.interface"
 import { ApiError } from "./../../common/constants/errors"
 import { UpdateUserDto } from "./dto/update-user.dto"
+import { User } from "./entities/user.entity"
+import { UserInfoDto } from "./dto/user-info.dto"
 
 @Injectable()
 export class UserService {
@@ -37,7 +37,7 @@ export class UserService {
     return this.uowService.userRepository.save(user)
   }
 
-  async getByToken(authToken: string): Promise<IUserInfo> {
+  async getByToken(authToken: string): Promise<UserInfoDto> {
     const decodedUser = await this.tokenService.decodeToken(authToken)
     if (!decodedUser) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 

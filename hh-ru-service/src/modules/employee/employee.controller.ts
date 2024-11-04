@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -15,8 +14,7 @@ import { CurrentUser } from "./../../decorators/current-user"
 import { AccessTokenGuard } from "./../../guards/access-token.guard"
 import { Roles } from "./../../decorators/roles"
 import { RoleGuard } from "./../../guards/role.guard"
-import { UserRole } from "./../../modules/user/entities/user.entity"
-import { IUser } from "./../../modules/user/user.interface"
+import { IUser, UserRole } from "./../../modules/user/user.interface"
 import { EmployeeService } from "./employee.service"
 import { UpdateEmployeeDto } from "./dto/update-employee.dto"
 import { CreateResumeDto } from "../resume/dto/create-resume.dto"
@@ -24,7 +22,6 @@ import { UpdateResumeDto } from "../resume/dto/update-resume.dto"
 import { CreateJobApplicationDto } from "../job-application/dto/create-jobApplication.dto"
 import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
 import { DefaultFieldPipe } from "./../../pipes/DefaultField.pipe"
-import { ClientProxy } from "@nestjs/microservices"
 
 @Controller("employee/")
 @UseGuards(AccessTokenGuard)
@@ -45,7 +42,7 @@ export class EmployeeController {
   @UseGuards(RoleGuard)
   @Get("me")
   getMe(@CurrentUser() user: IUser) {
-    return user
+    return this.employeeService.getMe(user.id)
   }
 
   @Roles(UserRole.EMPLOYEE)

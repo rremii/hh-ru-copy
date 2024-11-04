@@ -1,10 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
-import { IUser } from "../user.interface"
-
-export enum UserRole {
-  EMPLOYEE = "employee",
-  EMPLOYER = "employer",
-}
+import { IUser, UserRole } from "../user.interface"
 
 @Entity({ name: "users" })
 export class User extends BaseEntity implements IUser {
