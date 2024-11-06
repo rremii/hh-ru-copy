@@ -3,11 +3,13 @@ import { EmployerAuthLayout } from "../layout/AuthLayout"
 import { MainLayout } from "@employer/app/layout/MainLayout"
 import { ApplicationsPage } from "@employer/pages/ApplicationsPage"
 import { JobPostsPage } from "@employer/pages/JobPostsPage"
+import { ResumesPage } from "@employer/pages/ResumesPage"
+import { ResumePage } from "@employer/pages/ResumePage"
 
 const routes: RouteObject[] = [
   {
     path: "",
-    element: <div>not implemented</div>,
+    element: <ResumesPage />,
   },
   {
     path: "job-posts",
@@ -19,23 +21,15 @@ const routes: RouteObject[] = [
   },
   {
     path: "resumes",
-    element: <div>not implemented</div>,
+    element: <ResumesPage />,
   },
   {
     path: "resumes/:id",
-    element: <div>not implemented</div>,
+    element: <ResumePage />,
   },
   {
     path: "applications/:type",
     element: <ApplicationsPage />,
-  },
-  {
-    path: "applications/me/:id",
-    element: <div>not implemented</div>,
-  },
-  {
-    path: "applications/employees/:id",
-    element: <div>not implemented</div>,
   },
   {
     path: "profile",

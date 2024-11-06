@@ -1,3 +1,4 @@
+import { ApplyToJobPostModal } from "@employee/widgets/applyToJobPostModal/ApplyToJobPostModal"
 import { JobPost } from "@employee/widgets/jobPost/JobPost"
 import styled from "styled-components"
 
@@ -5,6 +6,7 @@ export const JobPostPage = () => {
   return (
     <PageLayout>
       <JobPost />
+      <ApplyToJobPostModal />
     </PageLayout>
   )
 }

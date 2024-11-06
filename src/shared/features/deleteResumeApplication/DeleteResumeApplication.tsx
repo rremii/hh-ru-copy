@@ -1,5 +1,9 @@
 import { Button } from "@shared/shared/button"
 
-export const DeleteResumeApplication = () => {
+interface Props {
+  resumeId: number
+}
+
+export const DeleteResumeApplication = ({}: Props) => {
   return <Button type="danger">Удалить</Button>
 }

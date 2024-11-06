@@ -1,19 +1,30 @@
 import { useGetJobPost } from "@employee/entities/jobPost/model/useGetJobPost"
+import { openMenu } from "@shared/entities/ui/model/UiSlice"
 import { Button } from "@shared/shared/button"
+import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
 import { useNavigation, useParams } from "react-router-dom"
 import styled from "styled-components"
 
 export const JobPost = () => {
+  const dispatch = useAppDispatch()
   const { id } = useParams()
 
   const { jobPost } = useGetJobPost(Number(id))
+
+  const openApplyModal = () => {
+    dispatch(openMenu("applyToJobPostModal"))
+  }
 
   return (
     <JobPostLayout>
       <TitleContainer>
         <Title>{jobPost?.title}</Title>
         <Salary>Размер зарплаты: {jobPost?.salary}</Salary>
-        <Button color="rgb(13, 194, 103)" type="filled">
+        <Button
+          onClick={openApplyModal}
+          color="rgb(13, 194, 103)"
+          type="filled"
+        >
           Откликнуться
         </Button>
       </TitleContainer>

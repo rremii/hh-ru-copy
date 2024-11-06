@@ -1,7 +1,7 @@
 import { useGetJobApplications } from "@employer/entities/jobApplication/model/useGetJobApplications"
 import { DeleteJobApplication } from "@employer/features/deleteJobApplication/DeleteJobApplication"
 import { GoToResume } from "@employer/features/goToResumePost/GoToResume"
-import { JobApplicationCard } from "@employer/shared/ui/JobApplicationCard"
+import { JobApplicationCard } from "@shared/shared/ui/JobApplicationCard"
 import styled from "styled-components"
 
 export const EmployeeApplicationList = () => {
@@ -15,8 +15,7 @@ export const EmployeeApplicationList = () => {
           {...jobApplication}
           btns={[
             <>
-              <DeleteJobApplication />
-              <GoToResume resumeId={jobApplication.resume.id} />
+              <DeleteJobApplication jobApplicationId={jobApplication.id} />
             </>,
           ]}
         />

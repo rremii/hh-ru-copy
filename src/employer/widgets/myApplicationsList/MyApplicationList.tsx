@@ -1,7 +1,8 @@
 import { useGetMyResumeApplications } from "@employer/entities/resumeApplication/model/useGetMyResumeApplications"
-import { ResumeApplicationCard } from "@employer/shared/ui/ResumeApplicationCard"
+import { ResumeApplicationCard } from "@shared/shared/ui/ResumeApplicationCard"
 import { DeleteResumeApplication } from "@shared/features/deleteResumeApplication/DeleteResumeApplication"
 import styled from "styled-components"
+import { GoToResume } from "@employer/features/goToResumePost/GoToResume"
 
 export const MyApplicationList = () => {
   const { resumeApplications } = useGetMyResumeApplications()
@@ -14,7 +15,8 @@ export const MyApplicationList = () => {
           {...resumeApplication}
           btns={[
             <>
-              <DeleteResumeApplication />
+              <DeleteResumeApplication resumeId={resumeApplication.id} />
+              <GoToResume resumeId={resumeApplication.resumeId} />
             </>,
           ]}
         />

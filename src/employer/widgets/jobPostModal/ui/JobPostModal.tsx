@@ -13,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useGetJobPost } from "@employee/entities/jobPost/model/useGetJobPost"
 import { EditJobPostForm } from "@employer/entities/jobPost/ui/EditJobPostForm"
 import { CreateJobPostForm } from "@employer/entities/jobPost/ui/CreateJobPostForm"
+import { ModalHeader } from "@shared/shared/ui/ModalHeader"
 
 export const JobPostModal = () => {
   const dispatch = useAppDispatch()
@@ -32,11 +33,7 @@ export const JobPostModal = () => {
         <>
           <Overlay $isActive={isOpen} onClick={closeModal} />
           <FormModal $centered $isOpen={isOpen}>
-            <ModalHeader>
-              <button onClick={closeModal}>
-                <Cross width="20" height="20" />
-              </button>
-            </ModalHeader>
+            <ModalHeader onCrossClick={closeModal} />
             {jobPost ? <EditJobPostForm {...jobPost} /> : <CreateJobPostForm />}
           </FormModal>
         </>,
@@ -52,8 +49,4 @@ const FormModal = styled(Modal)`
   max-width: 90%;
   /* height: 600px; */
   max-height: 90%;
-`
-const ModalHeader = styled.header`
-  display: flex;
-  justify-content: flex-end;
 `

@@ -9,7 +9,6 @@ interface BaseBtnProps
     HTMLAttributes<HTMLButtonElement> {
   pending?: boolean
   padding?: string
-  onClick?: () => void
 }
 
 export interface DangerBtnProps extends BaseBtnProps {}

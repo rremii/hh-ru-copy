@@ -1,5 +1,6 @@
 import { useGetResumeApplications } from "@employee/entities/resumeApplication/model/useGetResumeApplications"
-import { ResumeApplicationCard } from "@employee/shared/ui/ResumeApplicationCard"
+import { DeleteResumeApplication } from "@shared/features/deleteResumeApplication/DeleteResumeApplication"
+import { ResumeApplicationCard } from "@shared/shared/ui/ResumeApplicationCard"
 import styled from "styled-components"
 
 export const EmployerApplicationList = () => {
@@ -8,7 +9,15 @@ export const EmployerApplicationList = () => {
   return (
     <ListLayout>
       {resumeApplications.map((resumeApplication, index) => (
-        <ResumeApplicationCard key={index} {...resumeApplication} />
+        <ResumeApplicationCard
+          key={index}
+          {...resumeApplication}
+          btns={[
+            <>
+              <DeleteResumeApplication resumeId={resumeApplication.id} />
+            </>,
+          ]}
+        />
       ))}
     </ListLayout>
   )

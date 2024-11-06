@@ -11,6 +11,7 @@ import Cross from "@icons/Cross.svg?react"
 import { EditResumeForm } from "@employee/entities/resume/ui/EditResumeForm"
 import { CreateResumeForm } from "@employee/entities/resume/ui/CreateResumeForm"
 import { Modal } from "@shared/shared/ui/Modal"
+import { ModalHeader } from "@shared/shared/ui/ModalHeader"
 
 export const ResumeModal = () => {
   const dispatch = useAppDispatch()
@@ -30,11 +31,8 @@ export const ResumeModal = () => {
         <>
           <Overlay $isActive={isOpen} onClick={closeModal} />
           <FormModal $centered $isOpen={isOpen}>
-            <ModalHeader>
-              <button onClick={closeModal}>
-                <Cross width="20" height="20" />
-              </button>
-            </ModalHeader>
+            <ModalHeader onCrossClick={closeModal} />
+
             {isResume ? <EditResumeForm {...resume} /> : <CreateResumeForm />}
           </FormModal>
         </>,
@@ -48,8 +46,4 @@ const FormModal = styled(Modal)`
   border-radius: 15px;
   width: 500px;
   max-width: 90%;
-`
-const ModalHeader = styled.header`
-  display: flex;
-  justify-content: flex-end;
 `
