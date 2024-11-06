@@ -79,4 +79,6 @@ const SkillInput = styled.input`
 const SkillsContainer = styled.div`
   display: flex;
   align-items: center;
+  max-height: 150px;
+  overflow-y: auto;
 `

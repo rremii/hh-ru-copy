@@ -1,6 +1,4 @@
-import { IJobApplication } from "@entities/jobApplication/types"
-import { ResumeApplication } from "@entities/resumeApplication/types"
-import { Button } from "@shared/shared/button"
+import { ResumeApplication } from "@shared/entities/resumeApplication/types"
 import { Fragment } from "react/jsx-runtime"
 import styled from "styled-components"
 

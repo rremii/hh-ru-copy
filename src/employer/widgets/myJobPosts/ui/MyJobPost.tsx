@@ -1,37 +1,41 @@
-import { useGetJobPost } from "@employee/entities/jobPost/model/useGetJobPost"
+import { OpenJobPostModal } from "@employer/features/openJobPostModal/OpenJobPostModal"
+import { JobPost } from "@shared/entities/jobPost/types"
 import { Button } from "@shared/shared/button"
-import { useNavigation, useParams } from "react-router-dom"
 import styled from "styled-components"
 
-export const JobPost = () => {
-  const { id } = useParams()
+interface Props extends JobPost {}
 
-  const { jobPost } = useGetJobPost(Number(id))
-
+export const MyJobPost = ({
+  description,
+  employerId,
+  id,
+  requirements,
+  salary,
+  title,
+}: Props) => {
   return (
     <JobPostLayout>
       <TitleContainer>
-        <Title>{jobPost?.title}</Title>
-        <Salary>Размер зарплаты: {jobPost?.salary}</Salary>
-        <Button color="rgb(13, 194, 103)" type="filled">
-          Откликнуться
-        </Button>
+        <Title>{title}</Title>
+        <Salary>Размер зарплаты: {salary}</Salary>
       </TitleContainer>
 
       <SectionTitle>Описание</SectionTitle>
-      <Description>{jobPost?.description}</Description>
+      <Description>{description}</Description>
 
       <SectionTitle>Требования</SectionTitle>
       <RequirementsContainer>
-        {jobPost?.requirements.map((requirement, index) => (
+        {requirements.map((requirement, index) => (
           <Requirement key={requirement}>{requirement}</Requirement>
         ))}
       </RequirementsContainer>
+      <BtnSection>
+        <OpenJobPostModal jobPostId={id}>Изменить</OpenJobPostModal>
+      </BtnSection>
     </JobPostLayout>
   )
 }
 const JobPostLayout = styled.div`
-  max-width: 600px;
   width: 100%;
 `
 
@@ -81,4 +85,9 @@ const Salary = styled.p`
   font-size: 18px;
   color: black;
   line-height: 1.5;
+`
+const BtnSection = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 `

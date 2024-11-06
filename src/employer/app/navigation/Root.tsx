@@ -2,6 +2,7 @@ import { Route, RouteObject } from "react-router-dom"
 import { EmployerAuthLayout } from "../layout/AuthLayout"
 import { MainLayout } from "@employer/app/layout/MainLayout"
 import { ApplicationsPage } from "@employer/pages/ApplicationsPage"
+import { JobPostsPage } from "@employer/pages/JobPostsPage"
 
 const routes: RouteObject[] = [
   {
@@ -10,7 +11,11 @@ const routes: RouteObject[] = [
   },
   {
     path: "job-posts",
-    element: <div>not implemented</div>,
+    element: <JobPostsPage />,
+  },
+  {
+    path: "job-posts/:id",
+    element: <JobPostsPage />,
   },
   {
     path: "resumes",
