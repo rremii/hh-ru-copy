@@ -5,6 +5,7 @@ import { ApplicationsPage } from "@employer/pages/ApplicationsPage"
 import { JobPostsPage } from "@employer/pages/JobPostsPage"
 import { ResumesPage } from "@employer/pages/ResumesPage"
 import { ResumePage } from "@employer/pages/ResumePage"
+import { ProfilePage } from "@employer/pages/Profile"
 
 const routes: RouteObject[] = [
   {
@@ -33,7 +34,7 @@ const routes: RouteObject[] = [
   },
   {
     path: "profile",
-    element: <div>not implemented</div>,
+    element: <ProfilePage />,
   },
 ]
 

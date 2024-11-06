@@ -1,5 +1,5 @@
+import { Employee } from "@shared/entities/employee/types"
 import { UserRole } from "@shared/entities/user/types"
-import { Employee } from "../types"
 
 const me: Employee = {
   id: 1,

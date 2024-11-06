@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 interface Props {
   isError?: boolean
+  textarea?: boolean
   label?: string
   input?: {
     type?: string
@@ -13,7 +14,12 @@ interface Props {
   }
 }
 
-export const FormField: FC<Props> = ({ input = {}, isError, label }) => {
+export const FormField: FC<Props> = ({
+  input = {},
+  isError,
+  label,
+  textarea,
+}) => {
   const { placeholder, type = "text", register, onChange, beforeInput } = input
 
   const labelId = useId()
@@ -24,14 +30,24 @@ export const FormField: FC<Props> = ({ input = {}, isError, label }) => {
         {label}
         <div className="input-cont">
           {beforeInput}
-          <input
-            onChange={onChange}
-            id={label + "_" + labelId}
-            className={isError ? "error" : ""}
-            type={type}
-            {...register}
-            placeholder={placeholder || ""}
-          />
+          {textarea ? (
+            <textarea
+              onChange={onChange}
+              id={label + "_" + labelId}
+              className={isError ? "error" : ""}
+              {...register}
+              placeholder={placeholder || ""}
+            />
+          ) : (
+            <input
+              onChange={onChange}
+              id={label + "_" + labelId}
+              className={isError ? "error" : ""}
+              type={type}
+              {...register}
+              placeholder={placeholder || ""}
+            />
+          )}
         </div>
       </label>
     </FieldLayout>
@@ -61,6 +77,7 @@ const FieldLayout = styled.div`
     width: 100%;
     position: relative;
 
+    textarea,
     input {
       width: 100%;
       border-radius: 5px;

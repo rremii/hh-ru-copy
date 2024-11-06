@@ -105,11 +105,12 @@ export const SignUpInfoForm = () => {
           isError={Boolean(errors.root) || Boolean(errors.password)}
           input={{
             type: "password",
-            placeholder: "123",
+            placeholder: "Пароль",
             register: { ...register("password") },
           }}
         />
         <FormField
+          textarea
           isError={Boolean(errors.root) || Boolean(errors.about)}
           input={{
             type: "text",

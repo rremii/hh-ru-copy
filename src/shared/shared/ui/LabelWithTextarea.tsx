@@ -1,46 +1,49 @@
+import { on } from "events"
 import { useEffect, useRef, useState } from "react"
-
-import EditIcon from "@icons/edit.svg?react"
 import styled from "styled-components"
+import EditIcon from "@icons/edit.svg?react"
 
 interface Props {
-  onChange: (value: string) => void
+  onSubmit: (value: string) => void
   label: string
 }
 
-export const LabelWithEdit = ({ onChange, label }: Props) => {
+export const LabelWithTextarea = ({ label, onSubmit }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [curLabel, setCurLabel] = useState(label)
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   useEffect(() => {
     setCurLabel(label)
   }, [label])
 
-  const onSubmit = () => {
+  const handleSubmit = () => {
+    const newValue = textareaRef.current?.value || ""
     setIsEditing(false)
-    onChange(curLabel)
+    onSubmit(newValue)
+    setCurLabel(newValue)
   }
-
-  const onTextChange = () => {
-    if (!inputRef.current) return
-    const newLabel = inputRef.current.value
+  const onChange = () => {
+    const newLabel = textareaRef.current?.value || ""
     setCurLabel(newLabel)
   }
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit()
+    }
+  }
+  const startEditing = () => setIsEditing(true)
 
   return (
-    <Container onClick={() => setIsEditing(true)}>
+    <Container onClick={startEditing}>
       {isEditing ? (
-        <Input
-          ref={inputRef}
-          onBlur={onSubmit}
-          onKeyUp={(e) => {
-            if (e.key === "Enter") {
-              onSubmit()
-            }
-          }}
-          onChange={onTextChange}
+        <TextareaLayout
+          onChange={onChange}
+          ref={textareaRef}
           value={curLabel}
+          onKeyDown={onKeyDown}
+          onBlur={handleSubmit}
           autoFocus={true}
         />
       ) : (
@@ -54,21 +57,25 @@ export const LabelWithEdit = ({ onChange, label }: Props) => {
     </Container>
   )
 }
-
 const Container = styled.button`
   position: relative;
   width: max-content;
   cursor: pointer;
 `
-const Input = styled.input`
-  padding: 0 12px;
-  border-radius: 7px;
-  border: 1px solid #e0e0e0;
-  height: 30px;
-  font-size: 17px;
-  color: black;
-`
 
+const TextareaLayout = styled.textarea`
+  width: max-content;
+
+  /* height: 100px; */
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  transition: border 0.3s;
+  &:focus-within {
+    border: 1px solid #2e6ebb;
+  }
+`
 const LabelContainer = styled.div`
   position: relative;
   display: flex;

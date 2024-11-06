@@ -1,5 +1,6 @@
-import { useGetMe } from "@employee/entities/employee/model/useGetMe"
-import { EditEmployeeName } from "@employee/features/editEmployeeName/EditEmployeeName"
+import { useGetMe } from "@employer/entities/employer/model/useGetMe"
+import { EditEmployerAbout } from "@employer/features/editEmployerAbout/EditEmployerAbout"
+import { EditEmployerName } from "@employer/features/editEmployerName/EditEmployerName"
 import { ProfileIcon } from "@shared/shared/ui/ProfileIcon"
 import styled from "styled-components"
 
@@ -9,10 +10,11 @@ export const Profile = () => {
   return (
     <ProfileLayout>
       <ProfileIcon $width="70px" $height="70px" $fontSize={35}>
-        {me.name.slice(0, 1)}
+        {me?.name.slice(0, 1)}
       </ProfileIcon>
-      <Email>{me.email}</Email>
-      <EditEmployeeName />
+      <Email>{me?.email}</Email>
+      <EditEmployerName />
+      <EditEmployerAbout />
     </ProfileLayout>
   )
 }

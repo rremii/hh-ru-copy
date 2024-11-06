@@ -1,8 +1,8 @@
-import { useGetMe } from "@employee/entities/employee/model/useGetMe"
+import { useGetMe } from "@employer/entities/employer/model/useGetMe"
 import { LabelWithEdit } from "@shared/shared/ui/LabelWithEdit"
 import styled from "styled-components"
 
-export const EditEmployeeName = () => {
+export const EditEmployerName = () => {
   const { me } = useGetMe()
 
   return (
