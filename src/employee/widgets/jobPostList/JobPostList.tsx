@@ -1,5 +1,5 @@
 import { useGetJobPosts } from "@employee/entities/jobPost/model/useGetJobPosts"
-import { JobPostCard } from "@shared/shared/ui/JobPostCard"
+import { JobPostCard } from "@employee/shared/ui/JobPostCard"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 

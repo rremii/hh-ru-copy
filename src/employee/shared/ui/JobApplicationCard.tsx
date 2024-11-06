@@ -1,9 +1,8 @@
-import { IJobApplication } from "@entities/jobApplication/types"
-import { Button } from "@shared/shared/button"
+import { JobApplication } from "@shared/entities/jobApplication/types"
 import { Fragment } from "react/jsx-runtime"
 import styled from "styled-components"
 
-interface Props extends IJobApplication {
+interface Props extends JobApplication {
   btns?: React.ReactNode[]
 }
 

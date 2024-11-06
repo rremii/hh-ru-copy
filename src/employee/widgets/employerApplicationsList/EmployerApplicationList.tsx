@@ -1,5 +1,5 @@
 import { useGetResumeApplications } from "@employee/entities/resumeApplication/model/useGetResumeApplications"
-import { ResumeApplicationCard } from "@shared/shared/ui/ResumeApplicationCard"
+import { ResumeApplicationCard } from "@employee/shared/ui/ResumeApplicationCard"
 import styled from "styled-components"
 
 export const EmployerApplicationList = () => {

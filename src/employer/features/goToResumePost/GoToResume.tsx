@@ -9,7 +9,7 @@ export const GoToResume = ({ resumeId }: Props) => {
   const navigate = useNavigate()
 
   const goToResume = (id: number) => {
-    // navigate(`/job-list/${id}`)
+    navigate(`/employer/resumes/${id}`)
   }
   return (
     <Button
