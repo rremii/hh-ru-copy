@@ -37,12 +37,16 @@ const PageLayout = styled.div`
   width: 100%;
   height: 100%;
   padding: 50px 0 100px;
+
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+  }
 `
 
 const ResumeWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
+  align-items: center;
 `
 
 const BtnSection = styled.div`
@@ -50,4 +54,5 @@ const BtnSection = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  margin-top: 10px;
 `

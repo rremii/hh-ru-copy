@@ -57,7 +57,6 @@ export const LabelWithEdit = ({ onChange, label }: Props) => {
 
 const Container = styled.button`
   position: relative;
-  width: max-content;
   cursor: pointer;
 `
 const Input = styled.input`
@@ -74,12 +73,13 @@ const LabelContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: max-content;
+  /* width: max-content; */
 `
 const Text = styled.p`
   font-size: 18px;
   color: black;
   line-height: 30px;
+  max-width: 100%;
 `
 const IconContainer = styled.div`
   position: absolute;

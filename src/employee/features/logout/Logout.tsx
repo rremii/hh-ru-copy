@@ -1,9 +1,9 @@
 import { useLogout } from "@employee/entities/auth/model/useLogout"
 import { Button } from "@shared/shared/button"
 import { useToast } from "@shared/shared/modules/toast"
-import { useEffect } from "react"
+import { PropsWithChildren, useEffect } from "react"
 
-export const Logout = () => {
+export const Logout = ({ children }: PropsWithChildren) => {
   const { logout, isLoading } = useLogout()
 
   const handleLogout = () => {
@@ -19,7 +19,7 @@ export const Logout = () => {
       pending={isLoading}
       onClick={handleLogout}
     >
-      выйти
+      {children}
     </Button>
   )
 }

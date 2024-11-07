@@ -25,6 +25,7 @@ const ReviewsLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   width: 100%;
   max-width: 600px;
 `
@@ -37,4 +38,7 @@ const Label = styled.h3`
 `
 const ReviewsContainer = styled.div`
   padding-left: 20px;
+  @media screen and (max-width: 600px) {
+    padding-left: 0;
+  }
 `

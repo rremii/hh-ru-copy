@@ -39,12 +39,16 @@ export const ResumeInfo = ({ bottom }: Props) => {
 const ResumeLayout = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 90%;
+  width: 100%;
   align-items: flex-start;
-  padding: 30px 50px;
+  padding: 25px 50px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px;
   margin-bottom: 10px;
+
+  @media screen and (max-width: 600px) {
+    padding: 15px 25px;
+  }
 `
 
 const Experience = styled.div`

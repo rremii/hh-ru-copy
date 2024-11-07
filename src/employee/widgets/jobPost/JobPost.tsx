@@ -44,7 +44,12 @@ const JobPostLayout = styled.div`
 const BtnSection = styled.div`
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 10px;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 const Title = styled.h1`
   font-size: 30px;

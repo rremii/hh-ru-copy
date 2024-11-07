@@ -44,6 +44,7 @@ export const ApplyToJobPostForm = ({ jobPostId, onCancel }: Props) => {
   return (
     <FormLayout onSubmit={handleSubmit(onSubmit)}>
       <FormField
+        textarea
         label="Cover letter"
         isError={Boolean(errors.root) || Boolean(errors.coverLetter)}
         input={{

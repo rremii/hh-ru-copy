@@ -59,14 +59,12 @@ export const LabelWithTextarea = ({ label, onSubmit }: Props) => {
 }
 const Container = styled.button`
   position: relative;
-  width: max-content;
   cursor: pointer;
 `
 
 const TextareaLayout = styled.textarea`
   width: max-content;
 
-  /* height: 100px; */
   border: 1px solid #d9d9d9;
   border-radius: 10px;
   padding: 10px;
@@ -79,9 +77,7 @@ const TextareaLayout = styled.textarea`
 const LabelContainer = styled.div`
   position: relative;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  width: max-content;
 `
 const Text = styled.p`
   font-size: 18px;

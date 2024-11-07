@@ -20,4 +20,9 @@ const Main = styled.main`
   height: 100%;
   max-width: 1250px;
   margin: 0 auto;
+  padding: 0 20px;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
 `

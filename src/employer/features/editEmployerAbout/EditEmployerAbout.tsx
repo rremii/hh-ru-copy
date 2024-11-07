@@ -1,5 +1,5 @@
 import { useGetMe } from "@employer/entities/employer/model/useGetMe"
-import { LabelWithTextarea } from "@shared/shared/ui/labelWithTextarea"
+import { LabelWithTextarea } from "@shared/shared/ui/LabelWithTextarea"
 import styled from "styled-components"
 
 export const EditEmployerAbout = () => {
@@ -19,7 +19,6 @@ export const EditEmployerAbout = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: max-content;
 `
 const Title = styled.h3`
   margin-top: 20px;

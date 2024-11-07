@@ -44,14 +44,15 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 20px;
+  padding: 20px;
 `
 
 const OptionLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
-  max-width: 90%;
+  width: 100%;
+  max-width: 400px;
   gap: 20px;
   padding: 20px;
   border-radius: 25px;
