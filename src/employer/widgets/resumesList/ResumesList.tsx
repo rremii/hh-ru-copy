@@ -3,11 +3,12 @@ import styled from "styled-components"
 import { ResumeCard } from "@employer/shared/ui/ResumeCard"
 
 export const ResumesList = () => {
-  const { resumes } = useGetResumes()
+  const { resumes, isFetching } = useGetResumes()
 
   return (
     <ResumesListLayout>
-      {resumes.map((resume) => (
+      {isFetching && <div>LOADING</div>}
+      {resumes?.map((resume) => (
         <ResumeCard key={resume.id} {...resume} />
       ))}
     </ResumesListLayout>

@@ -4,11 +4,12 @@ import { MyJobPost } from "./ui/MyJobPost"
 import React from "react"
 
 export const MyJobPosts = () => {
-  const { jobPosts } = useGetMyJobPosts()
+  const { jobPosts, isFetching } = useGetMyJobPosts()
 
   return (
     <PostsLayout>
-      {jobPosts.map((jobPost, index) => (
+      {isFetching && <div>LOADING</div>}
+      {jobPosts?.map((jobPost, index) => (
         <React.Fragment key={jobPost.id}>
           <MyJobPost {...jobPost} />
           {index !== jobPosts.length - 1 && <Separator />}

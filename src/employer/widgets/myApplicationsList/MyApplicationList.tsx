@@ -5,11 +5,12 @@ import styled from "styled-components"
 import { GoToResume } from "@employer/features/goToResumePost/GoToResume"
 
 export const MyApplicationList = () => {
-  const { resumeApplications } = useGetMyResumeApplications()
+  const { resumeApplications, isFetching } = useGetMyResumeApplications()
 
   return (
     <ListLayout>
-      {resumeApplications.map((resumeApplication, index) => (
+      {isFetching && <div>LOADING</div>}
+      {resumeApplications?.map((resumeApplication, index) => (
         <ResumeApplicationCard
           key={index}
           {...resumeApplication}

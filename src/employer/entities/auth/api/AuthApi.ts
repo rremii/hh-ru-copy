@@ -22,7 +22,6 @@ export const AuthApi = ApiEmployer.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-
     logout: build.mutation<DefaultResponse, void>({
       query: () => ({
         url: "auth/logout",

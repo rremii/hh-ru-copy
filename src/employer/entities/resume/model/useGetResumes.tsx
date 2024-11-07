@@ -1,16 +1,8 @@
 import { Resume } from "@shared/entities/resume/types"
-
-const resumes: Resume[] = [
-  {
-    id: 1,
-    title: "Фронтенд разработчик",
-    experience: "6 лет опыта в такой то такойто компании",
-    education: "Оконченое высшее образование",
-    skills: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
-    employeeId: 1,
-  },
-]
+import { useGetResumesQuery } from "../api/ResumeApi"
 
 export const useGetResumes = () => {
-  return { resumes }
+  const { data: resumes, isFetching, isSuccess, error } = useGetResumesQuery()
+
+  return { resumes, isFetching, isSuccess, error }
 }

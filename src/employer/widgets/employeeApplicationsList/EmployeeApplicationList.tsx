@@ -5,11 +5,12 @@ import { JobApplicationCard } from "@shared/shared/ui/JobApplicationCard"
 import styled from "styled-components"
 
 export const EmployeeApplicationList = () => {
-  const { jobApplications } = useGetJobApplications()
+  const { jobApplications, isFetching } = useGetJobApplications()
 
   return (
     <ListLayout>
-      {jobApplications.map((jobApplication, index) => (
+      {isFetching && <div>LOADING</div>}
+      {jobApplications?.map((jobApplication, index) => (
         <JobApplicationCard
           key={index}
           {...jobApplication}

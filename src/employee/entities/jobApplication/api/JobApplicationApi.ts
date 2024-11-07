@@ -14,6 +14,13 @@ export const JobApplicationApi = ApiEmployee.injectEndpoints({
         data: dto,
       }),
     }),
+    deleteJobApplication: build.mutation<JobApplication[], number>({
+      query: (applicationId) => ({
+        url: `job-application/` + applicationId,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["JobApplication"],
+    }),
     getMyJobApplications: build.query<JobApplication[], void>({
       query: () => ({
         url: "me/job-application",
@@ -22,5 +29,8 @@ export const JobApplicationApi = ApiEmployee.injectEndpoints({
     }),
   }),
 })
-export const { useCreateJobApplicationMutation, useGetMyJobApplicationsQuery } =
-  JobApplicationApi
+export const {
+  useCreateJobApplicationMutation,
+  useGetMyJobApplicationsQuery,
+  useDeleteJobApplicationMutation,
+} = JobApplicationApi

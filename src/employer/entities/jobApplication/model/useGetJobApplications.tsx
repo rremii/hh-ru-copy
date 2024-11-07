@@ -1,18 +1,12 @@
-import { JobApplicationDto } from "../types"
+import { useGetJobApplicationsQuery } from "../api/JobApplicationApi"
 
-const jobApplications: JobApplicationDto[] = [
-  {
-    id: 1,
-    jobPostId: 1,
-    employeeId: 1,
-    coverLetter:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga tempore tenetur, optio porro dicta ipsa at consequuntur libero doloremque ipsam blanditiis labore perspiciatis corporis harum cupiditate minima eius, quia dolor.",
-    resume: {
-      id: 1,
-    },
-  },
-]
+export const useGetJobApplications = (jobPostId?: number) => {
+  const {
+    data: jobApplications,
+    isFetching,
+    isSuccess,
+    error,
+  } = useGetJobApplicationsQuery(jobPostId as number, { skip: !jobPostId })
 
-export const useGetJobApplications = () => {
-  return { jobApplications }
+  return { jobApplications, isFetching, isSuccess, error }
 }
