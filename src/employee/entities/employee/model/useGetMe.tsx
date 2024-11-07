@@ -1,13 +1,7 @@
-import { Employee } from "@shared/entities/employee/types"
-import { UserRole } from "@shared/entities/user/types"
-
-const me: Employee = {
-  id: 1,
-  name: "John Doe",
-  email: "john.doe@gmail.com",
-  role: UserRole.EMPLOYEE,
-}
+import { useGetMeQuery } from "../api/EmployeeApi"
 
 export const useGetMe = () => {
+  const { data: me, isFetching, isSuccess, error } = useGetMeQuery()
+
   return { me }
 }

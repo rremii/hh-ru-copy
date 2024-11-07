@@ -1,14 +1,28 @@
 import { useGetMe } from "@employee/entities/employee/model/useGetMe"
+import { useUpdateMe } from "@employee/entities/employee/model/useUpdateMe"
 import { LabelWithEdit } from "@shared/shared/ui/LabelWithEdit"
 import styled from "styled-components"
 
 export const EditEmployeeName = () => {
   const { me } = useGetMe()
+  const { update } = useUpdateMe()
+
+  const onSubmit = (name: string) => {
+    if (!me) return
+
+    update({ id: me.id, name })
+  }
 
   return (
     <Container>
-      <Title>Имя:</Title>
-      <LabelWithEdit label={me?.name} onChange={() => {}} />
+      {me ? (
+        <>
+          <Title>Имя:</Title>
+          <LabelWithEdit label={me?.name} onChange={onSubmit} />
+        </>
+      ) : (
+        <div>LOADING</div>
+      )}
     </Container>
   )
 }

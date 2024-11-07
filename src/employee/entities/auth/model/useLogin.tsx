@@ -2,13 +2,13 @@ import { useEffect } from "react"
 import { setAuthState } from "./AuthSlice"
 import { LoginDto } from "../types"
 import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
-import { useLoginEmployeeMutation } from "../api/AuthApi"
+import { useLoginMutation } from "../api/AuthApi"
 
 export const useLogin = () => {
   const dispatch = useAppDispatch()
 
   const [login, { isLoading, isError, error, data: result, isSuccess }] =
-    useLoginEmployeeMutation()
+    useLoginMutation()
 
   useEffect(() => {
     if (isSuccess) {

@@ -1,14 +1,12 @@
-import { Employer } from "@shared/entities/employer/types"
-import { UserRole } from "@shared/entities/user/types"
-
-const employer: Employer = {
-  id: 1,
-  name: "Рога и Копанин",
-  email: "lev.evgen@gmail.com",
-  about: "Крутая ит компания дял разрабов",
-  role: UserRole.EMPLOYER,
-}
+import { useGetEmployerQuery } from "../api/EmployerApi"
 
 export const useGetEmployer = (id?: number) => {
-  return { employer }
+  const {
+    data: employer,
+    isFetching,
+    isSuccess,
+    error,
+  } = useGetEmployerQuery(id as number, { skip: !id })
+
+  return { employer, isFetching, isSuccess, error }
 }

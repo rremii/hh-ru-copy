@@ -2,7 +2,7 @@ import { Logout } from "@employee/features/logout/Logout"
 import { Modal } from "@shared/shared/ui/Modal"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import ProfileIcon from "@icons/profile.svg"
+import ProfileIcon from "@icons/profile.svg?react"
 
 interface Props {
   isOpen: boolean

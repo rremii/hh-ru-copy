@@ -9,9 +9,9 @@ export const Profile = () => {
   return (
     <ProfileLayout>
       <ProfileIcon $width="70px" $height="70px" $fontSize={35}>
-        {me.name.slice(0, 1)}
+        {me?.name?.slice(0, 1)}
       </ProfileIcon>
-      <Email>{me.email}</Email>
+      <Email>{me?.email}</Email>
       <EditEmployeeName />
     </ProfileLayout>
   )

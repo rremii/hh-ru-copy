@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
 import { useEffect } from "react"
-import { useRegisterEmployerMutation } from "../api/AuthApi"
+import { useRegisterMutation } from "../api/AuthApi"
 import { setAuthState } from "./AuthSlice"
 import { RegisterDto } from "../types"
 
@@ -8,7 +8,7 @@ export const useRegister = () => {
   const dispatch = useAppDispatch()
 
   const [register, { isLoading, isError, error, data: result, isSuccess }] =
-    useRegisterEmployerMutation()
+    useRegisterMutation()
 
   useEffect(() => {
     if (isSuccess) {

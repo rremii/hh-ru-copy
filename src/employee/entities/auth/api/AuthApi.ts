@@ -1,45 +1,49 @@
-import { Api } from "@shared/shared/api/config/Api"
+import { Api, ApiEmployee } from "@shared/shared/api/config/Api"
 import { LoginDto, RegisterDto } from "../types"
 import { AuthResponse } from "@shared/entities/auth/types"
 import { DefaultResponse } from "@shared/shared/api/config/types"
 
-export const AuthApi = Api.injectEndpoints({
+export const AuthApi = ApiEmployee.injectEndpoints({
   endpoints: (build) => ({
-    registerEmployee: build.mutation<AuthResponse, RegisterDto>({
+    register: build.mutation<AuthResponse, RegisterDto>({
       query: (registerData: RegisterDto) => ({
         url: "auth/register/employee",
         method: "POST",
         data: registerData,
+        prefix: "",
       }),
     }),
-    loginEmployee: build.mutation<AuthResponse, LoginDto>({
+    login: build.mutation<AuthResponse, LoginDto>({
       query: (loginData) => ({
         url: "auth/login",
         method: "POST",
         data: loginData,
+        prefix: "",
       }),
       invalidatesTags: ["User"],
     }),
 
-    logoutEmployee: build.mutation<DefaultResponse, void>({
+    logout: build.mutation<DefaultResponse, void>({
       query: () => ({
         url: "auth/logout",
         method: "DELETE",
+        prefix: "",
       }),
     }),
 
-    refreshEmployee: build.query<AuthResponse, void>({
+    refresh: build.query<AuthResponse, void>({
       query: () => ({
         url: "auth/refresh/employee",
         method: "GET",
+        prefix: "",
       }),
     }),
   }),
   overrideExisting: true,
 })
 export const {
-  useRefreshEmployeeQuery,
-  useRegisterEmployeeMutation,
-  useLoginEmployeeMutation,
-  useLogoutEmployeeMutation,
+  useRefreshQuery,
+  useRegisterMutation,
+  useLoginMutation,
+  useLogoutMutation,
 } = AuthApi

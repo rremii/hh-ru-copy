@@ -1,14 +1,16 @@
-import { useGetResumeApplications } from "@employee/entities/resumeApplication/model/useGetResumeApplications"
+import { useGetMyResumeApplications } from "@employee/entities/resumeApplication/model/useGetResumeApplications"
 import { DeleteResumeApplication } from "@shared/features/deleteResumeApplication/DeleteResumeApplication"
 import { ResumeApplicationCard } from "@shared/shared/ui/ResumeApplicationCard"
 import styled from "styled-components"
 
 export const EmployerApplicationList = () => {
-  const { resumeApplications } = useGetResumeApplications()
+  const { resumeApplications, isFetching } = useGetMyResumeApplications()
 
   return (
     <ListLayout>
-      {resumeApplications.map((resumeApplication, index) => (
+      {isFetching && <div>LOADING</div>}
+
+      {resumeApplications?.map((resumeApplication, index) => (
         <ResumeApplicationCard
           key={index}
           {...resumeApplication}

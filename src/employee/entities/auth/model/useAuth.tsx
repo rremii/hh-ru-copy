@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useRefreshEmployeeQuery } from "../api/AuthApi"
+import { useRefreshQuery } from "../api/AuthApi"
 import { setAuthState } from "./AuthSlice"
 import { useNavigate } from "react-router-dom"
 import {
@@ -13,7 +13,7 @@ export const useAuth = () => {
 
   const authState = useTypedSelector((state) => state.EmployeeAuth.authState)
 
-  const { data, isError } = useRefreshEmployeeQuery(undefined, {
+  const { data, isError } = useRefreshQuery(undefined, {
     skip: authState === "success",
   })
 

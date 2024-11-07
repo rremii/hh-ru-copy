@@ -7,6 +7,10 @@ import { Button } from "@shared/shared/button"
 import { Resume } from "../../../../shared/entities/resume/types"
 import { SkillsPicker } from "@shared/shared/modules/skillsPicker/SkillsPicker"
 import { FormFields, ResumeForm } from "./ResumeForm"
+import { useUpdateResume } from "../model/useUpdateResume"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { closeMenu } from "@shared/entities/ui/model/UiSlice"
 
 interface Props extends Resume {}
 
@@ -18,12 +22,21 @@ export const EditResumeForm = ({
   title,
   id,
 }: Props) => {
+  const dispatch = useDispatch()
+
+  const { updateResume, isLoading, isSuccess } = useUpdateResume()
+
+  useEffect(() => {
+    dispatch(closeMenu("resumeModal"))
+  }, [isSuccess])
+
   const onSubmit = (dto: FormFields) => {
-    console.log(dto)
+    updateResume({ ...dto, id })
   }
 
   return (
     <ResumeForm
+      isLoading={isLoading}
       education={education}
       experience={experience}
       skills={skills}

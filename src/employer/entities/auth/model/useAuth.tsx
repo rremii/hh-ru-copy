@@ -5,7 +5,7 @@ import {
 import { useEffect, useState } from "react"
 import { setAuthState } from "./AuthSlice"
 import { useNavigate } from "react-router-dom"
-import { useRefreshEmployerQuery } from "../api/AuthApi"
+import { useRefreshQuery } from "../api/AuthApi"
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()
@@ -13,7 +13,7 @@ export const useAuth = () => {
 
   const authState = useTypedSelector((state) => state.EmployerAuth.authState)
 
-  const { data, isError } = useRefreshEmployerQuery(undefined, {
+  const { data, isError } = useRefreshQuery(undefined, {
     skip: authState === "success",
   })
 

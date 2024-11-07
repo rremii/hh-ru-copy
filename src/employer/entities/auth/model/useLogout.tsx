@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@shared/shared/hooks/storeHooks.ts"
 import { useEffect } from "react"
-import { useLogoutEmployerMutation } from "../api/AuthApi"
+import { useLogoutMutation } from "../api/AuthApi"
 import { setAuthState } from "./AuthSlice"
 import { useToast } from "@shared/shared/modules/toast"
 
@@ -8,8 +8,7 @@ export const useLogout = () => {
   const dispatch = useAppDispatch()
   const { openToast } = useToast()
 
-  const [logout, { isLoading, isError, error, isSuccess }] =
-    useLogoutEmployerMutation()
+  const [logout, { isLoading, isError, error, isSuccess }] = useLogoutMutation()
 
   useEffect(() => {
     if (!isSuccess && !isError) return

@@ -1,6 +1,4 @@
 import Logo from "@icons/logo.svg?react"
-import SearchIcon from "@icons/search.svg?react"
-import ProfileIcon from "@icons/profile.svg?react"
 import styled from "styled-components"
 import { Header as HeaderTemplate } from "@shared/shared/ui/Header"
 import { HeaderModal } from "./HeaderModal"

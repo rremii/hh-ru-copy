@@ -1,10 +1,13 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react"
-import { AxiosError, AxiosRequestConfig } from "axios"
-import { $api, API_URL } from "./index"
+import { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios"
+import { api, API_URL, apiEmployee, apiEmployer } from "./index"
 import { ApiError } from "./types"
 
-const axiosBaseQuery =
-  (): BaseQueryFn<
+const createAxiosBaseQuery =
+  (
+    api: AxiosInstance,
+    urlPrefix?: string
+  ): BaseQueryFn<
     {
       url: string
       method: AxiosRequestConfig["method"]
@@ -12,21 +15,30 @@ const axiosBaseQuery =
       params?: unknown
       baseUrl?: string
       withCredentials?: boolean
+      prefix?: string
     },
     unknown,
     ApiError
   > =>
-  async ({ url, method, data, params, withCredentials, baseUrl = API_URL }) => {
+  async ({
+    url,
+    method,
+    data,
+    params,
+    withCredentials,
+    baseUrl = API_URL,
+    prefix = urlPrefix,
+  }) => {
     try {
       const requestConfig: AxiosRequestConfig = {
-        url: baseUrl + url,
+        url: baseUrl + prefix + url,
         method,
         data,
         params,
         withCredentials,
       }
 
-      const result = await $api.request(requestConfig)
+      const result = await api.request(requestConfig)
 
       return { data: result.data }
     } catch (error: unknown) {
@@ -52,8 +64,21 @@ const axiosBaseQuery =
   }
 
 export const Api = createApi({
-  reducerPath: "ApiRtk",
-  baseQuery: axiosBaseQuery(),
+  reducerPath: "Api",
+  baseQuery: createAxiosBaseQuery(api),
+  endpoints: () => ({}),
+  tagTypes: [],
+})
+export const ApiEmployee = createApi({
+  reducerPath: "ApiEmployee",
+  baseQuery: createAxiosBaseQuery(apiEmployee, "employee/"),
+  endpoints: () => ({}),
+  tagTypes: ["User", "Resume"],
+})
+
+export const ApiEmployer = createApi({
+  reducerPath: "ApiEmployer",
+  baseQuery: createAxiosBaseQuery(apiEmployer, "employer/"),
   endpoints: () => ({}),
   tagTypes: ["User"],
 })

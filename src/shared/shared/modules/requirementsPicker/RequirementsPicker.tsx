@@ -6,7 +6,6 @@ import {
   useState,
 } from "react"
 import styled from "styled-components"
-import { Requirement } from "./Requirement"
 import CrossIcon from "@icons/cross.svg?react"
 
 interface Props {
@@ -18,29 +17,37 @@ export const RequirementsPicker = ({ initRequirements, onChange }: Props) => {
   const [requirements, setRequirements] = useState<string[]>(initRequirements)
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const onSubmit = () => {
     if (!inputRef || !inputRef.current) return
     const newRequirement = inputRef.current.value
 
     if (newRequirement.length > 0 && !requirements.includes(newRequirement)) {
       const newRequirements = [...requirements, newRequirement]
-      onChange(newRequirements)
       setRequirements(newRequirements)
+      onChange(newRequirements)
 
       inputRef.current.value = ""
     }
   }
-  const onRemove = (removeRequirement: string) => {
-    if (!inputRef.current) return
-    const newRequirements = requirements.filter(
-      (requirement) => requirement !== removeRequirement
-    )
-    onChange(newRequirements)
-    setRequirements(newRequirements)
-    inputRef.current.value = ""
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && document.activeElement === inputRef.current) {
+      e.preventDefault()
+      e.stopPropagation()
+      onSubmit()
+    }
   }
+
+  const handleRequirementClick =
+    (removeRequirement: string) => (e: React.MouseEvent<HTMLLIElement>) => {
+      if (!inputRef.current || document.activeElement !== e.target) return
+      const newRequirements = requirements.filter(
+        (requirement) => requirement !== removeRequirement
+      )
+      setRequirements(newRequirements)
+      onChange(newRequirements)
+      inputRef.current.value = ""
+    }
 
   return (
     <PickerContainer>
@@ -48,11 +55,14 @@ export const RequirementsPicker = ({ initRequirements, onChange }: Props) => {
         placeholder="Enter your requirements"
         type="text"
         ref={inputRef}
-        onKeyDown={(e) => e.key === "Enter" && onSubmit(e)}
+        onKeyDown={handleKeyDown}
       />
       <RequirementsContainer>
         {requirements.map((requirement) => (
-          <Requirement onClick={() => onRemove(requirement)} key={requirement}>
+          <Requirement
+            onClick={handleRequirementClick(requirement)}
+            key={requirement}
+          >
             {requirement}
             <CrossIcon color="black" width="10" height="10" />
           </Requirement>
@@ -61,7 +71,28 @@ export const RequirementsPicker = ({ initRequirements, onChange }: Props) => {
     </PickerContainer>
   )
 }
-
+const Requirement = styled.li`
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 5px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(100%);
+    width: 7px;
+    height: 7px;
+    background-color: black;
+    border-radius: 50%;
+  }
+`
 const PickerContainer = styled.div``
 
 const RequirementInput = styled.input`

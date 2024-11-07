@@ -1,12 +1,5 @@
-import {
-  ChangeEventHandler,
-  FormEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import { useRef, useState } from "react"
 import styled from "styled-components"
-import { Skill } from "./Skill"
 import CrossIcon from "@icons/cross.svg?react"
 
 interface Props {
@@ -18,27 +11,35 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
   const [skills, setSkills] = useState<string[]>(initSkills)
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const onSubmit = () => {
     if (!inputRef || !inputRef.current) return
     const newSkill = inputRef.current.value
 
     if (newSkill.length > 0 && !skills.includes(newSkill)) {
       const newSkills = [...skills, newSkill]
-      onChange(newSkills)
       setSkills(newSkills)
+      onChange(newSkills)
 
       inputRef.current.value = ""
     }
   }
-  const onRemove = (removeSkill: string) => {
-    if (!inputRef.current) return
-    const newSkills = skills.filter((skill) => skill !== removeSkill)
-    onChange(newSkills)
-    setSkills(newSkills)
-    inputRef.current.value = ""
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && document.activeElement === inputRef.current) {
+      e.preventDefault()
+      e.stopPropagation()
+      onSubmit()
+    }
   }
+
+  const handleSkillClick =
+    (removeSkill: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (!inputRef.current || document.activeElement !== e.target) return
+      const newSkills = skills.filter((skill) => skill !== removeSkill)
+      setSkills(newSkills)
+      onChange(newSkills)
+      inputRef.current.value = ""
+    }
 
   return (
     <PickerContainer>
@@ -46,11 +47,11 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
         placeholder="Enter your skills"
         type="text"
         ref={inputRef}
-        onKeyDown={(e) => e.key === "Enter" && onSubmit(e)}
+        onKeyDown={handleKeyDown}
       />
       <SkillsContainer>
         {skills.map((skill) => (
-          <Skill onClick={() => onRemove(skill)} key={skill}>
+          <Skill onClick={handleSkillClick(skill)} key={skill}>
             {skill}
             <CrossIcon color="black" width="10" height="10" />
           </Skill>
@@ -59,7 +60,16 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
     </PickerContainer>
   )
 }
-
+const Skill = styled.button`
+  border: 1px solid #d9d9d9;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 5px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`
 const PickerContainer = styled.div``
 
 const SkillInput = styled.input`

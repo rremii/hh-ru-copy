@@ -1,5 +1,5 @@
 import { useGetJobApplications } from "@employer/entities/jobApplication/model/useGetJobApplications"
-import { DeleteJobApplication } from "@employer/features/deleteJobApplication/DeleteJobApplication"
+import { DeleteJobApplication } from "@shared/features/deleteJobApplication/DeleteJobApplication"
 import { GoToResume } from "@employer/features/goToResumePost/GoToResume"
 import { JobApplicationCard } from "@shared/shared/ui/JobApplicationCard"
 import styled from "styled-components"

@@ -15,6 +15,7 @@ export interface FormFields {
 
 interface Props extends Partial<FormFields> {
   onSubmit: (dto: FormFields) => void
+  isLoading: boolean
 }
 
 export const ResumeForm = ({
@@ -23,6 +24,7 @@ export const ResumeForm = ({
   skills = [],
   title,
   onSubmit,
+  isLoading,
 }: Props) => {
   const {
     clearErrors,
@@ -70,7 +72,12 @@ export const ResumeForm = ({
       />
       <SkillsPicker initSkills={skills} onChange={setSkills} />
       <div className="btn-section">
-        <Button color="rgb(13, 194, 103)" type="filled" rounded>
+        <Button
+          pending={isLoading}
+          color="rgb(13, 194, 103)"
+          type="filled"
+          rounded
+        >
           Submit
         </Button>
       </div>

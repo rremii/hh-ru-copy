@@ -1,1 +1,5 @@
-import { User } from "@shared/entities/user/types"
+export interface UpdateMeDto {
+  id: number
+
+  name?: string
+}

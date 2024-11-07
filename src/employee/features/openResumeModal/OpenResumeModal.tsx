@@ -14,14 +14,7 @@ export const OpenResumeModal = ({ children }: Props) => {
   }
 
   return (
-    <Button
-      style={{
-        width: "100px",
-      }}
-      type="filled"
-      rounded
-      onClick={openModal}
-    >
+    <Button type="filled" rounded onClick={openModal}>
       {children}
     </Button>
   )

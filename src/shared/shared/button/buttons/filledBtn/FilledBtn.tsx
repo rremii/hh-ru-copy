@@ -46,9 +46,9 @@ const FilledBtnLayout = styled.button<{
   border-radius: ${({ $brRadius }) => $brRadius + "px"};
   transition: 0.3s;
   color: white;
-  width: max-content;
+  /* width: max-content; */
   font-size: 16px;
-
+  /* height: min-content; */
   &:hover {
     opacity: 0.8;
   }

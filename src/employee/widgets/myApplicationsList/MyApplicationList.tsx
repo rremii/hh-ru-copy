@@ -1,15 +1,17 @@
-import { useGetJobApplications } from "@employee/entities/jobApplication/model/useGetMyJobApplications"
+import { useGetMyJobApplications } from "@employee/entities/jobApplication/model/useGetMyJobApplications"
 import { GoToJobPost } from "@employee/features/goToJobPost/GoToJobPost"
-import { DeleteJobApplication } from "@employer/features/deleteJobApplication/DeleteJobApplication"
+import { DeleteJobApplication } from "@shared/features/deleteJobApplication/DeleteJobApplication"
 import { JobApplicationCard } from "@shared/shared/ui/JobApplicationCard"
 import styled from "styled-components"
 
 export const MyApplicationList = () => {
-  const { jobApplications } = useGetJobApplications()
+  const { jobApplications, isFetching } = useGetMyJobApplications()
 
   return (
     <ListLayout>
-      {jobApplications.map((jobApplication, index) => (
+      {isFetching && <div>LOADING</div>}
+
+      {jobApplications?.map((jobApplication, index) => (
         <JobApplicationCard
           key={index}
           {...jobApplication}

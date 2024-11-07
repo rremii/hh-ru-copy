@@ -11,42 +11,40 @@ export const ResumePage = () => {
 
   return (
     <PageLayout>
-      <ResumeWrapper>
-        {hasResume ? (
-          <>
-            <ResumeInfo
-              bottom={
-                <BtnSection>
-                  <OpenResumeModal>Edit</OpenResumeModal>
-                </BtnSection>
-              }
-            />
-          </>
-        ) : (
-          <BtnSection>
-            <OpenResumeModal>Create Resume</OpenResumeModal>
-          </BtnSection>
-        )}
-        <ResumeModal />
-      </ResumeWrapper>
+      {hasResume ? (
+        <ResumeWrapper>
+          <ResumeInfo
+            bottom={
+              <BtnSection>
+                <OpenResumeModal>Edit</OpenResumeModal>
+              </BtnSection>
+            }
+          />
+        </ResumeWrapper>
+      ) : (
+        <OpenResumeModal>Create Resume</OpenResumeModal>
+      )}
+      <ResumeModal />
     </PageLayout>
   )
 }
+
+const ResumeWrapper = styled.div`
+  width: 100%;
+  max-width: 400px;
+`
+
 const PageLayout = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   padding: 50px 0 100px;
+  flex-direction: column;
 
+  align-items: flex-start;
   @media screen and (max-width: 600px) {
     justify-content: center;
   }
-`
-
-const ResumeWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  align-items: center;
 `
 
 const BtnSection = styled.div`
