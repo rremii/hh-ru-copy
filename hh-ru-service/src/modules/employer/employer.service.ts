@@ -1,3 +1,4 @@
+import { EmployerReviewService } from "./../employer-review/employer-review.service"
 import { Injectable, NotFoundException } from "@nestjs/common"
 import { CreateEmployerDto } from "./dto/create-employer.dto"
 import { UnitOfWorkService } from "../unit-of-work/unit-of-work.service"
@@ -10,6 +11,7 @@ import { ApiError } from "./../../common/constants/errors"
 import { JobPostService } from "../job-post/job-post.service"
 import { ResumeApplicationService } from "../resume-application/resume-application.service"
 import { EmployerDto } from "./dto/employer.dto"
+import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
 
 @Injectable()
 export class EmployerService {
@@ -17,6 +19,7 @@ export class EmployerService {
     private readonly uowService: UnitOfWorkService,
     private readonly jobPostService: JobPostService,
     private readonly resumeApplicationService: ResumeApplicationService,
+    private readonly employerReviewService: EmployerReviewService,
   ) {}
 
   async getMe(userId: number): Promise<EmployerDto> {
@@ -81,6 +84,18 @@ export class EmployerService {
   async getJobApplications(jobPostId: number) {
     return this.uowService.jobApplicationRepository.find({
       where: { jobPostId },
+      select: {
+        employee: {
+          resume: {
+            id: true,
+          },
+        },
+      },
+      relations: {
+        employee: {
+          resume: true,
+        },
+      },
     })
   }
 
@@ -88,6 +103,9 @@ export class EmployerService {
     return this.jobPostService.delete(id)
   }
 
+  async deleteResumeApplication(id: number) {
+    return this.resumeApplicationService.delete(id)
+  }
   async createResumeApplication(createDto: CreateResumeApplicationDto) {
     return this.resumeApplicationService.create(createDto)
   }
@@ -101,11 +119,21 @@ export class EmployerService {
   async getEmployerReviews(employerId: number) {
     return this.uowService.employerReviewRepository.find({
       where: { employerId },
+      order: { created_at: "DESC" },
     })
   }
 
   async getById(id: number) {
-    return this.uowService.employerRepository.findOneBy({ id })
+    const user = await this.uowService.userRepository.findOneBy({ id })
+    if (!user) throw new NotFoundException(ApiError.EMPLOYER_NOT_FOUND)
+
+    const employer = await this.uowService.employerRepository.findOneBy({ id })
+    if (!employer) throw new NotFoundException(ApiError.EMPLOYER_NOT_FOUND)
+
+    return {
+      ...user,
+      ...employer,
+    }
   }
 
   async getPostJobById(id: number) {
@@ -114,5 +142,9 @@ export class EmployerService {
 
   async getPostJobs() {
     return this.jobPostService.getAll()
+  }
+
+  async createEmployerReview(createDto: CreateEmployerReviewDto) {
+    return this.employerReviewService.create(createDto)
   }
 }

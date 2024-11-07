@@ -8,6 +8,7 @@ import { TokenModule } from "../token/token.module"
 import { UserModule } from "../user/user.module"
 import { ResumeModule } from "../resume/resume.module"
 import { EmployerReviewsModule } from "../employer-review/employer-review.module"
+import { JobPostModule } from "../job-post/job-post.module"
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { EmployerReviewsModule } from "../employer-review/employer-review.module
     ResumeModule,
     JobApplicationModule,
     EmployerReviewsModule,
+    JobPostModule,
   ],
   providers: [EmployeeService],
   controllers: [EmployeeController],

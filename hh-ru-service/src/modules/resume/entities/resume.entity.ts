@@ -29,7 +29,9 @@ export class Resume extends BaseEntity implements IResume {
   @Column()
   employeeId: number
 
-  @OneToOne(() => Employee, undefined, { onDelete: "CASCADE" })
+  @OneToOne(() => Employee, (employee) => employee.resume, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn({ name: "employeeId", referencedColumnName: "id" })
   employee: Employee
 }

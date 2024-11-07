@@ -24,6 +24,9 @@ export class EmployerReview extends BaseEntity implements IEmployerReview {
   @Column()
   employeeId: number
 
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  created_at: Date
+
   @ManyToOne(() => Employer, undefined, { onDelete: "CASCADE" })
   @JoinColumn({ name: "employerId", referencedColumnName: "id" })
   employer: Employer

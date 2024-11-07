@@ -17,13 +17,20 @@ export class JobPostService {
     return this.uowService.jobPostRepository.find()
   }
 
-  async create({ description, requirements, salary, title }: CreateJobPostDto) {
+  async create({
+    description,
+    requirements,
+    salary,
+    title,
+    employerId,
+  }: CreateJobPostDto) {
     const jobPost = new JobPost()
 
     jobPost.description = description
     jobPost.requirements = requirements
     jobPost.salary = salary
     jobPost.title = title
+    jobPost.employerId = employerId
 
     return this.uowService.jobPostRepository.save(jobPost)
   }

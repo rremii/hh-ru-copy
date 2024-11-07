@@ -1,3 +1,4 @@
+import { JobApplication } from "src/modules/job-application/entities/job-application.entity"
 import { ResumeService } from "./../resume/resume.service"
 import { Injectable, NotFoundException } from "@nestjs/common"
 import { Employee } from "./entities/employee.entity"
@@ -13,6 +14,7 @@ import { JobApplicationService } from "../job-application/job-application.servic
 import { EmployerReviewService } from "../employer-review/employer-review.service"
 import { ApiError } from "./../../common/constants/errors"
 import { EmployeeDto } from "./dto/employee.dto"
+import { JobPostService } from "../job-post/job-post.service"
 
 @Injectable()
 export class EmployeeService {
@@ -22,6 +24,7 @@ export class EmployeeService {
     private readonly resumeService: ResumeService,
     private readonly jobApplicationService: JobApplicationService,
     private readonly employerReviewService: EmployerReviewService,
+    private readonly jobPostService: JobPostService,
   ) {}
 
   async getMe(userId: number): Promise<EmployeeDto> {
@@ -80,7 +83,7 @@ export class EmployeeService {
     const resume = await this.uowService.resumeRepository.findOneBy({
       employeeId,
     })
-    if (!resume) throw new NotFoundException(ApiError.RESUME_NOT_FOUND)
+    if (!resume) return []
 
     return this.uowService.resumeApplicationRepository.find({
       where: { resumeId: resume.id },
@@ -89,6 +92,9 @@ export class EmployeeService {
 
   async createJobApplication(createDto: CreateJobApplicationDto) {
     return this.jobApplicationService.create(createDto)
+  }
+  async deleteJobApplication(id: number) {
+    return this.jobApplicationService.delete(id)
   }
 
   async getJobApplications(employeeId: number) {
@@ -115,6 +121,21 @@ export class EmployeeService {
 
   async getResumeById(id: number) {
     return this.resumeService.getById(id)
+  }
+
+  async getPostJobById(id: number, employeeId: number) {
+    const jobApplications = await this.jobApplicationService.getByJobPostId(id)
+
+    const isApplied = jobApplications.some(
+      (jobApplication) => jobApplication.employeeId === employeeId,
+    )
+
+    const jobPost = await this.jobPostService.getById(id)
+
+    return {
+      ...jobPost,
+      isApplied,
+    }
   }
 
   async getResumes() {

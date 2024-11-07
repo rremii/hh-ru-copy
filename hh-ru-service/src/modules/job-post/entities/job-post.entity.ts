@@ -20,7 +20,7 @@ export class JobPost extends BaseEntity implements IJobPost {
   @Column()
   description: string
 
-  @Column()
+  @Column({ type: "money" })
   salary: number
 
   @Column({ array: true, type: "text", default: [] })

@@ -24,6 +24,9 @@ export class JobApplication extends BaseEntity implements IJobApplication {
   @Column()
   jobPostId: number
 
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  created_at: Date
+
   @ManyToOne(() => JobPost, undefined, { onDelete: "CASCADE" })
   @JoinColumn({ name: "jobPostId", referencedColumnName: "id" })
   jobPost: JobPost

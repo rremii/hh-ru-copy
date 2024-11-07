@@ -21,26 +21,12 @@ import { EmployerService } from "./employer.service"
 import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
 import { UpdateJobPostDto } from "../job-post/dto/update-jobPost"
 import { DefaultFieldPipe } from "./../../pipes/DefaultField.pipe"
+import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
 
 @UseGuards(AccessTokenGuard)
 @Controller("employer/")
 export class EmployerController {
   constructor(private readonly employerService: EmployerService) {}
-
-  @Get(":id")
-  async getById(@Param("id", ParseIntPipe) id: number) {
-    return this.employerService.getById(id)
-  }
-
-  @Get("job-post")
-  async getJobPosts() {
-    return this.employerService.getPostJobs()
-  }
-
-  @Get("job-post/:id")
-  async getPostJobById(@Param("id", ParseIntPipe) id: number) {
-    return this.employerService.getPostJobById(id)
-  }
 
   @Get("me")
   @Roles(UserRole.EMPLOYER)
@@ -87,14 +73,21 @@ export class EmployerController {
   async updateJobPost(@Body(ValidationPipe) updateDto: UpdateJobPostDto) {
     return this.employerService.updateJobPost(updateDto)
   }
-
+  //todo filter jobposts to not applyed ones
+  //same to resumes
   @Get("me/job-post/:jobPostId/job-application")
   @Roles(UserRole.EMPLOYER)
   @UseGuards(RoleGuard)
-  async getJobApplications(@Param("jobPostId") jobPostId: number) {
+  async getJobApplications(
+    @Param("jobPostId", ParseIntPipe) jobPostId: number,
+  ) {
     return this.employerService.getJobApplications(jobPostId)
   }
 
+  @Delete("resume-application/:id")
+  async deleteResumeApplication(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.deleteResumeApplication(id)
+  }
   @Delete("me/job-post/:id")
   @Roles(UserRole.EMPLOYER)
   @UseGuards(RoleGuard)
@@ -123,10 +116,37 @@ export class EmployerController {
     return this.employerService.getResumeApplications(user.id)
   }
 
-  @Get("me/employer-reviews")
-  @Roles(UserRole.EMPLOYER)
+  @Post(":id/employer-reviews")
+  @Roles(UserRole.EMPLOYEE)
   @UseGuards(RoleGuard)
-  async getEmployerReviews(@CurrentUser() user: IUser) {
-    return this.employerService.getEmployerReviews(user.id)
+  async createEmployerReview(
+    @CurrentUser() user: IUser,
+    @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
+    createDto: CreateEmployerReviewDto,
+  ) {
+    return this.employerService.createEmployerReview({
+      ...createDto,
+      employeeId: user.id,
+    })
+  }
+
+  @Get(":id/employer-reviews")
+  async getEmployerReviews(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.getEmployerReviews(id)
+  }
+
+  @Get("job-post")
+  async getPostJobs() {
+    return this.employerService.getPostJobs()
+  }
+
+  @Get("job-post/:id")
+  async getPostJobById(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.getPostJobById(id)
+  }
+
+  @Get(":id")
+  async getById(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.getById(id)
   }
 }

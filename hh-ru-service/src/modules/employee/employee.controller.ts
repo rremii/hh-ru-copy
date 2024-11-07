@@ -38,6 +38,12 @@ export class EmployeeController {
     return this.employeeService.getResumeById(id)
   }
 
+  @Delete("job-application/:id")
+  @UseGuards(RoleGuard)
+  async deleteJobApplication(@Param("id", ParseIntPipe) id: number) {
+    return this.employeeService.deleteJobApplication(id)
+  }
+
   @Roles(UserRole.EMPLOYEE)
   @UseGuards(RoleGuard)
   @Get("me")
@@ -138,5 +144,15 @@ export class EmployeeController {
   @UseGuards(RoleGuard)
   async getEmployerReviewsByEmployee(@CurrentUser() user: IUser) {
     return this.employeeService.getEmployerReviewsByEmployee(user.id)
+  }
+
+  @Get("job-post/:id")
+  @Roles(UserRole.EMPLOYEE)
+  @UseGuards(RoleGuard)
+  async getPostJobById(
+    @Param("id", ParseIntPipe) id: number,
+    @CurrentUser() user: IUser,
+  ) {
+    return this.employeeService.getPostJobById(id, user.id)
   }
 }
