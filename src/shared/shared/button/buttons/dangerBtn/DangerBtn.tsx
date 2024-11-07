@@ -9,10 +9,12 @@ export const DangerBtn: FC<DangerBtnProps> = ({
   children,
   onClick,
   color = "#fff",
+  actionType,
   ...btnProps
 }) => {
   return (
     <DangerBtnLayout
+      type={actionType}
       onClick={onClick}
       disabled={pending}
       $pending={pending}

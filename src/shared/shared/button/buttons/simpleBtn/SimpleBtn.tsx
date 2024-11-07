@@ -9,10 +9,12 @@ export const SimpleBtn: FC<SimpleBtnProps> = ({
   padding,
   children,
   onClick,
+  actionType,
   ...btnProps
 }) => {
   return (
     <SimpleBtnLayout
+      type={actionType}
       onClick={onClick}
       disabled={pending}
       $pending={pending}

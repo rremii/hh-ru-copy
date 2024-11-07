@@ -6,21 +6,22 @@ import styled from "styled-components"
 export const EmployerProfile = () => {
   const { id } = useParams()
 
-  const { employer } = useGetEmployer(Number(id))
+  const { employer, isFetching } = useGetEmployer(Number(id))
 
   return (
     <ProfileLayout>
+      {isFetching && <div>LOADING</div>}
       <ProfileIcon $width="70px" $height="70px" $fontSize={35}>
-        {employer.name.slice(0, 1)}
+        {employer?.name?.slice(0, 1)}
       </ProfileIcon>
-      <Email>{employer.email}</Email>
+      <Email>{employer?.email}</Email>
       <Section>
         <Label>Имя:</Label>
-        <Text>{employer.name}</Text>
+        <Text>{employer?.name}</Text>
       </Section>
       <Section>
         <Label>О себе:</Label>
-        <Text>{employer.about}</Text>
+        <Text>{employer?.about}</Text>
       </Section>
     </ProfileLayout>
   )

@@ -1,18 +1,23 @@
 import { useGetMe } from "@employer/entities/employer/model/useGetMe"
+import { useUpdateMe } from "@employer/entities/employer/model/useUpdateMe"
 import { LabelWithTextarea } from "@shared/shared/ui/LabelWithTextarea"
 import styled from "styled-components"
 
 export const EditEmployerAbout = () => {
   const { me } = useGetMe()
 
-  const onSubmit = (about: string) => {
-    console.log(about)
+  const { updateMe } = useUpdateMe()
+
+  const onChange = (about: string) => {
+    if (!me) return
+
+    updateMe({ id: me.id, about })
   }
 
   return (
     <Container>
       <Title>О себе:</Title>
-      <LabelWithTextarea label={me?.about} onSubmit={onSubmit} />
+      <LabelWithTextarea label={me?.about || ""} onSubmit={onChange} />
     </Container>
   )
 }

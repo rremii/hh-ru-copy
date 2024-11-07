@@ -73,6 +73,7 @@ export const ResumeForm = ({
       <SkillsPicker initSkills={skills} onChange={setSkills} />
       <div className="btn-section">
         <Button
+          actionType="submit"
           pending={isLoading}
           color="rgb(13, 194, 103)"
           type="filled"

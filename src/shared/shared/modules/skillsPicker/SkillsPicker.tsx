@@ -33,8 +33,8 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
   }
 
   const handleSkillClick =
-    (removeSkill: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (!inputRef.current || document.activeElement !== e.target) return
+    (removeSkill: string) => (e: React.MouseEvent<HTMLLIElement>) => {
+      if (!inputRef.current) return
       const newSkills = skills.filter((skill) => skill !== removeSkill)
       setSkills(newSkills)
       onChange(newSkills)
@@ -60,7 +60,7 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
     </PickerContainer>
   )
 }
-const Skill = styled.button`
+const Skill = styled.li`
   border: 1px solid #d9d9d9;
   border-radius: 15px;
   padding: 5px 10px;
@@ -69,6 +69,7 @@ const Skill = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 `
 const PickerContainer = styled.div``
 

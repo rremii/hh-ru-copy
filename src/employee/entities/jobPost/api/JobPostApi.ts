@@ -7,8 +7,8 @@ export const JobPostApi = ApiEmployee.injectEndpoints({
       query: (id) => ({
         url: "job-post/" + id,
         method: "GET",
-        prefix: "employer/",
       }),
+      providesTags: ["JobPost"],
     }),
     getJobsPosts: build.query<JobPost[], void>({
       query: () => ({

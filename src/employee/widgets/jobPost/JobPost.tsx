@@ -16,7 +16,7 @@ export const JobPost = () => {
             <Title>{jobPost.title}</Title>
             <Salary>Размер зарплаты: {jobPost.salary}</Salary>
             <BtnSection>
-              <OpenApplyModal />
+              {!jobPost.isApplied && <OpenApplyModal />}
               <GoToEmployer id={jobPost.employerId} />
             </BtnSection>
           </TitleContainer>

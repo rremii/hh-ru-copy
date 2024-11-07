@@ -40,7 +40,7 @@ export const RequirementsPicker = ({ initRequirements, onChange }: Props) => {
 
   const handleRequirementClick =
     (removeRequirement: string) => (e: React.MouseEvent<HTMLLIElement>) => {
-      if (!inputRef.current || document.activeElement !== e.target) return
+      if (!inputRef.current) return
       const newRequirements = requirements.filter(
         (requirement) => requirement !== removeRequirement
       )

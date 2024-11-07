@@ -6,8 +6,6 @@ export interface CreateJobPostDto {
   salary: number
 
   requirements: string[]
-
-  employerId: number
 }
 
 export interface UpdateJobPostDto {
@@ -17,7 +15,7 @@ export interface UpdateJobPostDto {
 
   description?: string
 
-  salary?: number
+  salary?: number | string
 
   requirements?: string[]
 }

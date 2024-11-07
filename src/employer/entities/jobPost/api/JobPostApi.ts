@@ -5,7 +5,7 @@ import { CreateJobPostDto, UpdateJobPostDto } from "../types"
 export const JobPostApi = ApiEmployer.injectEndpoints({
   endpoints: (build) => ({
     getMyJobPosts: build.query<JobPost[], void>({
-      query: (jobPostId) => ({
+      query: () => ({
         url: `me/job-post`,
         method: "GET",
       }),

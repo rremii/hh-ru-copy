@@ -11,13 +11,6 @@ export const JobApplicationApi = ApiEmployer.injectEndpoints({
       }),
       providesTags: ["JobApplication"],
     }),
-    deleteJobApplication: build.mutation<JobApplication[], number>({
-      query: (applicationId) => ({
-        url: `job-application/` + applicationId,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["JobApplication"],
-    }),
   }),
   overrideExisting: true,
 })

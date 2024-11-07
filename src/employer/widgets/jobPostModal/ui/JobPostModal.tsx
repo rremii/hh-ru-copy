@@ -26,7 +26,7 @@ export const JobPostModal = () => {
   const closeModal = () => {
     dispatch(closeMenu("jobPostModal"))
   }
-
+  const isUpdate = typeof id === "number" && jobPost
   return (
     <>
       {createPortal(
@@ -34,7 +34,11 @@ export const JobPostModal = () => {
           <Overlay $isActive={isOpen} onClick={closeModal} />
           <FormModal $centered $isOpen={isOpen}>
             <ModalHeader onCrossClick={closeModal} />
-            {jobPost ? <EditJobPostForm {...jobPost} /> : <CreateJobPostForm />}
+            {isUpdate ? (
+              <EditJobPostForm {...jobPost} />
+            ) : (
+              <CreateJobPostForm />
+            )}
           </FormModal>
         </>,
         document.body

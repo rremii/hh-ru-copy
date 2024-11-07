@@ -1,7 +1,5 @@
 import { ButtonHTMLAttributes, HTMLAttributes, PropsWithChildren } from "react"
 
-type CombineTypes<T, U> = T & U
-
 type BtnType = "simple" | "danger" | "filled"
 
 interface BaseBtnProps
@@ -9,6 +7,7 @@ interface BaseBtnProps
     HTMLAttributes<HTMLButtonElement> {
   pending?: boolean
   padding?: string
+  actionType?: "button" | "reset" | "submit"
 }
 
 export interface DangerBtnProps extends BaseBtnProps {

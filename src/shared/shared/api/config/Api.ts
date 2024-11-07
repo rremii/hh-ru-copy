@@ -73,12 +73,24 @@ export const ApiEmployee = createApi({
   reducerPath: "ApiEmployee",
   baseQuery: createAxiosBaseQuery(apiEmployee, "employee/"),
   endpoints: () => ({}),
-  tagTypes: ["User", "Resume", "JobApplication", "ResumeApplication"],
+  tagTypes: [
+    "User",
+    "Resume",
+    "JobApplication",
+    "ResumeApplication",
+    "JobPost",
+  ],
 })
 
 export const ApiEmployer = createApi({
   reducerPath: "ApiEmployer",
   baseQuery: createAxiosBaseQuery(apiEmployer, "employer/"),
   endpoints: () => ({}),
-  tagTypes: ["User", "JobApplication", "JobPost", "ResumeApplication"],
+  tagTypes: [
+    "User",
+    "JobApplication",
+    "JobPost",
+    "ResumeApplication",
+    "EmployerReview",
+  ],
 })

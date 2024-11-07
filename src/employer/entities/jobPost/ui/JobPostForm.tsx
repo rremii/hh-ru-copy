@@ -12,6 +12,7 @@ export interface FormFields {
   description: string
   requirements: string[]
   salary: number
+  isLoading?: boolean
 }
 
 interface Props extends Partial<FormFields> {
@@ -24,6 +25,7 @@ export const JobPostForm = ({
   requirements = [],
   salary,
   onSubmit,
+  isLoading,
 }: Props) => {
   const {
     clearErrors,
@@ -75,7 +77,12 @@ export const JobPostForm = ({
         onChange={setRequirements}
       />
       <div className="btn-section">
-        <Button color="rgb(13, 194, 103)" type="filled" rounded>
+        <Button
+          pending={isLoading}
+          color="rgb(13, 194, 103)"
+          type="filled"
+          rounded
+        >
           Submit
         </Button>
       </div>

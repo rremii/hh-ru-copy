@@ -10,6 +10,7 @@ export const FilledBtn: FC<FilledBtnProps> = ({
   color,
   rounded,
   onClick,
+  actionType,
   ...btnProps
 }) => {
   let brRadius = 0
@@ -17,6 +18,7 @@ export const FilledBtn: FC<FilledBtnProps> = ({
   if (typeof rounded === "number") brRadius = rounded
   return (
     <FilledBtnLayout
+      type={actionType}
       onClick={onClick}
       $pending={pending}
       $color={color}

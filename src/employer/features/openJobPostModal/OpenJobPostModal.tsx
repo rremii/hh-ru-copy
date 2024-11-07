@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 interface Props extends PropsWithChildren {
-  jobPostId: number
+  jobPostId?: number
 }
 
 export const OpenJobPostModal = ({ children, jobPostId }: Props) => {
@@ -14,19 +14,12 @@ export const OpenJobPostModal = ({ children, jobPostId }: Props) => {
   const navigate = useNavigate()
 
   const openModal = () => {
-    navigate("/employer/job-posts/" + jobPostId)
+    navigate("/employer/job-posts/" + (jobPostId || ""))
     dispatch(openMenu("jobPostModal"))
   }
 
   return (
-    <Button
-      style={{
-        width: "100px",
-      }}
-      type="filled"
-      rounded
-      onClick={openModal}
-    >
+    <Button type="filled" rounded onClick={openModal}>
       {children}
     </Button>
   )

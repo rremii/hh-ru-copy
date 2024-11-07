@@ -1,3 +1,4 @@
+import { useGetJobApplicationsQuery } from "@employer/entities/jobApplication/api/JobApplicationApi"
 import { useGetJobPostQuery } from "../api/JobPostApi"
 
 export const useGetJobPost = (id?: number) => {

@@ -5,13 +5,14 @@ import styled from "styled-components"
 
 export const MyReviews = () => {
   const { me } = useGetMe()
-  const { reviews } = useGetEmployerReviews(me?.id)
+  const { reviews, isFetching } = useGetEmployerReviews(me?.id)
 
   return (
     <ReviewsContainer>
       <ReviewsLayout>
         <Label>Мои отзывы:</Label>
-        {reviews.map((review, index) => (
+        {isFetching && <div>LOADING</div>}
+        {reviews?.map((review, index) => (
           <ReviewCard key={index} {...review} />
         ))}
       </ReviewsLayout>

@@ -4,6 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import styled from "styled-components"
 import { Button } from "@shared/shared/button"
 import { FormField } from "@shared/shared/ui/FormField"
+import { useCreateResume } from "@employee/entities/resume/model/useCreateResume"
+import { useCreateResumeApplication } from "../model/useCreateResumeApplication"
+import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
+import { useEffect } from "react"
+import { closeMenu } from "@shared/entities/ui/model/UiSlice"
+import { useGetMe } from "@employer/entities/employer/model/useGetMe"
 
 interface FormFields {
   coverLetter: string
@@ -15,6 +21,8 @@ interface Props {
 }
 
 export const ApplyToResumeForm = ({ resumeId, onCancel }: Props) => {
+  const dispatch = useAppDispatch()
+
   const {
     clearErrors,
     reset,
@@ -29,13 +37,24 @@ export const ApplyToResumeForm = ({ resumeId, onCancel }: Props) => {
     },
   })
 
+  const { me } = useGetMe()
+  const { createResumeApplication, isSuccess, isLoading } =
+    useCreateResumeApplication()
+
+  useEffect(() => {
+    if (!isSuccess) return
+
+    dispatch(closeMenu("applyToResumeModal"))
+  }, [isSuccess])
+
   const onSubmit = (dto: FormFields) => {
-    if (!resumeId) return
-    console.log(dto)
+    if (!resumeId || !me) return
+    createResumeApplication({ ...dto, resumeId, employerId: me.id })
   }
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    e.stopPropagation()
 
     if (onCancel) onCancel()
     reset()
@@ -44,20 +63,26 @@ export const ApplyToResumeForm = ({ resumeId, onCancel }: Props) => {
   return (
     <FormLayout onSubmit={handleSubmit(onSubmit)}>
       <FormField
-        label="Cover letter"
+        label="Сопроводительное письмо"
         isError={Boolean(errors.root) || Boolean(errors.coverLetter)}
         input={{
-          placeholder: "cover letter",
+          placeholder: "Сопроводительное письмо",
           register: { ...register("coverLetter") },
         }}
       />
 
       <div className="btn-section">
-        <Button onClick={handleCancel} color="#878787" type="filled" rounded>
-          Cancel
+        <Button
+          actionType="reset"
+          onClick={handleCancel}
+          color="#878787"
+          type="filled"
+          rounded
+        >
+          Отмена
         </Button>
-        <Button type="filled" rounded>
-          Apply
+        <Button actionType="submit" pending={isLoading} type="filled" rounded>
+          Отправить
         </Button>
       </div>
     </FormLayout>

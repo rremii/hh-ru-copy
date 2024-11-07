@@ -19,13 +19,7 @@ export const ResumeApplicationApi = ApiEmployer.injectEndpoints({
         url: "me/resume-application",
         method: "POST",
         data: dto,
-      }),
-      invalidatesTags: ["ResumeApplication"],
-    }),
-    deleteResumeApplication: build.mutation<ResumeApplication, number>({
-      query: (applicationId) => ({
-        url: "resume-application/" + applicationId,
-        method: "DELETE",
+        prefix: "employer/",
       }),
       invalidatesTags: ["ResumeApplication"],
     }),
@@ -35,5 +29,4 @@ export const ResumeApplicationApi = ApiEmployer.injectEndpoints({
 export const {
   useGetMyResumeApplicationsQuery,
   useCreateResumeApplicationMutation,
-  useDeleteResumeApplicationMutation,
 } = ResumeApplicationApi

@@ -1,18 +1,22 @@
 import { CreateReviewForm } from "@employee/entities/employerReview/ui/CreateReviewForm"
 import { useGetEmployerReviews } from "@shared/entities/employerReview/model/useGetEmployerReviews"
 import { ReviewCard } from "@shared/shared/ui/ReviewCard"
+import { useParams } from "react-router-dom"
 import styled from "styled-components"
 
 export const EmployerReviews = () => {
-  const { reviews } = useGetEmployerReviews(1)
+  const { id } = useParams()
+
+  const { reviews, isFetching } = useGetEmployerReviews(Number(id))
 
   return (
     <ReviewsContainer>
       <ReviewsLayout>
         <Label>Напиши свой отзыв:</Label>
-        <CreateReviewForm />
+        <CreateReviewForm employerId={Number(id)} />
         <Label>Отзывы:</Label>
-        {reviews.map((review, index) => (
+        {isFetching && <div>LOADING</div>}
+        {reviews?.map((review, index) => (
           <ReviewCard key={index} {...review} />
         ))}
       </ReviewsLayout>
