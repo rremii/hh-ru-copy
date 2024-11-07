@@ -1,7 +1,11 @@
 import { useGetMyResume } from "@employee/entities/resume/model/useGetMyResume"
 import styled from "styled-components"
 
-export const ResumeInfo = () => {
+interface Props {
+  bottom?: React.ReactNode
+}
+
+export const ResumeInfo = ({ bottom }: Props) => {
   const { resume } = useGetMyResume()
 
   const { title, experience, education, skills, employeeId } = resume
@@ -28,6 +32,7 @@ export const ResumeInfo = () => {
           ))}
         </SkillsContainer>
       </div>
+      {bottom}
     </ResumeLayout>
   )
 }

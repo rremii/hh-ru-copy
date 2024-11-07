@@ -11,7 +11,9 @@ interface BaseBtnProps
   padding?: string
 }
 
-export interface DangerBtnProps extends BaseBtnProps {}
+export interface DangerBtnProps extends BaseBtnProps {
+  color?: string
+}
 
 export interface FilledBtnProps extends BaseBtnProps {
   rounded?: boolean | number

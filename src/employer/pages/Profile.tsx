@@ -1,3 +1,4 @@
+import { MyReviews } from "@employer/widgets/myReviews/MyReviews"
 import { Profile } from "@employer/widgets/profile/Profile"
 import styled from "styled-components"
 
@@ -5,6 +6,7 @@ export const ProfilePage = () => {
   return (
     <PageLayout>
       <Profile />
+      <MyReviews />
     </PageLayout>
   )
 }

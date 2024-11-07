@@ -4,8 +4,9 @@ import { JobPostPage } from "@employee/pages/JobPostPage"
 import { ProfilePage } from "@employee/pages/ProfilePage"
 import { ResumePage } from "@employee/pages/ResumePage"
 import { Route, RouteObject } from "react-router-dom"
-import { EmployeeAuthLayout } from "../layout/AuthLayout"
+import { EmployeeAuthLayout } from "../../app/layout/AuthLayout"
 import { MainLayout } from "@employee/app/layout/MainLayout"
+import { EmployerProfilePage } from "@employee/pages/EmployerProfilePage"
 
 const routes = [
   {
@@ -27,6 +28,10 @@ const routes = [
   {
     path: "profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "profile/employer/:id",
+    element: <EmployerProfilePage />,
   },
   {
     path: "applications/:type",

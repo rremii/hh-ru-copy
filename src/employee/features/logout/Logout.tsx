@@ -14,8 +14,8 @@ export const Logout = () => {
     <Button
       style={{ fontSize: 14 }}
       padding="2px 10px "
-      color="rgb(135, 192, 201)"
-      type="simple"
+      color="#000"
+      type="danger"
       pending={isLoading}
       onClick={handleLogout}
     >

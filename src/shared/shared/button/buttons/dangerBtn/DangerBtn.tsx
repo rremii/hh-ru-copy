@@ -8,6 +8,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
   padding,
   children,
   onClick,
+  color = "#fff",
   ...btnProps
 }) => {
   return (
@@ -16,11 +17,12 @@ export const DangerBtn: FC<DangerBtnProps> = ({
       disabled={pending}
       $pending={pending}
       $padding={padding}
+      $color={color}
       {...btnProps}
     >
       {children}
       <div className="spinner">
-        {pending && <Spinner $color="white" $width="15px" $height="15px" />}
+        {pending && <Spinner $color={color} $width="15px" $height="15px" />}
       </div>
     </DangerBtnLayout>
   )
@@ -29,17 +31,17 @@ export const DangerBtn: FC<DangerBtnProps> = ({
 const DangerBtnLayout = styled.button<{
   $pending?: boolean
   $padding?: string
+  $color?: string
 }>`
   color: #ff4d3a;
   padding: ${({ $padding }) => $padding || "5px 10px"};
   border-radius: 10px;
-  background-color: white;
   transition: 0.3s;
   position: relative;
   width: min-content;
   &:hover {
     background-color: #ff4d3a;
-    color: white;
+    color: ${({ $color }) => $color};
   }
 
   .spinner {

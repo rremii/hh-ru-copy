@@ -1,43 +1,39 @@
 import { useGetJobPost } from "@employee/entities/jobPost/model/useGetJobPost"
-import { openMenu } from "@shared/entities/ui/model/UiSlice"
-import { Button } from "@shared/shared/button"
-import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
+import { GoToEmployer } from "@employee/features/goToEmployer/GoToEmployer"
+import { OpenApplyModal } from "@employee/features/openApplyModal/OpenApplyModal"
 import { useNavigation, useParams } from "react-router-dom"
 import styled from "styled-components"
 
 export const JobPost = () => {
-  const dispatch = useAppDispatch()
   const { id } = useParams()
-
   const { jobPost } = useGetJobPost(Number(id))
-
-  const openApplyModal = () => {
-    dispatch(openMenu("applyToJobPostModal"))
-  }
 
   return (
     <JobPostLayout>
-      <TitleContainer>
-        <Title>{jobPost?.title}</Title>
-        <Salary>Размер зарплаты: {jobPost?.salary}</Salary>
-        <Button
-          onClick={openApplyModal}
-          color="rgb(13, 194, 103)"
-          type="filled"
-        >
-          Откликнуться
-        </Button>
-      </TitleContainer>
+      {jobPost ? (
+        <>
+          <TitleContainer>
+            <Title>{jobPost.title}</Title>
+            <Salary>Размер зарплаты: {jobPost.salary}</Salary>
+            <BtnSection>
+              <OpenApplyModal />
+              <GoToEmployer id={jobPost.employerId} />
+            </BtnSection>
+          </TitleContainer>
 
-      <SectionTitle>Описание</SectionTitle>
-      <Description>{jobPost?.description}</Description>
+          <SectionTitle>Описание</SectionTitle>
+          <Description>{jobPost.description}</Description>
 
-      <SectionTitle>Требования</SectionTitle>
-      <RequirementsContainer>
-        {jobPost?.requirements.map((requirement, index) => (
-          <Requirement key={requirement}>{requirement}</Requirement>
-        ))}
-      </RequirementsContainer>
+          <SectionTitle>Требования</SectionTitle>
+          <RequirementsContainer>
+            {jobPost.requirements.map((requirement, index) => (
+              <Requirement key={requirement}>{requirement}</Requirement>
+            ))}
+          </RequirementsContainer>
+        </>
+      ) : (
+        <div>LOADING</div>
+      )}
     </JobPostLayout>
   )
 }
@@ -45,7 +41,11 @@ const JobPostLayout = styled.div`
   max-width: 600px;
   width: 100%;
 `
-
+const BtnSection = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`
 const Title = styled.h1`
   font-size: 30px;
   font-weight: 500;

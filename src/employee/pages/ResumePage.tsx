@@ -14,14 +14,17 @@ export const ResumePage = () => {
       <ResumeWrapper>
         {hasResume ? (
           <>
-            <ResumeInfo />
-            <BtnSection>
-              <OpenResumeModal>Edit</OpenResumeModal>
-            </BtnSection>
+            <ResumeInfo
+              bottom={
+                <BtnSection>
+                  <OpenResumeModal>Edit</OpenResumeModal>
+                </BtnSection>
+              }
+            />
           </>
         ) : (
           <BtnSection>
-            <OpenResumeModal>Create</OpenResumeModal>
+            <OpenResumeModal>Create Resume</OpenResumeModal>
           </BtnSection>
         )}
         <ResumeModal />
