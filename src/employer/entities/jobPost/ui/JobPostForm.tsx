@@ -6,12 +6,13 @@ import { Button } from "@shared/shared/button"
 import { JobPost } from "@shared/entities/jobPost/types"
 import { jobPostSchema } from "../constants/jobPostSchema"
 import { RequirementsPicker } from "@shared/shared/modules/requirementsPicker/RequirementsPicker"
+import { useEffect } from "react"
 
 export interface FormFields {
   title: string
   description: string
   requirements: string[]
-  salary: number
+  salary: number | string
   isLoading?: boolean
 }
 
@@ -19,14 +20,8 @@ interface Props extends Partial<FormFields> {
   onSubmit: (dto: FormFields) => void
 }
 
-export const JobPostForm = ({
-  title,
-  description,
-  requirements = [],
-  salary,
-  onSubmit,
-  isLoading,
-}: Props) => {
+export const JobPostForm = ({ onSubmit, ...jobPost }: Props) => {
+  const { description, isLoading, requirements, salary, title } = jobPost
   const {
     clearErrors,
     reset,
@@ -36,6 +31,12 @@ export const JobPostForm = ({
     formState: { errors },
   } = useForm<FormFields>({
     resolver: yupResolver(jobPostSchema),
+    values: {
+      title: title || "",
+      description: description || "",
+      requirements: requirements || [],
+      salary: salary || 0,
+    },
     defaultValues: {
       title: title || "",
       description: description || "",
@@ -73,7 +74,7 @@ export const JobPostForm = ({
       />
 
       <RequirementsPicker
-        initRequirements={requirements}
+        initRequirements={requirements || []}
         onChange={setRequirements}
       />
       <div className="btn-section">

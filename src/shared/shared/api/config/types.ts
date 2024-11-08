@@ -1,14 +1,12 @@
+import { AxiosResponse, InternalAxiosRequestConfig } from "axios"
+import { publicDecrypt } from "crypto"
+
 export class ApiError extends Error {
   constructor(
     public readonly message: string,
     public readonly name: string,
-    public readonly options: unknown = {},
-    public readonly response: {
-      statusCode: number
-      message: string
-      error: string
-    },
-    public readonly status: number
+    public readonly status: number,
+    public readonly response?: AxiosResponse
   ) {
     super(message)
   }

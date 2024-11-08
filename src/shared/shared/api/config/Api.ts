@@ -47,12 +47,6 @@ const createAxiosBaseQuery =
           throw new ApiError(
             "Server error try again later",
             "InternalError",
-            {},
-            {
-              error: "InternalError",
-              message: "Server error try again later",
-              statusCode: 500,
-            },
             500
           )
 

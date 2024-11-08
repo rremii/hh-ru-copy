@@ -18,7 +18,6 @@ export const CreateJobPostForm = () => {
 
   const onSubmit = (dto: FormFields) => {
     if (!me) return
-
     createJobPost({ ...dto, salary: Number(dto.salary) })
   }
 

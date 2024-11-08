@@ -11,6 +11,13 @@ export const JobPostApi = ApiEmployer.injectEndpoints({
       }),
       providesTags: ["JobPost"],
     }),
+    getMyJobPost: build.query<JobPost, number>({
+      query: (id) => ({
+        url: `me/job-post/` + id,
+        method: "GET",
+      }),
+      providesTags: ["JobPost"],
+    }),
     createJobPost: build.mutation<JobPost, CreateJobPostDto>({
       query: (dto) => ({
         url: "me/job-post",
@@ -31,6 +38,7 @@ export const JobPostApi = ApiEmployer.injectEndpoints({
   overrideExisting: true,
 })
 export const {
+  useGetMyJobPostQuery,
   useGetMyJobPostsQuery,
   useCreateJobPostMutation,
   useUpdateJobPostMutation,

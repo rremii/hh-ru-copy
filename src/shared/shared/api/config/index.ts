@@ -2,6 +2,7 @@ import axios from "axios"
 import { createWithTokenInterceptor } from "../intercetpors/createWithTokenInterceptor"
 import { createRefreshInterceptor } from "../intercetpors/createRefreshInterceptor"
 import { UserRole } from "@shared/entities/user/types"
+import { extractErrorInterceptor } from "../intercetpors/extractErrorInterceptor"
 
 export const API_URL = (import.meta.env.VITE_API_URL ||
   "http://localhost:5000/") as string
@@ -19,12 +20,22 @@ export const apiEmployer = axios.create({
   baseURL: API_URL,
 })
 
+api.interceptors.response.use((config) => {
+  return config
+}, extractErrorInterceptor)
+
 apiEmployee.interceptors.request.use(createWithTokenInterceptor())
 apiEmployee.interceptors.response.use((config) => {
   return config
 }, createRefreshInterceptor(apiEmployee, UserRole.EMPLOYEE))
+apiEmployee.interceptors.response.use((config) => {
+  return config
+}, extractErrorInterceptor)
 
 apiEmployer.interceptors.request.use(createWithTokenInterceptor())
 apiEmployer.interceptors.response.use((config) => {
   return config
 }, createRefreshInterceptor(apiEmployer, UserRole.EMPLOYER))
+apiEmployer.interceptors.response.use((config) => {
+  return config
+}, extractErrorInterceptor)
