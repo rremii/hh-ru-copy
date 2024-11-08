@@ -1,5 +1,4 @@
 import { useGetEmployerReviewsQuery } from "../api/ReviewApi"
-import { EmployerReview } from "../types"
 
 export const useGetEmployerReviews = (employerId?: number) => {
   const {

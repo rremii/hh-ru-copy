@@ -9,7 +9,7 @@ export const ResumeApplicationApi = ApiEmployer.injectEndpoints({
         url: "resume-application/" + applicationId,
         method: "DELETE",
       }),
-      invalidatesTags: ["ResumeApplication"],
+      invalidatesTags: ["ResumeApplication", "Resume"],
     }),
   }),
   overrideExisting: true,

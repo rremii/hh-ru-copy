@@ -1,8 +1,6 @@
 import { useGetResume } from "@employer/entities/resume/model/useGetResume"
+import { GoToResume } from "@employer/features/goToResumePost/GoToResume"
 import { OpenApplyModal } from "@employer/features/openApplyModal/OpenApplyModal"
-import { openMenu } from "@shared/entities/ui/model/UiSlice"
-import { Button } from "@shared/shared/button"
-import { useAppDispatch } from "@shared/shared/hooks/storeHooks"
 import { useParams } from "react-router-dom"
 import styled from "styled-components"
 
@@ -18,7 +16,7 @@ export const Resume = () => {
             <Title>{resume.title}</Title>
             <Experience>{resume.experience}</Experience>
             <BtnContainer>
-              <OpenApplyModal />
+              {!resume.isApplied && <OpenApplyModal />}
             </BtnContainer>
           </TitleContainer>
 

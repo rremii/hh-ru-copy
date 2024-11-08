@@ -1,15 +1,16 @@
 import { Api, ApiEmployee, ApiEmployer } from "@shared/shared/api/config/Api"
-import { JobPost } from "@shared/entities/jobPost/types"
 import { Resume } from "@shared/entities/resume/types"
+import { GetResumeResponse } from "../types"
 
 export const ResumeApi = ApiEmployer.injectEndpoints({
   endpoints: (build) => ({
-    getResume: build.query<Resume, number>({
+    getResume: build.query<GetResumeResponse, number>({
       query: (resumeId) => ({
         url: `resume/` + resumeId,
         method: "GET",
-        prefix: "employee/",
+        prefix: "employer/",
       }),
+      providesTags: ["Resume"],
     }),
     getResumes: build.query<Resume[], void>({
       query: () => ({

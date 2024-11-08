@@ -1,5 +1,5 @@
 import { useGetMe } from "@employer/entities/employer/model/useGetMe"
-import { useGetEmployerReviews } from "@shared/entities/employerReview/model/useGetEmployerReviews"
+import { useGetEmployerReviews } from "@employer/entities/employerReview/model/useGetEmployerReviews"
 import { ReviewCard } from "@shared/shared/ui/ReviewCard"
 import styled from "styled-components"
 

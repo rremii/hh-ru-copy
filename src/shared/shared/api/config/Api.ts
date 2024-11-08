@@ -79,6 +79,7 @@ export const ApiEmployee = createApi({
     "JobApplication",
     "ResumeApplication",
     "JobPost",
+    "EmployerReview",
   ],
 })
 
@@ -92,5 +93,6 @@ export const ApiEmployer = createApi({
     "JobPost",
     "ResumeApplication",
     "EmployerReview",
+    "Resume",
   ],
 })

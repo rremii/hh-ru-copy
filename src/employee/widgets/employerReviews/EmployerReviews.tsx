@@ -1,5 +1,7 @@
+import { useGetMe } from "@employee/entities/employee/model/useGetMe"
+import { useGetEmployerReviews } from "@employee/entities/employerReview/model/useGetEmployerReviews"
 import { CreateReviewForm } from "@employee/entities/employerReview/ui/CreateReviewForm"
-import { useGetEmployerReviews } from "@shared/entities/employerReview/model/useGetEmployerReviews"
+import { DeleteReview } from "@employee/features/deleteReview/DeleteReview"
 import { ReviewCard } from "@shared/shared/ui/ReviewCard"
 import { useParams } from "react-router-dom"
 import styled from "styled-components"
@@ -7,6 +9,7 @@ import styled from "styled-components"
 export const EmployerReviews = () => {
   const { id } = useParams()
 
+  const { me } = useGetMe()
   const { reviews, isFetching } = useGetEmployerReviews(Number(id))
 
   return (
@@ -16,13 +19,31 @@ export const EmployerReviews = () => {
         <CreateReviewForm employerId={Number(id)} />
         <Label>Отзывы:</Label>
         {isFetching && <div>LOADING</div>}
-        {reviews?.map((review, index) => (
-          <ReviewCard key={index} {...review} />
-        ))}
+        {reviews?.map((review, index) => {
+          if (review.employeeId === me?.id)
+            return (
+              <ReviewCard
+                key={index}
+                {...review}
+                bottom={
+                  <ButtonSection>
+                    <DeleteReview reviewId={review.id} />
+                  </ButtonSection>
+                }
+              />
+            )
+          return <ReviewCard key={index} {...review} />
+        })}
       </ReviewsLayout>
     </ReviewsContainer>
   )
 }
+
+const ButtonSection = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`
 
 const ReviewsLayout = styled.div`
   width: max-content;

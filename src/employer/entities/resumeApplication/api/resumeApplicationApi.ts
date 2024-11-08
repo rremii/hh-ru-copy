@@ -21,7 +21,7 @@ export const ResumeApplicationApi = ApiEmployer.injectEndpoints({
         data: dto,
         prefix: "employer/",
       }),
-      invalidatesTags: ["ResumeApplication"],
+      invalidatesTags: ["ResumeApplication", "Resume"],
     }),
   }),
   overrideExisting: true,
