@@ -1,3 +1,5 @@
+import { ResumeApplication } from "./../resume-application/entities/resume-application.entity"
+import { ResumeService } from "./../resume/resume.service"
 import { EmployerReviewService } from "./../employer-review/employer-review.service"
 import { Injectable, NotFoundException } from "@nestjs/common"
 import { CreateEmployerDto } from "./dto/create-employer.dto"
@@ -12,6 +14,7 @@ import { JobPostService } from "../job-post/job-post.service"
 import { ResumeApplicationService } from "../resume-application/resume-application.service"
 import { EmployerDto } from "./dto/employer.dto"
 import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
+import { EmployeeService } from "../employee/employee.service"
 
 @Injectable()
 export class EmployerService {
@@ -20,6 +23,7 @@ export class EmployerService {
     private readonly jobPostService: JobPostService,
     private readonly resumeApplicationService: ResumeApplicationService,
     private readonly employerReviewService: EmployerReviewService,
+    private readonly resumeService: ResumeService,
   ) {}
 
   async getMe(userId: number): Promise<EmployerDto> {
@@ -70,6 +74,9 @@ export class EmployerService {
   async getJobPostsByEmployerId(employerId: number) {
     return this.uowService.jobPostRepository.find({
       where: { employerId },
+      order: {
+        created_at: "DESC",
+      },
     })
   }
 
@@ -114,6 +121,22 @@ export class EmployerService {
     return this.uowService.resumeApplicationRepository.find({
       where: { employerId },
     })
+  }
+
+  async getResumeById(id: number, employerId: number) {
+    const resume = await this.resumeService.getById(id)
+    if (!resume) throw new NotFoundException(ApiError.RESUME_NOT_FOUND)
+
+    const resumeApplications =
+      await this.uowService.resumeApplicationRepository.find({
+        where: { employerId },
+      })
+
+    const isApplied = resumeApplications.some(
+      (resumeApplication) => resumeApplication.resumeId === id,
+    )
+
+    return { ...resume, isApplied }
   }
 
   async getEmployerReviews(employerId: number) {

@@ -21,7 +21,6 @@ import { EmployerService } from "./employer.service"
 import { CreateJobPostDto } from "../job-post/dto/create-jobPost"
 import { UpdateJobPostDto } from "../job-post/dto/update-jobPost"
 import { DefaultFieldPipe } from "./../../pipes/DefaultField.pipe"
-import { CreateEmployerReviewDto } from "../employer-review/dto/create-employerReview.dto"
 
 @UseGuards(AccessTokenGuard)
 @Controller("employer/")
@@ -40,7 +39,7 @@ export class EmployerController {
   @UseGuards(RoleGuard)
   async updateMe(
     @CurrentUser() user: IUser,
-    @Body(new DefaultFieldPipe("id", -1))
+    @Body(new DefaultFieldPipe("id", -1), ValidationPipe)
     updateDto: UpdateEmployerDto,
   ) {
     return this.employerService.update({ ...updateDto, id: user.id })
@@ -73,8 +72,12 @@ export class EmployerController {
   async updateJobPost(@Body(ValidationPipe) updateDto: UpdateJobPostDto) {
     return this.employerService.updateJobPost(updateDto)
   }
-  //todo filter jobposts to not applyed ones
-  //same to resumes
+  @Get("me/job-post/:id")
+  @Roles(UserRole.EMPLOYER)
+  @UseGuards(RoleGuard)
+  async getJobPost(@Param("id", ParseIntPipe) id: number) {
+    return this.employerService.getPostJobById(id)
+  }
   @Get("me/job-post/:jobPostId/job-application")
   @Roles(UserRole.EMPLOYER)
   @UseGuards(RoleGuard)
@@ -116,18 +119,14 @@ export class EmployerController {
     return this.employerService.getResumeApplications(user.id)
   }
 
-  @Post(":id/employer-reviews")
-  @Roles(UserRole.EMPLOYEE)
+  @Get("resume/:id")
+  @Roles(UserRole.EMPLOYER)
   @UseGuards(RoleGuard)
-  async createEmployerReview(
+  async getResumeById(
+    @Param("id", ParseIntPipe) id: number,
     @CurrentUser() user: IUser,
-    @Body(new DefaultFieldPipe("employeeId", -1), ValidationPipe)
-    createDto: CreateEmployerReviewDto,
   ) {
-    return this.employerService.createEmployerReview({
-      ...createDto,
-      employeeId: user.id,
-    })
+    return this.employerService.getResumeById(id, user.id)
   }
 
   @Get(":id/employer-reviews")

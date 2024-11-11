@@ -107,6 +107,10 @@ export class EmployeeService {
     return this.employerReviewService.create(createDto)
   }
 
+  async deleteEmployerReview(reviewId: number) {
+    return this.employerReviewService.delete(reviewId)
+  }
+
   async getEmployerReviewsByEmployee(employeeId: number) {
     return this.uowService.employerReviewRepository.find({
       where: { employeeId },

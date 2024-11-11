@@ -1,7 +1,8 @@
 export interface IJobPost {
   title: string
   description: string
-  salary: number
+  salary: number | string
   requirements: string[]
   employerId: number
+  created_at: Date
 }

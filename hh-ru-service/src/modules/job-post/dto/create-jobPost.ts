@@ -7,7 +7,7 @@ export class CreateJobPostDto {
   @IsString()
   description: string
 
-  @IsString()
+  @IsNumber()
   salary: number
 
   @IsArray()

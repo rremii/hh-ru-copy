@@ -10,6 +10,7 @@ export class DefaultFieldPipe implements PipeTransform<Value, Value> {
   ) {}
 
   transform(value: Value): Value {
+    console.log(value)
     return { ...value, [this.field]: this.defaultValue } as Value
   }
 }

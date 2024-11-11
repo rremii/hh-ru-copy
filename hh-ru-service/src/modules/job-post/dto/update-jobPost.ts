@@ -1,4 +1,11 @@
-import { IsArray, IsNumber, IsString } from "class-validator"
+import {
+  IsArray,
+  IsEmpty,
+  IsNumber,
+  IsNumberString,
+  IsString,
+  ValidateIf,
+} from "class-validator"
 
 export class UpdateJobPostDto {
   @IsNumber()
@@ -8,7 +15,7 @@ export class UpdateJobPostDto {
 
   description?: string
 
-  salary?: number
+  salary?: number | string
 
   requirements?: string[]
 }

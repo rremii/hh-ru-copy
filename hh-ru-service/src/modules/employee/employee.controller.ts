@@ -139,6 +139,13 @@ export class EmployeeController {
     })
   }
 
+  @Delete("me/employer-reviews/:reviewId")
+  @Roles(UserRole.EMPLOYEE)
+  @UseGuards(RoleGuard)
+  async deleteEmployerReview(@Param("reviewId") reviewId: number) {
+    return this.employeeService.deleteEmployerReview(reviewId)
+  }
+
   @Get("me/employer-reviews")
   @Roles(UserRole.EMPLOYEE)
   @UseGuards(RoleGuard)
