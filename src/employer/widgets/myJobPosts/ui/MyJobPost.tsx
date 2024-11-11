@@ -1,3 +1,4 @@
+import { DeleteJobPost } from "@employer/features/deleteJobPost/DeleteJobPost"
 import { OpenJobPostModal } from "@employer/features/openJobPostModal/OpenJobPostModal"
 import { JobPost } from "@shared/entities/jobPost/types"
 import { Button } from "@shared/shared/button"
@@ -30,6 +31,7 @@ export const MyJobPost = ({
         ))}
       </RequirementsContainer>
       <BtnSection>
+        <DeleteJobPost jobPostId={id}>Удалить</DeleteJobPost>
         <OpenJobPostModal jobPostId={id}>Изменить</OpenJobPostModal>
       </BtnSection>
     </JobPostLayout>
@@ -87,6 +89,7 @@ const Salary = styled.p`
   line-height: 1.5;
 `
 const BtnSection = styled.div`
+  margin-top: 20px;
   display: flex;
   gap: 10px;
   justify-content: flex-end;

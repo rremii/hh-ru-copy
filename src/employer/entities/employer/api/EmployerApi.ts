@@ -12,9 +12,10 @@ export const EmployerApi = ApiEmployer.injectEndpoints({
       providesTags: ["User"],
     }),
     updateMe: build.mutation<Employer, UpdateEmployerDto>({
-      query: () => ({
+      query: (dto) => ({
         url: "me",
-        method: "GET",
+        method: "PUT",
+        data: dto,
       }),
       invalidatesTags: ["User"],
     }),

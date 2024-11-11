@@ -1,4 +1,4 @@
-import { Api, ApiEmployee } from "@shared/shared/api/config/Api"
+import {  ApiEmployee } from "@shared/shared/api/config/Api"
 import { LoginDto, RegisterDto } from "../types"
 import { AuthResponse } from "@shared/entities/auth/types"
 import { DefaultResponse } from "@shared/shared/api/config/types"

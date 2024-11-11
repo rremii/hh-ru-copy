@@ -50,21 +50,21 @@ export const ResumeForm = ({
   return (
     <FormLayout onSubmit={handleSubmit(onSubmit)}>
       <FormField
-        label="Title"
+        label="Название"
         isError={Boolean(errors.root) || Boolean(errors.title)}
         input={{
           register: { ...register("title") },
         }}
       />
       <FormField
-        label="Experience"
+        label="Опыт"
         isError={Boolean(errors.root) || Boolean(errors.experience)}
         input={{
           register: { ...register("experience") },
         }}
       />
       <FormField
-        label="Education"
+        label="Образование"
         isError={Boolean(errors.root) || Boolean(errors.education)}
         input={{
           register: { ...register("education") },
@@ -79,7 +79,7 @@ export const ResumeForm = ({
           type="filled"
           rounded
         >
-          Submit
+          Подтвердить
         </Button>
       </div>
     </FormLayout>

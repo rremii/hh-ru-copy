@@ -7,9 +7,10 @@ export const extractErrorInterceptor = (
   const errorData = error.response?.data.response
 
   if (errorData) {
-    const message = errorData
-      ? errorData?.message[0] || errorData?.message
-      : null
+    const message =
+      typeof errorData.message === "string"
+        ? errorData.message
+        : errorData.message[0]
     const apiError: ApiError = {
       response: error.response,
       message: message || "Something went wrong",

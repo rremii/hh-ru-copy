@@ -6,9 +6,10 @@ import EditIcon from "@icons/edit.svg?react"
 interface Props {
   onSubmit: (value: string) => void
   label: string
+  validate: (value: string) => boolean
 }
 
-export const LabelWithTextarea = ({ label, onSubmit }: Props) => {
+export const LabelWithTextarea = ({ label, onSubmit, validate }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [curLabel, setCurLabel] = useState(label)
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
@@ -19,6 +20,9 @@ export const LabelWithTextarea = ({ label, onSubmit }: Props) => {
 
   const handleSubmit = () => {
     const newValue = textareaRef.current?.value || ""
+
+    if (!validate(curLabel)) return
+
     setIsEditing(false)
     onSubmit(newValue)
     setCurLabel(newValue)

@@ -17,6 +17,10 @@ export const RequirementsPicker = ({ initRequirements, onChange }: Props) => {
   const [requirements, setRequirements] = useState<string[]>(initRequirements)
   const inputRef = useRef<HTMLInputElement | null>(null)
 
+  useEffect(() => {
+    setRequirements(initRequirements)
+  }, [initRequirements])
+
   const onSubmit = () => {
     if (!inputRef || !inputRef.current) return
     const newRequirement = inputRef.current.value
@@ -52,7 +56,7 @@ export const RequirementsPicker = ({ initRequirements, onChange }: Props) => {
   return (
     <PickerContainer>
       <RequirementInput
-        placeholder="Enter your requirements"
+        placeholder="Введите требования"
         type="text"
         ref={inputRef}
         onKeyDown={handleKeyDown}

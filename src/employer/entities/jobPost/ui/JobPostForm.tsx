@@ -52,21 +52,21 @@ export const JobPostForm = ({ onSubmit, ...jobPost }: Props) => {
   return (
     <FormLayout onSubmit={handleSubmit(onSubmit)}>
       <FormField
-        label="Title"
+        label="Название"
         isError={Boolean(errors.root) || Boolean(errors.title)}
         input={{
           register: { ...register("title") },
         }}
       />
       <FormField
-        label="Description"
+        label="Описание"
         isError={Boolean(errors.root) || Boolean(errors.description)}
         input={{
           register: { ...register("description") },
         }}
       />
       <FormField
-        label="Salary"
+        label="Зарплата"
         isError={Boolean(errors.root) || Boolean(errors.salary)}
         input={{
           register: { ...register("salary") },
@@ -84,7 +84,7 @@ export const JobPostForm = ({ onSubmit, ...jobPost }: Props) => {
           type="filled"
           rounded
         >
-          Submit
+          Подтвердить
         </Button>
       </div>
     </FormLayout>

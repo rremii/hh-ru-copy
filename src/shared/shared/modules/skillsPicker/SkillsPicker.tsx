@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import CrossIcon from "@icons/cross.svg?react"
 
@@ -10,6 +10,10 @@ interface Props {
 export const SkillsPicker = ({ initSkills, onChange }: Props) => {
   const [skills, setSkills] = useState<string[]>(initSkills)
   const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    setSkills(initSkills)
+  }, [initSkills])
 
   const onSubmit = () => {
     if (!inputRef || !inputRef.current) return
@@ -44,7 +48,7 @@ export const SkillsPicker = ({ initSkills, onChange }: Props) => {
   return (
     <PickerContainer>
       <SkillInput
-        placeholder="Enter your skills"
+        placeholder="Введите навыки"
         type="text"
         ref={inputRef}
         onKeyDown={handleKeyDown}

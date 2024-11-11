@@ -6,9 +6,10 @@ import styled from "styled-components"
 interface Props {
   onChange: (value: string) => void
   label: string
+  validate: (value: string) => boolean
 }
 
-export const LabelWithEdit = ({ onChange, label }: Props) => {
+export const LabelWithEdit = ({ onChange, label, validate }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [curLabel, setCurLabel] = useState(label)
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -18,6 +19,8 @@ export const LabelWithEdit = ({ onChange, label }: Props) => {
   }, [label])
 
   const onSubmit = () => {
+    if (!validate(curLabel)) return
+
     setIsEditing(false)
     onChange(curLabel)
   }

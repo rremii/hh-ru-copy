@@ -34,6 +34,13 @@ export const JobPostApi = ApiEmployer.injectEndpoints({
       }),
       invalidatesTags: ["JobPost"],
     }),
+    deleteJobPost: build.mutation<JobPost, number>({
+      query: (id) => ({
+        url: "me/job-post/" + id,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["JobPost"],
+    }),
   }),
   overrideExisting: true,
 })
@@ -42,4 +49,5 @@ export const {
   useGetMyJobPostsQuery,
   useCreateJobPostMutation,
   useUpdateJobPostMutation,
+  useDeleteJobPostMutation,
 } = JobPostApi

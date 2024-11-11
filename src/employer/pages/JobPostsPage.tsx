@@ -7,7 +7,7 @@ export const JobPostsPage = () => {
   return (
     <PageLayout>
       <CreateJobPostContainer>
-        <OpenJobPostModal>add job post</OpenJobPostModal>
+        <OpenJobPostModal>Довать вакансию</OpenJobPostModal>
       </CreateJobPostContainer>
       <MyJobPosts />
       <JobPostModal />

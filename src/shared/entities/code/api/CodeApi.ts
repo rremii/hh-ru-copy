@@ -1,5 +1,5 @@
 import { Api } from "@shared/shared/api/config/Api"
-import { DefaultResponse } from "../types"
+import { DefaultResponse } from "@shared/shared/api/config/types"
 
 export const CodeApi = Api.injectEndpoints({
   endpoints: (build) => ({
@@ -16,7 +16,6 @@ export const CodeApi = Api.injectEndpoints({
         method: "POST",
         data: { code },
       }),
-      invalidatesTags: ["User"],
     }),
   }),
 })

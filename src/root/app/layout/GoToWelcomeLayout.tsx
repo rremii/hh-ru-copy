@@ -19,7 +19,7 @@ export const GoToWelcomeLayout = ({ children }: PropsWithChildren) => {
           <ArrowContainer>
             <Arrow width={22} color="black" />
           </ArrowContainer>
-          <Text>Welcome</Text>
+          <Text>В начало</Text>
         </LinkContainer>
       </HeaderLayout>
       {children}

@@ -50,7 +50,7 @@ export const CreateReviewForm = ({ employerId }: Props) => {
         textarea
         isError={Boolean(errors.root) || Boolean(errors.comment)}
         input={{
-          placeholder: "Enter your opinion",
+          placeholder: "Ваш комментарий",
           register: { ...register("comment") },
         }}
       />

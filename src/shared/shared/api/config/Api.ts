@@ -6,7 +6,7 @@ import { ApiError } from "./types"
 const createAxiosBaseQuery =
   (
     api: AxiosInstance,
-    urlPrefix?: string
+    urlPrefix = ""
   ): BaseQueryFn<
     {
       url: string
